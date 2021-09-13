@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.PlatformPayConfigMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.PlatformPayConfig">
+        <!--@mbg.generated-->
+        <!--@Table t_platform_pay_config-->
+        <id column="id" property="id"/>
+        <result column="certificate_path" property="certificatePath"/>
+        <result column="mch_key" property="mchKey"/>
+        <result column="mch_id" property="mchId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="ips_mer_code" property="ipsMerCode"/>
+        <result column="ips_acc_code" property="ipsAccCode"/>
+        <result column="ips_certificate_psw" property="ipsCertificatePsw"/>
+        <result column="ips_rsa_public_key" property="ipsRsaPublicKey"/>
+        <result column="ips_rsa_private_key" property="ipsRsaPrivateKey"/>
+        <result column="ips_aes" property="ipsAes"/>
+        <result column="ips_sha" property="ipsSha"/>
+        <result column="sxf_org_id" property="sxfOrgId"/>
+        <result column="sxf_acc_code" property="sxfAccCode"/>
+        <result column="sxf_certificate_psw" property="sxfCertificatePsw"/>
+        <result column="sxf_public" property="sxfPublic"/>
+        <result column="sxf_private_key" property="sxfPrivateKey"/>
+        <result column="sft_terminal_id" property="sftTerminalId"/>
+        <result column="sft_md5" property="sftMd5"/>
+        <result column="sft_channel_id" property="sftChannelId"/>
+        <result column="sft_sub_merchant_no" property="sftSubMerchantNo"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, certificate_path, mch_key, mch_id, tenant_id, is_deleted, create_time, update_time,
+        ips_mer_code, ips_acc_code, ips_certificate_psw, ips_rsa_public_key, ips_rsa_private_key,
+        ips_aes, ips_sha, sxf_org_id, sxf_acc_code, sxf_certificate_psw, sxf_public, sxf_private_key,
+        sft_terminal_id,
+        sft_md5,
+        sft_channel_id,
+        sft_sub_merchant_no
+    </sql>
+</mapper>

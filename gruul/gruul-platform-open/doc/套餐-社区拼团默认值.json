@@ -1,0 +1,44 @@
+{
+  "uniqueIdentification": "SQPT",
+  "version": "v1.2.3",
+  "buildAction": 3,
+  "importDirectUse": 0,
+  "url": "/",
+  "mq": {},
+  "kv": {
+    "packages": [
+      {
+        "level": 1,
+        "name": "门店版",
+        "remark": "适用于门店级商家订购，满足商品销售、推广营销等基础经营需求",
+        "packagePrice": 1,
+        "packagePriceUnit": 1,
+        "openState": 1
+      },
+      {
+        "level": 2,
+        "name": "企业版",
+        "remark": "适用于在单一城市发展的企业级社区团购商家",
+        "packagePrice": 4800,
+        "packagePriceUnit": 3,
+        "openState": 1
+      },
+      {
+        "level": 3,
+        "name": "集团版",
+        "remark": "适用于多城市布局的商家",
+        "packagePrice": 12000,
+        "packagePriceUnit": 3,
+        "openState": 1
+      },
+      {
+        "level": 4,
+        "name": "私有化部署",
+        "remark": "开通旗舰版权限，3年使用期限，后续12800元/年，8核32G以上配置的服务器",
+        "packagePrice": 48000,
+        "packagePriceUnit": 3,
+        "openState": 1
+      }
+    ]
+  }
+}

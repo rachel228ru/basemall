@@ -1,0 +1,49 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(putarea) {
+
+  @include e(row) {
+
+    @include m(item) {
+      display: inline-block;
+      width: 25%;
+    }
+
+    @include m(popover) {
+      font-size: 12px;
+      margin-bottom: 10px;
+
+      &:nth-last-of-type(1) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @include e(diatf) {
+    text-align: right;
+    height: 50px;
+    line-height: 80px;
+    border-top: 1px solid #EBEEF5;
+    margin-top: 30px;
+  }
+
+  @include e(checkAll) {
+    margin: 20px 0;
+  }
+
+  @include e(checkbox) {
+    margin-right: 4px;
+  }
+
+  @include e(newarea) {
+    margin-bottom: 20px;
+
+    @include m(chechbox) {
+      margin-left: 4px;
+    }
+  }
+
+  
+}

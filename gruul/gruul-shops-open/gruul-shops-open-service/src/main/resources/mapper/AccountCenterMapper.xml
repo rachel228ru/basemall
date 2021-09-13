@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.AccountCenterMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.shops.api.entity.AccountCenter">
+        <id column="id" property="id" />
+    <result column="create_time" property="createTime" />
+    <result column="is_deleted" property="deleted" />
+    <result column="update_time" property="updateTime" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="head style" property="headStyle" />
+    <result column="custom_style" property="customStyle" />
+    <result column="get_cart_text" property="getCartText" />
+    <result column="hide_cart_inlet" property="hideCartInlet" />
+    <result column="order_info" property="orderInfo" />
+    <result column="menu_style" property="menuStyle" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        is_deleted,
+        update_time,
+        tenant_id,
+        id, head_style, custom_style, get_cart_text, hide_cart_inlet, order_info, menu_style
+    </sql>
+
+</mapper>

@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.medusa.gruul.common.verify.GruulProperties,\
+    com.medusa.gruul.common.verify.TenantConfigProperties
+
+#该处省去

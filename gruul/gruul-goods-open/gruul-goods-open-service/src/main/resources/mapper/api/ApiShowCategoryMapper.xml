@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.api.ApiShowCategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiShowCategoryVo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="saleMode" property="sale_mode"/>
+        <collection property="showCategoryVos" ofType="com.medusa.gruul.goods.api.model.vo.api.ApiShowCategorySecondVo"
+                    column="{id = id, saleMode = sale_mode}" select="queryApiShowCategorySecond"></collection>
+    </resultMap>
+
+    <resultMap id="AssembleResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiShowCategoryVo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="saleMode" property="sale_mode"/>
+        <result column="productType" property="product_type"/>
+        <result column="productIds" property="product_ids"/>
+        <collection property="showCategoryVos" ofType="com.medusa.gruul.goods.api.model.vo.api.ApiShowCategorySecondVo"
+                    column="{id = id, saleMode = sale_mode, productType = product_type, productIds = product_ids}" select="queryApiAssembleShowCategorySecond"></collection>
+    </resultMap>
+
+    <resultMap id="SecondResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiShowCategorySecondVo">
+        <id column="second_id" property="id"/>
+        <result column="second_name" property="name"/>
+        <result column="product_number" property="productNumber"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        DISTINCT c.id, c.name, #{saleMode} as sale_mode
+    </sql>
+
+    <sql id="Second_Column_List">
+        DISTINCT sc.id as second_id, sc.name as second_name, coalesce(count(s.id), 0) as product_number
+    </sql>
+
+    <select id="queryAllApiShowCategoryList" resultMap="BaseResultMap">
+        SELECT
+        DISTINCT c.id, c.name, -1 as sale_mode
+        FROM
+        t_show_category c
+        INNER JOIN
+        t_product_show_category pc
+        ON
+        pc.show_category_id = c.id
+        WHERE
+        c.parent_id = 0
+        AND
+        c.is_deleted = 0
+        AND
+        pc.is_deleted = 0
+        AND EXISTS (
+        SELECT
+        p.id
+        FROM
+        t_product p
+        WHERE
+        pc.product_id = p.id
+        AND
+        p.is_deleted = 0
+        )
+    </select>
+
+    <select id="queryApiSupermarketShowCategoryList" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_show_category c
+        INNER JOIN
+        t_product_show_category pc
+        ON
+        pc.show_category_id = c.id
+        WHERE
+        c.parent_id = 0
+        AND
+        c.is_deleted = 0
+        AND
+        pc.is_deleted = 0
+        AND EXISTS (
+        SELECT
+        p.id
+        FROM
+        t_product p
+        WHERE
+        pc.product_id = p.id
+        AND
+        p.sale_mode = #{saleMode}
+        AND
+        p.is_deleted = 0
+        AND
+        p.status = 1
+        )
+    </select>
+
+    <select id="queryApiShowCategorySecond" resultMap="SecondResultMap">
+        SELECT
+        <include refid="Second_Column_List"/>
+        FROM
+        t_show_category sc
+        inner JOIN
+        t_product_show_category spc
+        ON
+        spc.show_category_id = sc.id
+        left join t_product s on spc.product_id = s.id
+        WHERE
+        sc.parent_id = #{id}
+        AND
+        sc.is_deleted = 0
+        AND
+        spc.is_deleted = 0
+        AND
+        s.is_deleted = 0
+        AND EXISTS (
+        SELECT
+        sp.id
+        FROM
+        t_product sp
+        WHERE
+        spc.product_id = sp.id
+        <if test="saleMode != -1 ">
+            AND
+            sp.sale_mode = #{saleMode}
+        </if>
+        AND
+        sp.is_deleted = 0
+        AND
+        sp.status = 1
+        )
+        group by sc.id,sc.name
+    </select>
+
+
+
+    <select id="queryApiAssembleShowCategorySecond" resultMap="SecondResultMap">
+        SELECT
+        <include refid="Second_Column_List"/>
+        FROM
+        t_show_category sc
+        INNER JOIN
+        t_product_show_category spc
+        ON
+        spc.show_category_id = sc.id
+        left join t_product s on spc.product_id = s.id
+        WHERE
+        sc.parent_id = #{id}
+        AND
+        sc.is_deleted = 0
+        AND
+        spc.is_deleted = 0
+        AND
+        s.is_deleted = 0
+        AND EXISTS (
+        SELECT
+        sp.id
+        FROM
+        t_product sp
+        WHERE
+        spc.product_id = sp.id
+        <if test="saleMode != -1 ">
+            AND
+            sp.sale_mode = #{saleMode}
+        </if>
+        AND
+        sp.is_deleted = 0
+        AND
+        sp.status = 1
+        <choose>
+            <when test="productType == 1 and productIds != '' ">
+                AND sp.id in
+                <foreach collection="productIds.split(',')" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </when>
+            <when test="productType == 2 and productIds != '' ">
+                AND sp.id not in
+                <foreach collection="productIds.split(',')" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+        )
+        group by sc.id,sc.name
+    </select>
+
+</mapper>

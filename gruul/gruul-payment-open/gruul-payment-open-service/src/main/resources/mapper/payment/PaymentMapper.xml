@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.payment.mapper.PaymentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.payment.api.entity.Payment">
+        <id column="id" property="id"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="timeout_express" property="timeoutExpress"/>
+        <result column="pay_channel" property="payChannel"/>
+        <result column="fee_type" property="feeType"/>
+        <result column="total_fee" property="totalFee"/>
+        <result column="body" property="body"/>
+        <result column="business_params" property="businessParams"/>
+        <result column="terminal_ip" property="terminalIp"/>
+        <result column="transaction_id" property="transactionId"/>
+        <result column="business_notify_url" property="businessNotifyUrl"/>
+        <result column="third_party_notify_status" property="thirdPartyNotifyStatus"/>
+        <result column="business_notify_status" property="businessNotifyStatus"/>
+        <result column="trade_status" property="tradeStatus"/>
+        <result column="third_party_notify_number" property="thirdPartyNotifyNumber"/>
+        <result column="tenant_id" property="tenantId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        is_deleted,
+        update_time,create_time,
+        id, timeout_express, pay_channel,
+        fee_type, total_fee, body, business_params,
+        terminal_ip, transaction_id, business_notify_url,
+        third_party_notify_status, business_notify_status,
+        trade_status, third_party_notify_number,tenant_id
+    </sql>
+    <!--后期如有多渠道，需修改-->
+    <select id="selectOrderStatus" resultMap="BaseResultMap">
+        select
+           <include refid="Base_Column_List"/>
+        from t_payment
+        where
+        tenant_id = #{tenantId} and
+        pay_channel = #{payChannel} and
+        transaction_id = #{transactionId} and
+        id = (
+            select payment_id from t_payment_wechat where out_trade_no = #{outTradeNo}
+        )
+    </select>
+
+</mapper>

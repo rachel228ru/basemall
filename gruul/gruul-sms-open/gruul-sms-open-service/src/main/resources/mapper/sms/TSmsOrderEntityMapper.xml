@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.medusa.gruul.sms.dao.mapper.TSmsOrderEntityMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.sms.dao.entity.TSmsOrderEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+          <result column="user_id" property="userId" jdbcType="BIGINT"/>
+          <result column="sms_send_time" property="smsSendTime" jdbcType="BIGINT"/>
+          <result column="sms_send_type" property="smsSendType" jdbcType="TINYINT"/>
+          <result column="sms_send_content" property="smsSendContent" jdbcType="VARCHAR"/>
+          <result column="sms_send_zone" property="smsSendZone" jdbcType="VARCHAR"/>
+          <result column="sms_send_param" property="smsSendParam" jdbcType="VARCHAR"/>
+          <result column="sms_send_mobiles" property="smsSendMobiles" jdbcType="VARCHAR"/>
+          <result column="sms_send_count" property="smsSendCount" jdbcType="INTEGER"/>
+          <result column="sms_send_success_count" property="smsSendSuccessCount" jdbcType="INTEGER"/>
+          <result column="sms_send_fail_count" property="smsSendFailCount" jdbcType="INTEGER"/>
+          <result column="sms_send_status" property="smsSendStatus" jdbcType="INTEGER"/>
+          <result column="provider_id" property="providerId" jdbcType="BIGINT"/>
+          <result column="sms_type" property="smsType" jdbcType="TINYINT"/>
+          <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+          <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+          <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+          <result column="template_id" property="templateId" jdbcType="BIGINT"/>
+          <result column="sign_id" property="signId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+         id, user_id,  sms_send_time,  sms_send_type,  sms_send_content,  sms_send_zone,  sms_send_param,  sms_send_mobiles,  sms_send_count,  sms_send_success_count,  sms_send_fail_count,  sms_send_status,  provider_id,  sms_type,  is_deleted,  create_time,  update_time,  template_id,  sign_id, sign_id 
+    </sql>
+
+    <!-- 根据id实现条件查询-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_order
+        where id =  #{id}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_sms_order  where id =  #{id}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.medusa.gruul.sms.dao.entity.TSmsOrderEntity">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_sms_order ( id,
+	      user_id,
+          sms_send_time,
+          sms_send_type,
+          sms_send_content,
+          sms_send_zone,
+          sms_send_param,
+          sms_send_mobiles,
+          sms_send_count,
+          sms_send_success_count,
+          sms_send_fail_count,
+          sms_send_status,
+          provider_id,
+          sms_type,
+          is_deleted,
+          create_time,
+          update_time,
+          template_id,
+          sign_id,
+        )
+        values ( #{id},
+         #{userId,jdbcType=BIGINT},
+         #{smsSendTime,jdbcType=BIGINT},
+         #{smsSendType,jdbcType=TINYINT},
+         #{smsSendContent,jdbcType=VARCHAR},
+         #{smsSendZone,jdbcType=VARCHAR},
+         #{smsSendParam,jdbcType=VARCHAR},
+         #{smsSendMobiles,jdbcType=VARCHAR},
+         #{smsSendCount,jdbcType=INTEGER},
+         #{smsSendSuccessCount,jdbcType=INTEGER},
+         #{smsSendFailCount,jdbcType=INTEGER},
+         #{smsSendStatus,jdbcType=INTEGER},
+         #{providerId,jdbcType=BIGINT},
+         #{smsType,jdbcType=TINYINT},
+         #{isDeleted,jdbcType=TINYINT},
+         #{createTime,jdbcType=TIMESTAMP},
+         #{updateTime,jdbcType=TIMESTAMP},
+         #{templateId,jdbcType=BIGINT},
+         #{signId,jdbcType=BIGINT},
+         )
+
+    </insert>
+
+
+    <insert id="insertSelective" parameterType="com.medusa.gruul.sms.dao.entity.TSmsOrderEntity">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into  t_sms_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="smsSendTime != null">
+                sms_send_time,
+            </if>
+            <if test="smsSendType != null">
+                sms_send_type,
+            </if>
+            <if test="smsSendContent != null">
+                sms_send_content,
+            </if>
+            <if test="smsSendZone != null">
+                sms_send_zone,
+            </if>
+            <if test="smsSendParam != null">
+                sms_send_param,
+            </if>
+            <if test="smsSendMobiles != null">
+                sms_send_mobiles,
+            </if>
+            <if test="smsSendCount != null">
+                sms_send_count,
+            </if>
+            <if test="smsSendSuccessCount != null">
+                sms_send_success_count,
+            </if>
+            <if test="smsSendFailCount != null">
+                sms_send_fail_count,
+            </if>
+            <if test="smsSendStatus != null">
+                sms_send_status,
+            </if>
+            <if test="providerId != null">
+                provider_id,
+            </if>
+            <if test="smsType != null">
+                sms_type,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="templateId != null">
+                template_id,
+            </if>
+            <if test="signId != null">
+                sign_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            #{id},
+            </if>
+                 <if test="userId != null">
+                     #{userId,jdbcType=BIGINT},
+                 </if>
+                 <if test="smsSendTime != null">
+                     #{smsSendTime,jdbcType=BIGINT},
+                 </if>
+                 <if test="smsSendType != null">
+                     #{smsSendType,jdbcType=TINYINT},
+                 </if>
+                 <if test="smsSendContent != null">
+                     #{smsSendContent,jdbcType=VARCHAR},
+                 </if>
+                 <if test="smsSendZone != null">
+                     #{smsSendZone,jdbcType=VARCHAR},
+                 </if>
+                 <if test="smsSendParam != null">
+                     #{smsSendParam,jdbcType=VARCHAR},
+                 </if>
+                 <if test="smsSendMobiles != null">
+                     #{smsSendMobiles,jdbcType=VARCHAR},
+                 </if>
+                 <if test="smsSendCount != null">
+                     #{smsSendCount,jdbcType=INTEGER},
+                 </if>
+                 <if test="smsSendSuccessCount != null">
+                     #{smsSendSuccessCount,jdbcType=INTEGER},
+                 </if>
+                 <if test="smsSendFailCount != null">
+                     #{smsSendFailCount,jdbcType=INTEGER},
+                 </if>
+                 <if test="smsSendStatus != null">
+                     #{smsSendStatus,jdbcType=INTEGER},
+                 </if>
+                 <if test="providerId != null">
+                     #{providerId,jdbcType=BIGINT},
+                 </if>
+                 <if test="smsType != null">
+                     #{smsType,jdbcType=TINYINT},
+                 </if>
+                 <if test="isDeleted != null">
+                     #{isDeleted,jdbcType=TINYINT},
+                 </if>
+                 <if test="createTime != null">
+                     #{createTime,jdbcType=TIMESTAMP},
+                 </if>
+                 <if test="updateTime != null">
+                     #{updateTime,jdbcType=TIMESTAMP},
+                 </if>
+                 <if test="templateId != null">
+                     #{templateId,jdbcType=BIGINT},
+                 </if>
+                 <if test="signId != null">
+                     #{signId,jdbcType=BIGINT},
+                 </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.medusa.gruul.sms.dao.entity.TSmsOrderEntity">
+        update t_sms_order
+        <set>
+            <if test="id != null">
+            id =  #{id},
+            </if>
+               <if test="userId != null">
+                   user_id = #{userId,jdbcType=BIGINT},
+               </if>
+               <if test="smsSendTime != null">
+                   sms_send_time = #{smsSendTime,jdbcType=BIGINT},
+               </if>
+               <if test="smsSendType != null">
+                   sms_send_type = #{smsSendType,jdbcType=TINYINT},
+               </if>
+               <if test="smsSendContent != null">
+                   sms_send_content = #{smsSendContent,jdbcType=VARCHAR},
+               </if>
+               <if test="smsSendZone != null">
+                   sms_send_zone = #{smsSendZone,jdbcType=VARCHAR},
+               </if>
+               <if test="smsSendParam != null">
+                   sms_send_param = #{smsSendParam,jdbcType=VARCHAR},
+               </if>
+               <if test="smsSendMobiles != null">
+                   sms_send_mobiles = #{smsSendMobiles,jdbcType=VARCHAR},
+               </if>
+               <if test="smsSendCount != null">
+                   sms_send_count = #{smsSendCount,jdbcType=INTEGER},
+               </if>
+               <if test="smsSendSuccessCount != null">
+                   sms_send_success_count = #{smsSendSuccessCount,jdbcType=INTEGER},
+               </if>
+               <if test="smsSendFailCount != null">
+                   sms_send_fail_count = #{smsSendFailCount,jdbcType=INTEGER},
+               </if>
+               <if test="smsSendStatus != null">
+                   sms_send_status = #{smsSendStatus,jdbcType=INTEGER},
+               </if>
+               <if test="providerId != null">
+                   provider_id = #{providerId,jdbcType=BIGINT},
+               </if>
+               <if test="smsType != null">
+                   sms_type = #{smsType,jdbcType=TINYINT},
+               </if>
+               <if test="isDeleted != null">
+                   is_deleted = #{isDeleted,jdbcType=TINYINT},
+               </if>
+               <if test="createTime != null">
+                   create_time = #{createTime,jdbcType=TIMESTAMP},
+               </if>
+               <if test="updateTime != null">
+                   update_time = #{updateTime,jdbcType=TIMESTAMP},
+               </if>
+               <if test="templateId != null">
+                   template_id = #{templateId,jdbcType=BIGINT},
+               </if>
+               <if test="signId != null">
+                   sign_id = #{signId,jdbcType=BIGINT},
+               </if>
+        </set>
+        where id =  #{id}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.medusa.gruul.sms.dao.entity.TSmsOrderEntity">
+        update t_sms_order
+        set 
+        user_id = #{userId,jdbcType=BIGINT},
+
+        sms_send_time = #{smsSendTime,jdbcType=BIGINT},
+
+        sms_send_type = #{smsSendType,jdbcType=TINYINT},
+
+        sms_send_content = #{smsSendContent,jdbcType=VARCHAR},
+
+        sms_send_zone = #{smsSendZone,jdbcType=VARCHAR},
+
+        sms_send_param = #{smsSendParam,jdbcType=VARCHAR},
+
+        sms_send_mobiles = #{smsSendMobiles,jdbcType=VARCHAR},
+
+        sms_send_count = #{smsSendCount,jdbcType=INTEGER},
+
+        sms_send_success_count = #{smsSendSuccessCount,jdbcType=INTEGER},
+
+        sms_send_fail_count = #{smsSendFailCount,jdbcType=INTEGER},
+
+        sms_send_status = #{smsSendStatus,jdbcType=INTEGER},
+
+        provider_id = #{providerId,jdbcType=BIGINT},
+
+        sms_type = #{smsType,jdbcType=TINYINT},
+
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+
+        template_id = #{templateId,jdbcType=BIGINT},
+
+        sign_id = #{signId,jdbcType=BIGINT},
+        where  id =  #{id}
+    </update>
+
+
+    <select id="searchByEntityCount" resultType="java.lang.Integer" parameterType="com.medusa.gruul.sms.dao.entity.TSmsOrderEntity">
+        select count(*)
+        from  t_sms_order
+        <where>
+            <if test="id != null">
+                  id = #{id,jdbcType=BIGINT}
+            </if>
+               <if test="userId != null">
+                   AND user_id = #{userId,jdbcType=BIGINT}
+               </if>
+               <if test="smsSendTime != null">
+                   AND sms_send_time = #{smsSendTime,jdbcType=BIGINT}
+               </if>
+               <if test="smsSendType != null">
+                   AND sms_send_type = #{smsSendType,jdbcType=TINYINT}
+               </if>
+               <if test="smsSendContent != null">
+                   AND sms_send_content = #{smsSendContent,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendZone != null">
+                   AND sms_send_zone = #{smsSendZone,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendParam != null">
+                   AND sms_send_param = #{smsSendParam,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendMobiles != null">
+                   AND sms_send_mobiles = #{smsSendMobiles,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendCount != null">
+                   AND sms_send_count = #{smsSendCount,jdbcType=INTEGER}
+               </if>
+               <if test="smsSendSuccessCount != null">
+                   AND sms_send_success_count = #{smsSendSuccessCount,jdbcType=INTEGER}
+               </if>
+               <if test="smsSendFailCount != null">
+                   AND sms_send_fail_count = #{smsSendFailCount,jdbcType=INTEGER}
+               </if>
+               <if test="smsSendStatus != null">
+                   AND sms_send_status = #{smsSendStatus,jdbcType=INTEGER}
+               </if>
+               <if test="providerId != null">
+                   AND provider_id = #{providerId,jdbcType=BIGINT}
+               </if>
+               <if test="smsType != null">
+                   AND sms_type = #{smsType,jdbcType=TINYINT}
+               </if>
+               <if test="isDeleted != null">
+                   AND is_deleted = #{isDeleted,jdbcType=TINYINT}
+               </if>
+               <if test="createTime != null">
+                   AND create_time = #{createTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="updateTime != null">
+                   AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="templateId != null">
+                   AND template_id = #{templateId,jdbcType=BIGINT}
+               </if>
+               <if test="signId != null">
+                   AND sign_id = #{signId,jdbcType=BIGINT}
+               </if>
+        </where>
+    </select>
+
+
+    <select id="searchByEntity" resultMap="BaseResultMap" parameterType="com.medusa.gruul.sms.dao.entity.TSmsOrderEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from  t_sms_order
+        <where>
+            <if test="id != null">
+            id = #{id,jdbcType=BIGINT}
+            </if>
+               <if test="userId != null">
+                   AND    user_id = #{userId,jdbcType=BIGINT}
+               </if>
+               <if test="smsSendTime != null">
+                   AND    sms_send_time = #{smsSendTime,jdbcType=BIGINT}
+               </if>
+               <if test="smsSendType != null">
+                   AND    sms_send_type = #{smsSendType,jdbcType=TINYINT}
+               </if>
+               <if test="smsSendContent != null">
+                   AND    sms_send_content = #{smsSendContent,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendZone != null">
+                   AND    sms_send_zone = #{smsSendZone,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendParam != null">
+                   AND    sms_send_param = #{smsSendParam,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendMobiles != null">
+                   AND    sms_send_mobiles = #{smsSendMobiles,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSendCount != null">
+                   AND    sms_send_count = #{smsSendCount,jdbcType=INTEGER}
+               </if>
+               <if test="smsSendSuccessCount != null">
+                   AND    sms_send_success_count = #{smsSendSuccessCount,jdbcType=INTEGER}
+               </if>
+               <if test="smsSendFailCount != null">
+                   AND    sms_send_fail_count = #{smsSendFailCount,jdbcType=INTEGER}
+               </if>
+               <if test="smsSendStatus != null">
+                   AND    sms_send_status = #{smsSendStatus,jdbcType=INTEGER}
+               </if>
+               <if test="providerId != null">
+                   AND    provider_id = #{providerId,jdbcType=BIGINT}
+               </if>
+               <if test="smsType != null">
+                   AND    sms_type = #{smsType,jdbcType=TINYINT}
+               </if>
+               <if test="isDeleted != null">
+                   AND    is_deleted = #{isDeleted,jdbcType=TINYINT}
+               </if>
+               <if test="createTime != null">
+                   AND    create_time = #{createTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="updateTime != null">
+                   AND    update_time = #{updateTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="templateId != null">
+                   AND    template_id = #{templateId,jdbcType=BIGINT}
+               </if>
+               <if test="signId != null">
+                   AND    sign_id = #{signId,jdbcType=BIGINT}
+               </if>
+        </where>
+    </select>
+
+
+
+
+    <select id="doListWaitSendOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_order
+        where sms_send_status = #{smsSendStatus} AND   is_deleted =0  AND sms_send_time &lt; unix_timestamp(now())*1000;
+    </select>
+
+
+    <resultMap id="smsDoSendDto" type="com.medusa.gruul.sms.model.dto.SmsDoSendDto">
+        <result column="smsOrderId" property="smsOrderId"/>
+        <result column="providerAppId" property="providerAppId"/>
+        <result column="providerAppSecret" property="providerAppSecret"/>
+        <result column="templateCode" property="templateCode"/>
+        <result column="smsTemplateContent" property="smsTemplateContent"/>
+        <result column="smsSign" property="smsSign"/>
+    </resultMap>
+
+
+    <select id="getSendSmsCfg" resultMap="smsDoSendDto" parameterType="java.lang.Long">
+     select tso.id                      as smsOrderId
+     , tsp.sms_provider_appId      as providerAppId
+     , tsp.sms_provider_app_secret as providerAppSecret
+     , tst.sms_template_code       as templateCode
+     , tst.sms_template_content       as smsTemplateContent
+     , tss.sms_sign as  smsSign
+     from t_sms_order tso
+         left join t_sms_provider tsp on tso.provider_id = tsp.id
+         left join t_sms_sign tss
+                   on tss.id = tso.sign_id
+         left join t_sms_template tst on tst.id = tso.template_id
+      where tsp.is_deleted = 0
+      and tss.is_deleted = 0
+      and tst.is_deleted = 0
+       and tso.id  = #{id}
+      ;
+    </select>
+
+</mapper>

@@ -1,0 +1,18 @@
+// 主背景色
+$main-background: #f1f2f6;
+$main-border-color: #f1f1f1;
+
+// 主亮色
+$main-light-color: #fe4e63;
+
+@mixin flex($justify-content: center, $align-items: center) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin utils-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

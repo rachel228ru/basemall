@@ -1,0 +1,1 @@
+<view style="width:100%;overflow:hidden;"><rich-text nodes="{{decoretionProperties.text}}"></rich-text></view>

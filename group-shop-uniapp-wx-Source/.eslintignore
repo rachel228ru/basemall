@@ -1,0 +1,7 @@
+node_modules/*
+src/wxcomponents/vant-weapp/**/*
+src/**/*.wxs
+vue.config.js
+src/mixins/*.ts
+postcss.config.js
+.prettierrc

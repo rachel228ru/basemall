@@ -1,0 +1,226 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/index/custom/custom",
+      "style": {
+        "navigationBarTitleText": "custom"
+      }
+    }
+  ],
+  "globalStyle": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "商超开发",
+    "navigationBarTextStyle": "black",
+    "usingComponents": {
+      "van-action-sheet": "wxcomponents/vant-weapp/action-sheet/index",
+      "van-area": "wxcomponents/vant-weapp/area/index",
+      "van-button": "wxcomponents/vant-weapp/button/index",
+      "van-cell": "wxcomponents/vant-weapp/cell/index",
+      "van-cell-group": "wxcomponents/vant-weapp/cell-group/index",
+      "van-checkbox": "wxcomponents/vant-weapp/checkbox/index",
+      "van-checkbox-group": "wxcomponents/vant-weapp/checkbox-group/index",
+      "van-col": "wxcomponents/vant-weapp/col/index",
+      "van-collapse": "wxcomponents/vant-weapp/collapse/index",
+      "van-collapse-item": "wxcomponents/vant-weapp/collapse-item/index",
+      "van-count-down": "wxcomponents/vant-weapp/count-down/index",
+      "van-datetime-picker": "wxcomponents/vant-weapp/datetime-picker/index",
+      "van-dialog": "wxcomponents/vant-weapp/dialog/index",
+      "van-divider": "wxcomponents/vant-weapp/divider/index",
+      "van-field": "wxcomponents/vant-weapp/field/index",
+      "van-icon": "wxcomponents/vant-weapp/icon/index",
+      "van-loading": "wxcomponents/vant-weapp/loading/index",
+      "van-picker": "wxcomponents/vant-weapp/picker/index",
+      "van-popup": "wxcomponents/vant-weapp/popup/index",
+      "van-radio": "wxcomponents/vant-weapp/radio/index",
+      "van-radio-group": "wxcomponents/vant-weapp/radio-group/index",
+      "van-rate": "wxcomponents/vant-weapp/rate/index",
+      "van-search": "wxcomponents/vant-weapp/search/index",
+      "van-stepper": "wxcomponents/vant-weapp/stepper/index",
+      "van-steps": "wxcomponents/vant-weapp/steps/index",
+      "van-switch": "wxcomponents/vant-weapp/switch/index",
+      "van-tab": "wxcomponents/vant-weapp/tab/index",
+      "van-tabs": "wxcomponents/vant-weapp/tabs/index",
+      "van-toast": "wxcomponents/vant-weapp/toast/index"
+    }
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {}
+  },
+  "subPackages": [
+    {
+      "root": "modules",
+      "pages": [
+        {
+          "path": "pages/submit/submit",
+          "style": {
+            "navigationBarTitleText": "下单详情"
+          }
+        }
+      ]
+    },
+    {
+      "root": "subcontract",
+      "pages": [
+        {
+          "path": "pages/addAddress/addAddress",
+          "style": {
+            "navigationBarTitleText": "添加地址"
+          }
+        },
+        {
+          "path": "pages/order/order",
+          "style": {
+            "navigationBarTitleText": "我的订单"
+          }
+        },
+        {
+          "path": "pages/detail/detail",
+          "style": {
+            "navigationBarTitleText": "商品详情"
+          }
+        },
+        {
+          "path": "pages/orderDetail/orderDetail",
+          "style": {
+            "navigationBarTitleText": "订单详情"
+          }
+        },
+        {
+          "path": "pages/applyAfterSale/applyAfterSale",
+          "style": {
+            "navigationBarTitleText": ""
+          }
+        },
+        {
+          "path": "pages/afterSaleDetail/afterSaleDetail",
+          "style": {
+            "navigationBarTitleText": "售后详情"
+          }
+        },
+        {
+          "path": "pages/afterSaleReturn/afterSaleReturn",
+          "style": {
+            "navigationBarTitleText": "填写退货物流信息"
+          }
+        },
+        {
+          "path": "pages/address/address",
+          "style": {
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationBarTextStyle": "black",
+            "navigationBarTitleText": "地址管理"
+          }
+        },
+        {
+          "path": "pages/collect/collect",
+          "style": {
+            "navigationBarTitleText": "我的收藏"
+          }
+        },
+        {
+          "path": "pages/footer/footer",
+          "style": {
+            "navigationBarTitleText": "浏览足迹"
+          }
+        },
+        {
+          "path": "pages/resourceApply/resourceApply",
+          "style": {
+            "navigationBarTitleText": "资源入驻"
+          }
+        },
+        {
+          "path": "pages/mySetting/mySetting",
+          "style": {
+            "navigationBarTitleText": "设置"
+          }
+        },
+        {
+          "path": "pages/deliveryInfo/deliveryInfo",
+          "style": {
+            "navigationBarTitleText": "查看物流"
+          }
+        },
+        {
+          "path": "pages/evaluationCenter/evaluationCenter",
+          "style": {
+            "navigationBarTitleText": "评价中心"
+          }
+        },
+        {
+          "path": "pages/linkPage/linkPage",
+          "style": {
+            "navigationBarTitleText": ""
+          }
+        },
+        {
+          "path": "pages/negotiationHistory/negotiationHistory",
+          "style": {
+            "navigationBarTitleText": "协商历史"
+          }
+        },
+        {
+          "path": "pages/orderEvaluation/orderEvaluation",
+          "style": {
+            "navigationBarTitleText": "订单评价"
+          }
+        },
+        {
+          "path": "pages/updateOrderAddress/updateOrderAddress",
+          "style": {
+            "navigationBarTitleText": "修改地址"
+          }
+        },
+        {
+          "path": "pages/spellPage/index",
+          "style": {
+            "navigationBarTitleText": "专区"
+          }
+        },
+        {
+          "path": "pages/Search/Search",
+          "style": {
+            "navigationBarTitleText": "搜索"
+          }
+        },
+        {
+          "path": "pages/reviews/reviews",
+          "style": {
+            "navigationBarTitleText": "商品评价"
+          }
+        },
+        {
+          "path": "pages/orderSuccess/orderSuccess",
+          "style": {
+            "navigationBarTitleText": "支付结果",
+            "navigationBarBackgroundColor": "#F15A48",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "pages/spellPage/second-catgoods/second-catgoods",
+          "style": {
+            "navigationBarTitleText": "分类"
+          }
+        }
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "modules",
+        "subcontract"
+      ]
+    }
+  }
+}

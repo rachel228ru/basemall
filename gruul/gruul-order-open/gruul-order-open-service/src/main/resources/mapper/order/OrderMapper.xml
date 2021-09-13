@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.order.mapper.OrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.order.api.entity.Order">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="user_note" property="userNote"/>
+        <result column="type" property="type"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="discounts_amount" property="discountsAmount"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="freight_amount" property="freightAmount"/>
+        <result column="promotion_amount" property="promotionAmount"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="coupon_amount" property="couponAmount"/>
+        <result column="pay_type" property="payType"/>
+        <result column="transaction_id" property="transactionId"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="source_type" property="sourceType"/>
+        <result column="close_time" property="closeTime"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="status" property="status"/>
+        <result column="note" property="note"/>
+        <result column="comment_time" property="commentTime"/>
+        <result column="complete_time" property="completeTime"/>
+        <result column="custom_form" property="customForm"/>
+        <result column="full_scale_id" property="fullScaleId"/>
+        <result column="full_scale_amount" property="fullScaleAmount"/>
+        <result column="refund_amount" property="refundAmount"/>
+        <result column="refund_transaction_id" property="refundTransactionId"/>
+        <result column="estimated_delivery_time" property="estimatedDeliveryTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+        id, shop_id, user_id, user_name, user_avatar_url, user_note, type, total_amount, discounts_amount,
+         pay_amount, freight_amount, promotion_amount, coupon_id,
+        coupon_amount, pay_type,transaction_id, pay_time, source_type, status,close_time,expire_time,
+         note,
+        comment_time, complete_time,custom_form, full_scale_id, full_scale_amount,
+         refund_amount,refund_transaction_id,estimated_delivery_time
+    </sql>
+
+
+    <!-- 小程序端订单列表查询映射结果 -->
+    <resultMap id="ApiOrderVoMap" type="com.medusa.gruul.order.model.ApiOrderVo">
+        <id column="id" property="orderId"/>
+        <result column="type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="pay_type" property="payType"/>
+        <result column="status" property="status"/>
+        <result column="expire_time" property="expireTime"/>
+        <collection column="{orderId=id}"
+                    property="itemVoList" javaType="ArrayList"
+                    ofType="com.medusa.gruul.order.model.SimpleOrderItemVo"
+                    select="com.medusa.gruul.order.mapper.OrderItemMapper.selectSimpleOrderItemVoByOrderId"/>
+    </resultMap>
+    <select id="searchApiOrderVoPage" resultMap="ApiOrderVoMap">
+        SELECT
+        o.id,o.type,o.create_time,o.pay_amount,o.pay_type,o.expire_time ,o.status
+        FROM
+        t_order as o
+        WHERE
+        o.is_deleted =0
+        AND o.user_id = #{userId}
+        <if test="statusList!=null and statusList.size>0">
+            AND o.status in
+            <foreach collection="statusList" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+            <if test="statusList.contains(105) or statusList.contains(104) or statusList.contains(104) ">
+                AND o.type != 103
+            </if>
+        </if>
+        AND o.type != 104
+        ORDER BY create_time DESC
+    </select>
+
+
+    <!-- PC管理端订单列表查询映射结果 -->
+    <resultMap id="ManageOrderVoMap" type="com.medusa.gruul.order.model.ManageOrderVo">
+        <id column="id" property="orderId"/>
+        <result column="type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="delivery_type" property="deliveryType"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_post_code" property="receiverPostCode"/>
+        <result column="receiver_province" property="receiverProvince"/>
+        <result column="receiver_city" property="receiverCity"/>
+        <result column="receiver_region" property="receiverRegion"/>
+        <result column="receiver_detail_address" property="receiverDetailAddress"/>
+        <result column="delivery_company" property="deliveryCompany"/>
+        <result column="delivery_sn" property="deliverySn"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="status" property="status"/>
+        <result column="note" property="note"/>
+        <collection column="id" property="itemVoList" javaType="ArrayList"
+                    select="com.medusa.gruul.order.mapper.OrderItemMapper.selectSimpleOrderItemVoByOrderId">
+        </collection>
+    </resultMap>
+    <select id="searchManageOrderVoPage" resultMap="ManageOrderVoMap">
+        SELECT
+        *
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.is_deleted = 0
+        AND od.is_deleted = 0
+        <if test="dto.goodsName!=null and dto.goodsName!=''">
+            AND o.id IN
+            ( SELECT
+            DISTINCT(oi.order_id)
+            FROM
+            t_order_item as oi
+            WHERE
+            oi.is_deleted = 0
+            AND oi.product_name LIKE concat('%',#{dto.goodsName},'%') )
+        </if>
+        <if test="dto.userName!=null and dto.userName!=''">
+            AND o.user_name LIKE concat('%',#{dto.userName},'%')
+        </if>
+        <if test="dto.receiverName!=null and dto.receiverName!=''">
+            AND od.receiver_name LIKE concat('%',#{dto.receiverName},'%')
+        </if>
+        <if test="dto.orderId!=null  and dto.orderId!=''">
+            AND o.id LIKE concat('%',#{dto.orderId},'%')
+        </if>
+        <if test="dto.pointName!=null and dto.pointName!=''">
+            AND od.point_name LIKE concat('%',#{dto.pointName},'%')
+        </if>
+        <if test="dto.deliverySn !=null  and dto.deliverySn!=''">
+            AND od.delivery_sn LIKE concat('%',#{dto.deliverySn},'%')
+        </if>
+        <if test="dto.lineId !=null and dto.lineId!=''">
+            AND od.line_id = #{dto.lineId}
+        </if>
+        <if test="dto.deliverType == 0">
+            AND od.delivery_type != 102
+        </if>
+        <if test="dto.deliverType == 100">
+            AND od.delivery_type = 100
+        </if>
+        <if test="dto.deliverType == 101">
+            AND od.delivery_type = 101
+        </if>
+        <if test="dto.deliverType == 102">
+            AND od.delivery_type = 102
+        </if>
+        <if test='dto.area !=null and dto.area == 1'>
+            AND o.activity_ids IS NOT NULL
+        </if>
+        <if test='dto.area !=null and dto.area == 2'>
+            AND o.activity_ids IS NULL
+        </if>
+        <if test='dto.remarkType == 1'>
+            AND o.note != ''
+        </if>
+        <if test='dto.remarkType == 2'>
+            AND o.note = ''
+        </if>
+        <if test="dto.startTime!=null and dto.startTime!='' and dto.endTime!=null and dto.endTime!=''">
+            AND o.pay_time BETWEEN concat(#{dto.startTime},' 00:00:00') AND concat(#{dto.endTime},' 23:59:59')
+        </if>
+        <if test="startDate!=null and endDate!=null">
+            AND o.create_time BETWEEN concat(#{startDate},' 00:00:00') AND concat(#{endDate},' 23:59:59')
+        </if>
+        <if test='dto.sendBillId == -1'>
+            AND od.send_bill_id IS NULL
+        </if>
+        <if test="dto.sendBillId!=null and dto.sendBillId!=0 and dto.sendBillId!=-1">
+            AND od.send_bill_id = #{dto.sendBillId}
+        </if>
+        <if test="statusList!=null and statusList.size>0">
+            AND status in
+            <foreach collection="statusList" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+        ORDER BY
+        o.create_time DESC
+    </select>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="OrderVoMap" type="com.medusa.gruul.order.api.model.OrderVo">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="user_note" property="userNote"/>
+        <result column="type" property="type"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="discounts_amount" property="discountsAmount"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="freight_amount" property="freightAmount"/>
+        <result column="promotion_amount" property="promotionAmount"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="coupon_amount" property="couponAmount"/>
+        <result column="pay_type" property="payType"/>
+        <result column="transaction_id" property="transactionId"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="source_type" property="sourceType"/>
+        <result column="close_time" property="closeTime"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="status" property="status"/>
+        <result column="note" property="note"/>
+        <result column="comment_time" property="commentTime"/>
+        <result column="complete_time" property="completeTime"/>
+        <result column="custom_form" property="customForm"/>
+        <result column="full_scale_id" property="fullScaleId"/>
+        <result column="full_scale_amount" property="fullScaleAmount"/>
+        <result column="refund_transaction_id" property="refundTransactionId"/>
+        <result column="estimated_delivery_time" property="estimatedDeliveryTime"/>
+        <association column="id" property="orderDelivery"
+                     select="com.medusa.gruul.order.mapper.OrderDeliveryMapper.selectById">
+        </association>
+        <collection column="id" property="orderItemList" javaType="ArrayList"
+                    select="com.medusa.gruul.order.mapper.OrderItemMapper.selectOrderItemVoByOrderId">
+        </collection>
+    </resultMap>
+    <select id="selectOrderVoById" resultMap="OrderVoMap">
+        SELECT
+         *
+        FROM t_order
+        WHERE
+        is_deleted = 0 AND id = #{orderId}
+    </select>
+    <select id="selectOrderVoListByIds" resultMap="OrderVoMap">
+        SELECT
+        *
+        FROM t_order
+        WHERE
+        is_deleted = 0 AND id IN
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </select>
+
+    <!-- 小程序端订单列表查询映射结果 -->
+    <resultMap id="SimpleOrderVoMap" type="com.medusa.gruul.order.model.SimpleOrderVo">
+        <id column="id" property="orderId"/>
+        <result column="type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_province" property="receiverProvince"/>
+        <result column="receiver_city" property="receiverCity"/>
+        <result column="receiver_region" property="receiverRegion"/>
+        <result column="receiver_detail_address" property="receiverDetailAddress"/>
+        <result column="send_bill_name" property="sendBillName"/>
+        <result column="user_note" property="userNote"/>
+        <result column="custom_form" property="customForm"/>
+        <collection column="id" property="itemVoList" javaType="ArrayList"
+                    ofType="com.medusa.gruul.order.model.SimpleOrderItemVo"
+                    select="com.medusa.gruul.order.mapper.OrderItemMapper.selectSimpleOrderItemVoByOrderId">
+        </collection>
+    </resultMap>
+    <select id="searchSimpleOrderVoForGroupPage" resultMap="SimpleOrderVoMap">
+        SELECT
+            *
+        FROM
+            t_order as o
+            LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+            o.status = #{status}
+            AND o.user_id = #{userId}
+        ORDER BY o.create_time DESC
+    </select>
+
+    <!-- 返回给物流模块的数据 -->
+    <resultMap id="GetOrderListMap" type="com.medusa.gruul.order.api.model.GetOrderListDto">
+        <id column="id" property="orderId"/>
+        <result column="pay_amount" property="price"/>
+        <result column="create_time" property="createTime"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="buyerNick"/>
+        <result column="user_avatar_url" property="img"/>
+        <result column="user_note" property="remark"/>
+        <result column="status" property="status"/>
+        <result column="type" property="type"/>
+        <result column="delivery_type" property="deliverType"/>
+        <result column="point_id" property="pointId"/>
+        <result column="line_id" property="lineId"/>
+        <result column="receiver_name" property="reName"/>
+        <result column="receiver_phone" property="rePhone"/>
+        <result column="receiver_detail_address" property="reAddress"/>
+        <result column="receiver_province" property="rProvince"/>
+        <result column="receiver_city" property="rCity"/>
+        <result column="receiver_region" property="rRegion"/>
+        <result column="custom_form" property="customForm"/>
+        <collection column="id" property="afsOrderList"
+                    select="com.medusa.gruul.order.mapper.AfsOrderMapper.selectByOrderId">
+        </collection>
+        <collection column="id" property="goods" javaType="ArrayList"
+                    ofType="com.medusa.gruul.order.api.model.GoodsBean"
+                    select="com.medusa.gruul.order.mapper.OrderItemMapper.selectGoodsBeanByOrderIds">
+        </collection>
+    </resultMap>
+    <select id="selectOrderListByIds" resultMap="GetOrderListMap">
+        SELECT
+        *
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.id IN
+        <foreach collection="orderIdList" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+        AND o.is_deleted= 0
+        AND o.tenant_id = #{tenantId}
+        AND o.shop_id = #{shopId}
+    </select>
+    <select id="selectNotShippedOrder" resultMap="GetOrderListMap">
+        SELECT
+            *
+        FROM
+            t_order as o
+            LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+            o.pay_time &lt; #{end}
+            AND o.is_deleted= 0
+            AND o.status= 101
+            AND od.delivery_type != 102
+            AND od.send_bill_id IS NULL
+            AND o.tenant_id = #{tenantId}
+            AND o.shop_id = #{shopId}
+    </select>
+    <select id="selectListByPointIdAndDate" resultType="com.medusa.gruul.order.api.entity.Order">
+        SELECT
+        o.*
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.create_time BETWEEN #{start} AND #{end}
+        AND o.is_deleted = 0
+        AND o.status != 100
+        AND od.point_id = #{pointId}
+        AND o.tenant_id = #{tenantId}
+         AND o.shop_id = #{shopId}
+    </select>
+    <select id="selectListByPointIdAndDateBetween" resultType="com.medusa.gruul.order.api.entity.Order">
+        SELECT
+        o.*
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.create_time BETWEEN #{start} AND #{end}
+        AND o.is_deleted = 0
+        AND o.status != 100
+        AND od.point_id = #{pointId}
+    </select>
+
+
+
+
+
+
+
+    <!-- OrderDto结果 -->
+    <resultMap id="OrderDto" type="com.medusa.gruul.order.api.model.OrderDto">
+        <id column="id" property="id"/>
+        <result column="status" property="status"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectOneById" resultMap="OrderDto">
+        SELECT
+        id as id,
+        update_time as updateTime,
+        user_id as user_id,
+        status as status
+        FROM t_order
+        WHERE
+        is_deleted = 0 AND id = #{orderId}
+    </select>
+
+
+    <update id="updateOneById" parameterType="com.medusa.gruul.order.api.model.OrderDto">
+        update   t_order set  status=#{status}, update_time = #{updateTime} where id = #{id}
+    </update>
+    <update id="closeExchangeOrder">
+        update t_order set status=#{status}, close_time = now() where type = 103 and id in
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </update>
+
+
+
+    <!-- PC管理端订单列表查询映射结果 -->
+    <resultMap id="ManageDeliveryOrdersVoMap" type="com.medusa.gruul.order.model.ManageDeliveryOrderVo">
+        <id column="id" property="orderId"/>
+        <result column="type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_post_code" property="receiverPostCode"/>
+        <result column="receiver_province" property="receiverProvince"/>
+        <result column="receiver_city" property="receiverCity"/>
+        <result column="receiver_region" property="receiverRegion"/>
+        <result column="receiver_detail_address" property="receiverDetailAddress"/>
+        <result column="pay_amount" property="payAmount"/>
+        <collection column="id" property="itemVoList" javaType="ArrayList"
+                    select="com.medusa.gruul.order.mapper.OrderItemMapper.selectSimpleOrderItemVoByOrderId">
+        </collection>
+    </resultMap>
+    <select id="searchLogisticsOrderList" resultMap="ManageDeliveryOrdersVoMap">
+        SELECT
+        *
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.status = 101
+        AND o.is_deleted = 0
+        AND od.is_deleted = 0
+        AND od.delivery_type = 102
+        <if test="dto.goodsName!=null and dto.goodsName!=''">
+            AND o.id IN
+            ( SELECT
+            DISTINCT(oi.order_id)
+            FROM
+            t_order_item as oi
+            WHERE
+            oi.is_deleted = 0
+            AND oi.product_name LIKE concat('%',#{dto.goodsName},'%') )
+        </if>
+        <if test="dto.userName!=null and dto.userName!=''">
+            AND o.user_name LIKE concat('%',#{dto.userName},'%')
+        </if>
+
+        <if test="dto.orderId!=null  and dto.orderId!=''">
+            AND o.id LIKE concat('%',#{dto.orderId},'%')
+        </if>
+        <if test="dto.address!=null  and dto.address!=''">
+            AND od.receiver_detail_address LIKE concat('%',#{dto.address},'%')
+        </if>
+        ORDER BY o.create_time DESC
+    </select>
+    <select id="selectListByPointIdAndStatus" resultMap="BaseResultMap">
+        SELECT
+        o.*
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.tenant_id = #{tenantId}
+        AND o.shop_id = #{shopId}
+        AND o.status in
+        <foreach collection="orderStatusList" item="orderStatus" open="(" separator="," close=")">
+            #{orderStatus}
+        </foreach>
+        AND od.point_id = #{pointId}
+    </select>
+
+
+    <select id="getProductLastBuyers" resultType="com.medusa.gruul.order.api.model.BuyerVo">
+        SELECT
+            o.user_name AS name,
+            o.user_avatar_url AS avatar_url
+        FROM
+            t_order AS o
+            LEFT JOIN t_order_item AS oi ON o.id = oi.order_id
+        WHERE
+            oi.product_id = #{productId}
+        ORDER BY
+            o.create_time DESC
+        LIMIT 3
+    </select>
+    <select id="searchLogisticsOrder" resultMap="ManageOrderVoMap">
+        SELECT
+        *
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.is_deleted = 0
+        AND o.status = 101
+        AND od.is_deleted = 0
+        AND od.delivery_type = 102
+        <if test="orderIds!=null and  orderIds.size() > 0">
+            AND o.id in
+            <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+                #{orderId}
+            </foreach>
+        </if>
+        ORDER BY o.create_time DESC
+    </select>
+    <select id="countLogisticsWaitSend" resultType="java.lang.Integer">
+        SELECT
+        count(o.id)
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.is_deleted = 0
+        AND o.status = 101
+        AND od.is_deleted = 0
+        AND od.delivery_type = 102
+    </select>
+    <select id="selectListByAssId" resultType="com.medusa.gruul.order.api.entity.Order">
+        SELECT
+        o.*
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.is_deleted = 0
+        AND o.status IN (101,102,103)
+        <if test="keyword!=null and keyword!=''">
+            AND (o.user_name LIKE concat('%',#{keyword},'%') or
+            od.receiver_name LIKE concat('%',#{keyword},'%') or
+            od.receiver_phone LIKE concat('%',#{keyword},'%')
+            )
+        </if>
+    </select>
+    <select id="selectShippedOrderByProductIds" resultType="java.lang.Long">
+        SELECT
+        o.id
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON od.order_id = o.id
+        LEFT JOIN t_order_item as oi ON oi.order_id = o.id
+        WHERE
+        o.is_deleted = 0
+        AND oi.is_deleted = 0
+        AND od.is_deleted = 0
+        AND o.status = 101
+        AND od.delivery_type != 102
+        AND od.send_bill_id IS NOT NULL
+        <if test="productIds!=null and  productIds.size() > 0">
+            AND oi.product_id IN
+            <foreach collection="productIds" item="productId" open="(" separator="," close=")">
+                #{productId}
+            </foreach>
+        </if>
+    </select>
+    <select id="searchIncentiveDetailPage" resultMap="ManageOrderVoMap">
+        SELECT
+        *
+        FROM
+        t_order as o
+        LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+        WHERE
+        o.is_deleted = 0
+        AND od.is_deleted = 0
+        AND o.complete_time BETWEEN #{beginTime} AND #{endTime}
+        <if test="deliverType == 100">
+            AND od.delivery_type in (100,101)
+        </if>
+        <if test="deliverType == 102">
+            AND od.delivery_type = 102
+        </if>
+        ORDER BY o.create_time DESC
+    </select>
+    <select id="waitSendProductList" resultType="java.lang.Long">
+        SELECT
+            DISTINCT oi.product_id
+        FROM
+            t_order as o
+            LEFT JOIN t_order_delivery as od ON o.id = od.order_id
+            LEFT JOIN t_order_item as oi ON oi.order_id = o.id
+        WHERE
+            o.is_deleted = 0
+            AND oi.is_deleted = 0
+            AND od.is_deleted = 0
+            AND o.STATUS = 101
+            AND od.delivery_type != 102
+            AND od.send_bill_id =  #{sendBillId}
+    </select>
+
+    <select id="getSolitaireLatelyBuyer" resultType="com.medusa.gruul.order.model.LatelyBuyerVo">
+        SELECT
+            MIN( user_name ) as user_name,
+            MIN( user_avatar_url ) as user_avatar_url,
+            MIN( pay_time ) as pay_time,
+            MIN( product_name ) as product_name,
+            COUNT( oi.order_id )  as product_total_quantity
+        FROM
+            t_order as o
+            LEFT JOIN t_order_item as oi ON oi.order_id = o.id
+        WHERE
+            o.is_deleted = 0
+            AND o.pay_time IS NOT NULL
+            AND o.solitaire_activity_id = #{solitaireActivityId}
+        GROUP BY
+            oi.order_id ,
+            o.pay_time
+        ORDER BY
+            o.pay_time DESC LIMIT 5
+    </select>
+    <!-- PC管理端订单列表查询映射结果 -->
+    <resultMap id="SolitaireBuyerVoMap" type="com.medusa.gruul.order.model.SolitaireBuyerVo">
+        <result column="id" property="orderId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_detail_address" property="receiverDetailAddress"/>
+        <result column="pay_amount" property="payAmount"/>
+        <collection column="id" property="itemVoList" javaType="ArrayList"
+                    select="com.medusa.gruul.order.mapper.OrderItemMapper.selectSolitaireOrderItemVoByOrderId">
+        </collection>
+    </resultMap>
+    <select id="getSolitaireBuyerPage" resultMap="SolitaireBuyerVoMap">
+        SELECT
+            id,
+            user_name,
+            user_avatar_url,
+            pay_time
+        FROM
+            t_order
+        WHERE
+            is_deleted = 0
+            AND pay_time IS NOT NULL
+            AND solitaire_activity_id = #{solitaireActivityId}
+        ORDER BY
+            pay_time DESC
+    </select>
+
+    <select id="getMySolitaireOrder" resultMap="SolitaireBuyerVoMap">
+        SELECT
+            id,
+            user_name,
+            user_avatar_url,
+            pay_time,
+            receiver_name,
+            receiver_phone,
+            receiver_detail_address,
+            pay_amount
+        FROM
+            t_order as o  LEFT JOIN t_order_delivery as od on o.id=od.order_id
+        WHERE
+            o.is_deleted = 0
+            AND pay_time IS NOT NULL
+            AND solitaire_activity_id = #{solitaireActivityId}
+            AND user_id = #{userId}
+        ORDER BY
+            pay_time DESC
+    </select>
+    <select id="selectListByFullScaleIds" resultType="com.medusa.gruul.order.api.model.ActivityStatisticsVo">
+        SELECT
+        full_scale_id as activity_id,
+        sum(pay_amount) AS gaap_total,
+        COUNT(id) AS pay_order,
+        COUNT(DISTINCT(user_id)) AS people_num
+        FROM
+        t_order
+        WHERE
+        status > 100
+        AND full_scale_id IN
+        <if test="fullScaleIdList!=null and  fullScaleIdList.size() > 0">
+            <foreach collection="fullScaleIdList" item="fullScaleId" open="(" separator="," close=")">
+                #{fullScaleId}
+            </foreach>
+        </if>
+        GROUP BY full_scale_id
+    </select>
+    <select id="getPointOrderHistory" resultType="java.lang.Integer">
+        SELECT
+            COUNT(DISTINCT od.order_id)
+        FROM
+            t_order AS o
+            LEFT JOIN t_order_delivery AS od ON o.id = od.order_id
+                AND od.tenant_id = #{tenantId}
+                AND  od.shop_id=#{shopId}
+        WHERE
+            o.pay_type != 100
+            AND od.point_id = #{pointId}
+            AND o.tenant_id = #{tenantId}
+            AND o.shop_id = #{shopId}
+    </select>
+
+
+
+</mapper>

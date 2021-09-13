@@ -1,0 +1,10 @@
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: "~element-ui/lib/theme-chalk/fonts";
+
+$--button-border-radius: 15px !default;
+$--button-mini-border-radius: 15px !default;
+$--button-small-border-radius: 15px !default;
+$--tag-border-radius: 15px !default;
+
+@import "~element-ui/packages/theme-chalk/src/index";
+@import "./element-cover.scss";

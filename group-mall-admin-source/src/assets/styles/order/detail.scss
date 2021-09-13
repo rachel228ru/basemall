@@ -1,0 +1,112 @@
+@include b(detail) {
+  width: 100%;
+
+  .tc {
+    text-align: center;
+  }
+
+  @include e(status) {
+    width: 100%;
+    background-color: rgba(233, 243, 251, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(45, 140, 240, 1);
+    box-shadow: none;
+    color: #586884;
+    padding: 20px;
+  }
+
+  @include e(price) {
+    @include flex(flex-end);
+
+    b {
+      font-size: 20px;
+      color: #2d8cf0;
+      position: relative;
+      top: -1px;
+    }
+  }
+
+  @include e(field) {
+    font-size: 13px;
+  }
+
+  @include e(table) {
+  }
+
+  /deep/ .el-col {
+    margin-top: 15px;
+  }
+
+  /deep/ .table {
+    &__goods {
+      @include flex(flex-start, flex-start);
+
+      &--image {
+        $s: 70px;
+        width: $s;
+        height: $s;
+        background: #ccc;
+        margin-right: 10px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &--info {
+        width: 184px;
+        height: auto;
+        line-height: 16px;
+
+        .goods--name {
+        }
+
+        .goods--specification {
+          @include flex(space-between);
+
+          .l {
+            color: #999999;
+          }
+        }
+
+        .goods--price {
+          color: #fd6205;
+          margin-top: 5px;
+        }
+      }
+    }
+
+    &__user {
+      @include flex(flex-start);
+
+      .user--head {
+        $s: 35px;
+        width: $s;
+        height: $s;
+        border-radius: 50%;
+        background: blue;
+        margin-right: 10px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    &__button {
+      cursor: pointer;
+      &.button--warning {
+        color: #fa8b03;
+      }
+    }
+
+    .el-pagination__sizes {
+      position: relative;
+      top: -3px;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!--本地仓库。该值表示构建系统本地仓库的路径。其默认值为~/.m2/repository。 -->
+    <localRepository>gitee_repository</localRepository>
+
+    <!--Maven 是否需要和用户交互以获得输入。如果 Maven 需要和用户交互以获得输入，则设置成 true，反之则应为 false。默认为
+            true。 <interactiveMode>true</interactiveMode>
+-->
+    <servers>
+        <server>
+            <id>medusa-releases</id>
+            <username>admin</username>
+            <password>password</password>
+        </server>
+        <server>
+            <id>medusa-snapshots</id>
+            <username>admin</username>
+            <password>password</password>
+        </server>
+        <server>
+            <id>nexus</id>
+            <username>admin</username>
+            <password>password</password>
+        </server>
+        <server>
+            <id>medusa-harbor</id>
+            <username>xiaoq</username>
+            <password>Password</password>
+        </server>
+    </servers>
+
+    <!-- 使用私库，镜像不用配置 -->
+    <mirrors></mirrors>
+
+    <!-- 环境配置，作为企业内应用，只使用内网私库（默认） 和 阿里云（私库维护时） -->
+    <profiles>
+        <profile>
+            <id>medusa</id>
+            <repositories>
+                <repository>
+                    <id>nexus</id>
+                    <url>http://nexus地址/repository/maven-public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>nexus</id>
+                    <url>http://nexus地址/repository/maven-public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+
+    </profiles>
+
+    <!-- 默认两个永远生效 -->
+    <activeProfiles>
+        <activeProfile>medusa</activeProfile>
+    </activeProfiles>
+
+</settings>

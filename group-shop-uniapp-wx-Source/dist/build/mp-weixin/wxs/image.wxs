@@ -1,0 +1,15 @@
+"use strict";
+
+var transformImage = function transformImage(url, type) {
+  switch (type) {
+    case "375":
+      return url + "-thumbnail";
+
+    default:
+      return url;
+  }
+};
+
+module.exports = {
+  transformImage: transformImage
+};

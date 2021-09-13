@@ -1,0 +1,13 @@
+{
+  "uniqueIdentification": "ACCOUNT_DEFAULT",
+  "version": "v1.2.3",
+  "buildAction": 1,
+  "importDirectUse": 0,
+  "url": "/",
+  "mq": {
+    "exchange": "gruul.account.exchange",
+    "routeKey": "gruul.account.default"
+  },
+  "kv": {
+  }
+}

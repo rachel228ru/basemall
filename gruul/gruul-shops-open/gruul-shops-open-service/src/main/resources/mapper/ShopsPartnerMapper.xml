@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.ShopsPartnerMapper">
+
+
+    <resultMap id="ShopsPartnerVoMap" type="com.medusa.gruul.shops.model.vo.ShopsPartnerVo">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="partner_id" property="partnerId"/>
+        <result column="phone" property="phone"/>
+        <result column="name" property="name"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="pass" property="pass"/>
+        <result column="region" property="region"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="province_code" property="provinceCode"/>
+        <result column="city_code" property="cityCode"/>
+        <result column="card_id_up" property="cardIdUp"/>
+        <result column="card_id_down" property="cardIdDown"/>
+        <result column="map_x" property="mapX"/>
+        <result column="map_y" property="mapY"/>
+        <result column="partner_model" property="partnerModel"/>
+        <result column="approval_status" property="approvalStatus"/>
+        <result column="prohibit_status" property="prohibitStatus"/>
+        <result column="province_name" property="provinceName"/>
+        <result column="city_name" property="cityName"/>
+        <result column="area_name" property="areaName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="platform_id" property="platformId"/>
+    </resultMap>
+
+    <sql id="sqlColumn">
+        id, partner_id, shop_id, phone, is_deleted, name, pass, invitation_code, region, area_code, province_code,
+         city_code, card_id_up, card_id_down, map_x, map_y, partner_model, approval_status, prohibit_status, province_name,
+          city_name, area_name, platform_id, tenant_id, create_time, update_time, is_deleted AS deleted
+    </sql>
+
+
+    <!-- 根据租户id获取默认商铺 feign -->
+    <select id="oneByTenantId" resultMap="ShopsPartnerVoMap">
+        select
+        a.*
+        from
+        `t_shops_partner` as a
+        where
+        exists
+          (
+            select
+            1
+            from
+            `t_shops`
+            where
+            `tenant_id` = #{tenantId}
+            and
+            `shop_id` = a.`shop_id`
+            and
+            `is_deleted` = '0'
+          )
+        and
+        a.`tenant_id` = #{tenantId}
+        and
+        a.`approval_status` = '1'
+        and
+        a.`prohibit_status` = '0'
+        and
+        a.`is_deleted` = '0'
+    </select>
+    <select id="selectByPlatformIdAndTenantId" resultType="com.medusa.gruul.shops.api.entity.ShopsPartner">
+        SELECT
+         <include refid="sqlColumn"/>
+        FROM t_shops_partner
+        WHERE
+        tenant_id = #{tenantId}
+        AND is_deleted = 0
+        AND platform_id = #{platformId}
+    </select>
+
+    <select id="selectByTenantIdAndPartnerIdIsNull"
+            resultType="com.medusa.gruul.shops.api.entity.ShopsPartner">
+        SELECT
+         <include refid="sqlColumn"/>
+        FROM t_shops_partner
+        WHERE
+        tenant_id = #{tenantId}
+        AND is_deleted = 0
+        AND partner_id IS NULL
+    </select>
+
+
+</mapper>

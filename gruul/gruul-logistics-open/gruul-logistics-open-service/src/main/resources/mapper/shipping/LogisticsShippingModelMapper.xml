@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.logistics.mapper.LogisticsShippingModelMapper">
+  <resultMap id="BaseResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsShippingModelVo">
+    <id column="id"  property="id" />
+    <result column="logistics_id"  property="logisticsId" />
+    <result column="valuation_model"  property="valuationModel" />
+    <result column="first_piece"  property="firstPiece" />
+    <result column="first_weight"  property="firstWeight" />
+    <result column="first_amount"  property="firstAmount" />
+    <result column="second_piece"  property="secondPiece" />
+    <result column="second_weight"  property="secondWeight" />
+    <result column="second_amount"  property="secondAmount" />
+    <result column="region_json"  property="regionJson" />
+  </resultMap>
+
+  <resultMap id="BeanMap" type="com.medusa.gruul.logistics.api.entity.LogisticsShippingModel">
+    <id column="id"  property="id" />
+    <result column="logistics_id"  property="logisticsId" />
+    <result column="valuation_model"  property="valuationModel" />
+    <result column="first_piece"  property="firstPiece" />
+    <result column="first_weight"  property="firstWeight" />
+    <result column="first_amount"  property="firstAmount" />
+    <result column="second_piece"  property="secondPiece" />
+    <result column="second_weight"  property="secondWeight" />
+    <result column="second_amount"  property="secondAmount" />
+    <result column="region_json"  property="regionJson" />
+  </resultMap>
+
+  <select id="selectByParamMap" resultMap="BeanMap" >
+   SELECT id, logistics_id, valuation_model, first_piece, first_weight,
+   first_amount, second_piece, second_weight, second_amount, region_json,
+   create_time, update_time, is_deleted AS deleted FROM t_logistics_shipping_model
+    WHERE region_json like  CONCAT('%',#{region_json} ,'%') AND logistics_id =#{logistics_id} AND is_deleted = 0
+  </select>
+  
+</mapper>

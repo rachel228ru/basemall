@@ -1,0 +1,32 @@
+//搜索
+
+@import "../mixins/mixins";
+
+@include b(search) {
+  margin: 0 20px;
+  height: 44px;
+  line-height: 44px;
+  padding: 0 22px;
+  vertical-align: middle;
+  transition: all 0.3s;
+
+  @include e(iconfont){
+    margin-right: 10px;
+    font-size: 16px;
+  }
+
+  @include when(style-one) {
+    background-color: #eeeeee;
+    border: 1px solid transparent;
+    border-radius: 44px;
+  }
+  @include when(style-two) {
+    background-color: #eeeeee;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  @include when(style-three) {
+    border: 1px solid #eeeeee;
+    border-radius: 44px;
+  }
+}

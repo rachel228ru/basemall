@@ -1,0 +1,45 @@
+.m__card {
+  background: #f9f9f9;
+  padding: 20px;
+
+  transform-origin: left top;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease 0s;
+
+  // &.show {
+  //   height: 304px;
+  // }
+
+  &.hide {
+    height: 50px;
+
+    .m__card--btn {
+      width: 940px;
+      height: 50px;
+      background: #f9f9f9;
+      line-height: 50px;
+      // margin-top: 20px
+    }
+  }
+
+  .m__card--btn {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    padding-bottom: 20px;
+    color: #586884;
+
+    span {
+      cursor: pointer;
+      vertical-align: middle;
+
+      .iconfont{
+        position: relative;
+        bottom: -1px;
+        right: -2px;
+      }
+    }
+  }
+}

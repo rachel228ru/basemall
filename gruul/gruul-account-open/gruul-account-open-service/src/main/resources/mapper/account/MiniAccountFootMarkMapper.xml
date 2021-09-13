@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.account.mapper.MiniAccountFootMarkMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.account.api.entity.MiniAccountFootMark">
+        <id column="footmark_id" property="footmarkId"/>
+        <result column="user_id" property="userId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="status" property="status"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="original_price" property="originalPrice"/>
+        <result column="ramark" property="ramark"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+    </resultMap>
+
+
+    <resultMap id="ResultMap" type="com.medusa.gruul.account.model.vo.AccountFootMarkVo">
+        <id column="footmark_id" property="footmarkId"/>
+        <result column="user_id" property="userId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="original_price" property="originalPrice"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        footmark_id,user_id,product_id,product_pic,product_name,status,product_price,original_price,create_time
+    </sql>
+    <delete id="deleteByUserId">
+        UPDATE
+            t_mini_account_foot_mark
+        SET is_deleted = 1
+        WHERE user_id = #{userId}
+    </delete>
+
+
+    <select id="selectByProductId" resultMap="BaseResultMap" resultType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_mini_account_foot_mark
+        WHERE
+        TO_DAYS(create_time) = TO_DAYS(NOW())
+        AND
+        user_id = #{userId}
+        AND
+        product_id = #{productId}
+        AND
+        is_deleted = 0
+    </select>
+
+    <select id="selectAccountFootMarkCount" resultType="java.lang.Integer">
+
+        SELECT COUNT(*)
+        FROM t_mini_account_foot_mark
+        WHERE user_id = #{userId}
+          AND is_deleted = 0
+    </select>
+
+
+    <select id="selectAccountFootMarkList" resultMap="ResultMap"
+            resultType="com.medusa.gruul.account.model.vo.AccountFootMarkVo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_mini_account_foot_mark
+        WHERE
+        user_id =#{accountFootMarkParam.userId}
+        AND
+        is_deleted = 0
+        ORDER BY
+        create_time
+        DESC
+    </select>
+
+
+    <update id="updateBeyondFootMark">
+
+        UPDATE
+            t_mini_account_foot_mark
+        SET is_deleted = 1
+        WHERE user_id = #{userId}
+          AND is_deleted = 0
+        limit #{delCount}
+    </update>
+
+</mapper>

@@ -1,0 +1,40 @@
+.line-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-line-break: auto;
+  -webkit-box-orient: vertical;
+}
+
+.line-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-line-break: auto;
+  -webkit-box-orient: vertical;
+}
+
+.lh-44{
+  line-height: 2.75rem;
+}
+
+.lh-14{
+  line-height: .875rem;
+}
+
+.lines {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.huanhang {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+}

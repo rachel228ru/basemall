@@ -1,0 +1,106 @@
+// 资讯
+
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(information-form-list) {
+  padding: 20px 10px;
+  border: 1px solid #eeeeee;
+  margin-bottom: 10px;
+  position: relative;
+
+  @include e(item) {
+    @include utils-ellipsis;
+  }
+
+  @include e(content) {
+    color: #409eff;
+  }
+
+  @include e(remove) {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+  }
+
+  &:hover {
+    @include e(remove) {
+      display: inline;
+    }
+  }
+}
+
+@include b(information-preview) {
+  @include e(top) {
+    display: flex;
+    justify-content: space-between;
+    line-height: 40px;
+  }
+
+  @include e(list) {
+    @include when(style-one) {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+
+      @include e(item) {
+        flex: none;
+        width: 80%;
+        margin-right: 20px;
+      }
+
+      @include e(img) {
+        height: 140px;
+        background-color: #eeeeee;
+      }
+
+      @include e(foot) {
+        padding: 10px 0;
+      }
+
+      @include e(title) {
+        @include utils-ellipsis(2);
+      }
+
+      @include e(record) {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+      }
+    }
+
+    @include when(style-two) {
+      @include e(item) {
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      @include e(img) {
+        flex: none;
+        width: 150px;
+        height: 150px;
+        background-color: #eeeeee;
+        margin-right: 10px;
+      }
+
+      @include e(foot) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px 0;
+      }
+
+      @include e(title) {
+        @include utils-ellipsis(2);
+      }
+
+      @include e(record) {
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
+  }
+}

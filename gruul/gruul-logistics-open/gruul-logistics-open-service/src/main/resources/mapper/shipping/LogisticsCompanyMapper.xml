@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.logistics.mapper.LogisticsCompanyMapper">
+
+
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.logistics.api.entity.LogisticsCompany">
+        <id column="id"  property="id"/>
+        <result column="name"  property="name"/>
+        <result column="code"  property="code"/>
+        <result column="is_deleted"  property="isDeleted"/>
+        <result column="create_time"  property="createTime"/>
+        <result column="update_time"  property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, `name`, code,is_deleted,create_time,update_time
+    </sql>
+
+    <select id="selectListCompany" resultMap="BaseResultMap" >
+     select
+     id, `name`, code,create_time,update_time
+     from t_logistics_company
+     where is_deleted=0 and tenant_id = #{tenantId} and shop_id = #{shopId} 
+    </select>
+
+    <select id="selectListCompanyByParam" resultMap="BaseResultMap" >
+     select
+     id, `name`, code,create_time,update_time
+     from t_logistics_company
+     where is_deleted=0 and code = #{code} and tenant_id = #{tenantId} and shop_id = #{shopId} limit 1
+    </select>
+</mapper>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "goods": "/pages/index/modules/shopCar/components/goods/goods"
+  }
+}

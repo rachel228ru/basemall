@@ -1,0 +1,29 @@
+@import "./mixins/mixins.scss";
+
+@include b(drag) {
+  @include e(list) {
+    .el-collapse-item__header {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    .el-collapse {
+      border-top: 0px;
+    }
+
+    @include m(item) {
+      width: 100%;
+    }
+
+    .is-disabled {
+      .el-collapse-item__header {
+        cursor: default !important;
+        color: #303133 !important;
+      }
+
+      .el-icon-arrow-right {
+        opacity: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.ShopsRenovationTemPageAssMapper">
+
+
+    <resultMap id="ShopsRenovationPageVoMap" type="com.medusa.gruul.shops.model.vo.ShopsRenovationAssemblyVo">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="page_id" property="pageId"/>
+        <result column="is_def" property="isDef"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="properties" property="properties"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="operator_id" property="operatorId"/>
+        <result column="operator_name" property="operatorName"/>
+    </resultMap>
+
+
+    <resultMap id="ShopsRenovationPageMap" type="com.medusa.gruul.shops.api.entity.ShopsRenovationAssembly">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="page_id" property="pageId"/>
+        <result column="is_def" property="isDef"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="properties" property="properties"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="operator_id" property="operatorId"/>
+        <result column="operator_name" property="operatorName"/>
+    </resultMap>
+
+
+    <!-- 获取商铺装修模板list by page id -->
+    <select id="listTemplatePageAssemblyByPageId" resultMap="ShopsRenovationPageMap">
+        select
+        *
+        from
+        `t_shops_renovation_assembly`
+        where
+        `is_deleted` = '0'
+        and
+        `page_id` = #{pageId}
+        order by `update_time`
+    </select>
+
+
+    <!-- 获取商铺装修模板list -->
+    <select id="listTemplatePageAssembly" resultMap="ShopsRenovationPageVoMap">
+        select
+        *
+        from
+        `t_shops_renovation_assembly`
+        where
+         `is_deleted` = '0'
+        and
+         `page_id` = #{pageId}
+
+    </select>
+    <select id="getFitmentInfoByTypeNotNull"
+            resultType="com.medusa.gruul.shops.api.entity.ShopsRenovationAssembly">
+
+         select
+        *
+        from
+        `t_shops_renovation_assembly`
+        where
+         `is_deleted` = '0'
+        and
+         `page_id` = #{param}
+
+    </select>
+
+</mapper>

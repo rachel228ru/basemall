@@ -1,0 +1,35 @@
+.editor_control {
+  border: 1px solid #e8eae9;
+  width: 300px;
+}
+.checklist_item {
+  width: 270px;
+  padding: 10px;
+  margin: 12px 10px;
+  border: 1px solid #e8eae9;
+  border-radius: 4px;
+  background-color: #fafafa;
+  position: relative;
+}
+.edit_icon {
+  width: 19px;
+  height: 15px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.editor_control_wrap {
+  height: calc(100vh - 80px) !important;
+  padding-bottom: 0 !important;
+  border: 1px solid #dcdfe6;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  .editor_control_wrap_main {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "search-plugin": "/pages/index/modules/mall/components/search-plugin/searchPlugin",
+    "top-modehead": "/pages/index/modules/mall/components/top-modehead/topModehead",
+    "top-biggoods": "/pages/index/modules/mall/components/top-biggoods/topBigGoods",
+    "left-tabbar": "/pages/index/modules/mall/components/left-tabbar/leftTabbar",
+    "swiper-list": "/pages/index/modules/mall/components/swiper-list/swiperList",
+    "left-biggoods": "/pages/index/modules/mall/components/left-biggoods/leftBigGoods",
+    "classified-goods": "/pages/index/modules/mall/components/classified-goods/classifiedGoods"
+  }
+}

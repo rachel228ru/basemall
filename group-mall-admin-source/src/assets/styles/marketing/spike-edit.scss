@@ -1,0 +1,7 @@
+@include b(spike) {
+  @include e(edit) {
+    .date--item {
+      width: 190px;
+    }
+  }
+}

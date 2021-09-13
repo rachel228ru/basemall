@@ -1,0 +1,112 @@
+{
+  "uniqueIdentification": "SHOP_TEMPLATE_DEFAULT",
+  "version": "v1.2.3",
+  "buildAction": 1,
+  "importDirectUse": 0,
+  "mq": {
+    "exchange": "gruul.shops.exchange",
+    "routeKey": "gruul.shops.template.queue.init"
+  },
+  "kv": {
+    "shopId": "",
+    "tenantId": "",
+    "colour": "1",
+    "onlineStatus": "1",
+    "isDevTemplate": "0",
+    "name": "拼团模板",
+    "pages": [
+      {"pageName": "默认页面",
+        "isDef": "1",
+        "assemblies": [
+          {"properties": "{\"icon\":\"lunbotu\",\"value\":\"HomeSwiper\",\"label\":\"轮播图\",\"id\":1593736550284,\"formData\":{\"type\":\"HomeSwiper\",\"swiperList\":[{\"title\":\"\",\"img\":\"https://oss-tencent.bgniao.cn//gruul/20200703/54fe31285d474fd793232f7b0b759f43.png\",\"link\":{\"id\":\"\",\"type\":\"\",\"name\":\"\",\"url\":\"\",\"append\":\"\"}}],\"padding\":2,\"imageStyle\":1,\"imageAngle\":1,\"indicator\":1,\"height\":360}}"},
+          {"properties": "{\"icon\":\"https://qiniu-app.qtshe.com/%E5%BA%97%E9%93%BA%E5%AF%BC%E8%88%AA.png\",\"value\":\"StoreNavigation\",\"label\":\"店铺导航\",\"id\":1587020489455,\"formData\":{\"storeNavigations\":[{\"navName\":\"新品\",\"fontColor\":\"#333333\",\"navIcon\":\"https://oss-tencent.bgniao.cn//gruul/20200703/7230eec5db0846c984ed6770124642bd.png\",\"pathLink\":\"\",\"linkUrl\":\"/pages/index/index\",\"linkName\":\"生活用品\",\"append\":\"mall\",\"type\":2,\"id\":259},{\"navName\":\"热卖\",\"fontColor\":\"#333333\",\"navIcon\":\"https://oss-tencent.bgniao.cn//gruul/20200703/a5b7b715655a4d46937049f8b7c34bb3.png\",\"pathLink\":\"\",\"linkUrl\":\"/pages/group/group\",\"linkName\":\"社群拼团\",\"append\":\"\",\"type\":4,\"id\":8},{\"navName\":\"超市\",\"fontColor\":\"#333333\",\"navIcon\":\"https://oss-tencent.bgniao.cn//gruul/20200703/45e3c2ecdcb249749071990658994742.png\",\"pathLink\":\"\",\"linkUrl\":\"/pages/index/index\",\"linkName\":\"分类页\",\"append\":\"mall\",\"type\":0,\"id\":2},{\"navName\":\"领券\",\"fontColor\":\"#333333\",\"navIcon\":\"https://oss-tencent.bgniao.cn//gruul/20200703/f9278a121a2f407583068095ac95e56b.png\",\"pathLink\":\"\",\"linkUrl\":\"/pages/coupon/couponCenter/couponCenter\",\"linkName\":\"领券中心\",\"append\":\"\",\"type\":4,\"id\":3},{\"navName\":\"签到\",\"fontColor\":\"#333333\",\"navIcon\":\"https://oss-tencent.bgniao.cn//gruul/20200703/feb8ef7c47794309a84b16c90391110b.png\",\"pathLink\":\"\",\"linkUrl\":\"/pages/integralShop/integralShop\",\"linkName\":\"积分商城\",\"append\":\"\",\"type\":4,\"id\":1}]}}"},
+          {"properties": "{\"icon\":\"mofang\",\"value\":\"CubeBox\",\"label\":\"魔方\",\"id\":1593739139109,\"formData\":{\"borderWidth\":6,\"layoutWidth\":6,\"layoutHeight\":6,\"showMethod\":7,\"pageMargin\":6,\"width\":2,\"subEntry\":[{\"x\":0,\"y\":0,\"width\":3,\"height\":2,\"img\":\"https://oss-tencent.bgniao.cn//gruul/20200703/7f7bbc0589bb4e4dbc4c1071fd84f63b.png\",\"link\":{\"id\":null,\"type\":null,\"name\":\"\",\"url\":\"\",\"append\":\"\"},\"linkName\":\"\"},{\"x\":3,\"y\":0,\"width\":3,\"height\":2,\"img\":\"https://oss-tencent.bgniao.cn//gruul/20200703/a46b4232a8114dc18d9da129658c92d2.png\",\"link\":{\"id\":null,\"type\":null,\"name\":\"\",\"url\":\"\",\"append\":\"\"},\"linkName\":\"\"}]}}"},
+          {"properties": "{\"icon\":\"mofang\",\"value\":\"CubeBox\",\"label\":\"魔方\",\"id\":1593739995060,\"formData\":{\"borderWidth\":0,\"layoutWidth\":7,\"layoutHeight\":7,\"showMethod\":7,\"pageMargin\":0,\"width\":2,\"subEntry\":[{\"x\":0,\"y\":0,\"width\":7,\"height\":1,\"img\":\"https://oss-tencent.bgniao.cn//gruul/20200703/0c1a4dc152d541709d3a5515f521a1e2.png\",\"link\":{\"id\":null,\"type\":null,\"name\":\"\",\"url\":\"\",\"append\":\"\"},\"linkName\":\"\"}]}}"},
+          {"properties": "{\"icon\":\"shangpin\",\"value\":\"Goods\",\"label\":\"商品\",\"id\":1593740199512,\"formData\":{\"goods\":[{\"id\":\"375\",\"img\":\"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200518/c3256f42e51c44799577530226a11533.jpg\",\"name\":\"省力型订书机学生装订机一指按压不费力订书器办公用品\",\"price\":\"0.01\",\"albumPics\":\"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200518/c3256f42e51c44799577530226a11533.jpg\"},{\"id\":\"374\",\"img\":\"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200518/598b1c96c2494f5bb62c3c6847031c78.jpg\",\"name\":\"迷你手持可充电USB小风扇办公桌面便携式电扇学生宿舍静音小电\",\"price\":\"0.01\",\"albumPics\":\"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200518/598b1c96c2494f5bb62c3c6847031c78.jpg\"}],\"listStyle\":\"goods-style--two\",\"pagePadding\":17,\"goodPadding\":12,\"goodsStyle\":\"is-none\",\"angle\":\"is-straight\",\"textStyle\":\"is-bold\",\"showContent\":{\"nameShow\":true,\"priceShow\":true,\"buttonShow\":true,\"buttonStyle\":1,\"buttonText\":\"\",\"tagShow\":false,\"tagStyle\":1},\"goodsItem\":{\"id\":1,\"img\":\"https://qiniu-app.qtshe.com/u391.png\",\"name\":\"商品名称商品名称商品名称商品名称商品名称商品名称商品名\",\"price\":\"99.90\"},\"goodsCount\":2}}"          }
+        ]
+      }
+    ],
+    "plugins": [{
+      "pluginProperties":[
+        {
+          "icon":"",
+          "value":"NavBar",
+          "label":"底部导航",
+          "id":1594696383853,
+          "formData":{
+            "codeStyle":1,
+            "menuList":[
+              {
+                "text":"首页",
+                "id":"471",
+                "iconType":1,
+                "iconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/9ad3a62298fd4c2aa75f93ac2b3a517a.png",
+                "selectedIconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/1e26aab823e84979a6994a0d34918526.png",
+                "linkSelectItem":"",
+                "sortIndex":0,
+                "linkUrl":"/pages/index/index",
+                "linkName":"",
+                "name":"",
+                "type":5,
+                "isHome":true
+              },
+              {
+                "text":"商超",
+                "id":2,
+                "iconType":1,
+                "iconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/f8d2575562af4c9490cb25b0101b680e.png",
+                "selectedIconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/7dae3bdf8ee24833b9600185fcec5fed.png",
+                "linkSelectItem":"",
+                "sortIndex":1,
+                "linkUrl":"/pages/index/index",
+                "linkName":"商超商品",
+                "name":"mall",
+                "type":0,
+                "isHome":false
+              },
+              {
+                "text":"购物车",
+                "id":4,
+                "iconType":1,
+                "iconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/bda9aea298bc489084af4134a399d292.png",
+                "selectedIconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/5f25150c75f247b590b8d8f100ea5820.png",
+                "linkSelectItem":"",
+                "sortIndex":2,
+                "linkUrl":"/pages/index/index",
+                "linkName":"购物车",
+                "name":"shopCar",
+                "type":0,
+                "isHome":false
+              },
+              {
+                "text":"我的",
+                "id":3,
+                "iconType":1,
+                "iconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/4c5bcb9fb63f4e8e9e4cd50be247e00a.png",
+                "selectedIconPath":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/gruul/20200327/13d654d202bb4fd69e2da28a6c20a90f.png",
+                "linkSelectItem":"",
+                "sortIndex":3,
+                "linkUrl":"/pages/index/index",
+                "linkName":"个人中心",
+                "name":"me",
+                "type":0,
+                "isHome":false
+              }
+            ],
+            "defaultColor":"#7A7E83",
+            "selectColor":"#F64E3F"
+          }
+        }
+      ],
+      "pluginNameCn":"底部导航",
+      "pluginNameEn":"navBar",
+      "isSelection": "1",
+      "isMandatory": "0"
+    }]
+  }
+}
+
+
+
+
+

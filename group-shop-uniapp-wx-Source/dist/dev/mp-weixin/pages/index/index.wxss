@@ -1,0 +1,101 @@
+@charset "UTF-8";
+page.data-v-57280228 {
+  min-height: 100%;
+  background: #f1f2f6;
+}
+view.data-v-57280228 {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*按钮*/
+button.data-v-57280228 {
+  line-height: inherit;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  opacity: 1;
+  background-color: inherit;
+}
+button.data-v-57280228::after {
+    border: 0;
+}
+.m__button.data-v-57280228 {
+  min-width: 140rpx;
+  padding: 6rpx 0;
+  text-align: center;
+  border-radius: 30rpx;
+  border: 2rpx solid #989898;
+  outline: none;
+  background: #fff;
+  margin-left: 20rpx;
+}
+.m__button.primary.data-v-57280228 {
+    background: #fe4e63;
+    border-color: #fe4e63;
+    color: #fff;
+}
+.m__button.primary[disabled].data-v-57280228 {
+      border-color: #fda7b2;
+      background: #fda7b2;
+      color: #fff3f6;
+}
+.text__pink.data-v-57280228 {
+  color: #fe4e63;
+}
+.text__green.data-v-57280228 {
+  color: #08bb07;
+}
+.text__primary.data-v-57280228 {
+  color: #000000;
+}
+/* BEM support Func
+ -------------------------- */
+/* BEM
+ -------------------------- */
+.container.data-v-57280228 {
+  padding-bottom: calc(88rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(88rpx + env(safe-area-inset-bottom));
+}
+.choiceShop2.data-v-57280228 {
+  position: fixed;
+  bottom: 300rpx;
+  right: 40rpx;
+  width: 90rpx;
+  height: 90rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 100rpx;
+  color: white;
+  z-index: 10;
+}
+.choiceShop2 .choiceWrap.data-v-57280228 {
+    width: 50rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    -webkit-align-content: center;
+            align-content: center;
+}
+.choiceShop2 .ft.data-v-57280228 {
+    font-size: 20rpx;
+    margin-top: -6rpx;
+}
+

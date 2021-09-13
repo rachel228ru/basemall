@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.SysShopPackageOrderMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.SysShopPackageOrder">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="up date_time" property="updateTime"/>
+        <result column="account_id" property="accountId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="shop_template_info_id" property="shopTemplateInfoId"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="package_id" property="packageId"/>
+        <result column="package_data" property="packageData"/>
+        <result column="package_time" property="packageTime"/>
+        <result column="package_price_unit" property="packagePriceUnit"/>
+        <result column="package_start_time" property="packageStartTime"/>
+        <result column="package_end_time" property="packageEndTime"/>
+        <result column="package_price" property="packagePrice"/>
+        <result column="amount_payable" property="amountPayable"/>
+        <result column="paid_payable" property="paidPayable"/>
+        <result column="pay_type" property="payType"/>
+        <result column="status" property="status"/>
+        <result column="pay_info" property="payInfo"/>
+        <result column="relauditor_id" property="relauditorId"/>
+        <result column="auditor_name" property="auditorName"/>
+        <result column="auditor_status" property="auditorStatus"/>
+        <result column="is_agreed" property="isAgreed"/>
+        <result column="is_automatic_deduction" property="isAutomaticDeduction"/>
+        <result column="is_received" property="isReceived"/>
+        <result column="order_type" property="orderType"/>
+        <result column="invoice_status" property="invoiceStatus"/>
+        <result column="order_source" property="orderSource"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="package_name" property="packageName"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="template_name" property="templateName"/>
+        <result column="agent_id" property="agentId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        is_deleted,
+        update_time,
+        package_name,
+        shop_name,
+        template_name,
+        audit_time,
+        id,
+        account_id,
+        tenant_id,
+        shop_template_info_id,
+        order_num,
+        package_id,
+        package_data,
+        order_type,
+        package_time,
+        package_price_unit,
+        package_start_time,
+        package_end_time,
+        package_price,
+        amount_payable,
+        paid_payable,
+        pay_type,
+        status,
+        pay_info,
+        relauditor_id,
+        auditor_name,
+        auditor_status,
+        is_agreed,
+        is_automatic_deduction,
+        is_received,
+        shop_id,invoice_status,order_source,agent_id
+    </sql>
+    <resultMap id="SysShopPackageOrderDtoMap" type="com.medusa.gruul.platform.model.dto.SysShopPackageOrderDto"
+               extends="BaseResultMap">
+        <result column="nike_name" property="nikeName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="phone" property="phone"/>
+    </resultMap>
+    <select id="selectOrders" resultMap="SysShopPackageOrderDtoMap">
+        select tsspo.*, tpai.nike_name, tpai.avatar_url, tpai.phone
+        from t_sys_shop_package_order as tsspo
+        left join t_platform_account_info as tpai on tpai.id = tsspo.account_id
+        <where>
+            <!--   用户昵称搜索 -->
+            <if test="nikeName != null and nikeName != ''">
+                and tpai.nike_name like concat('%', #{nikeName}, '%')
+            </if>
+            <!--        用户手机号搜索-->
+            <if test="phone != null and phone != ''">
+                and tpai.phone like concat('%', #{phone}, '%')
+            </if>
+            <!--            订单状态 1:处理中2:已经完成 3:关闭-->
+            <if test="status == null or status ==  0">
+                and tsspo.status > 0
+            </if>
+            <!--            订单状态 1:处理中2:已经完成 3:关闭-->
+            <if test="status != null and status > 0">
+                and tsspo.status = #{status}
+            </if>
+            <!--        订单开发时间-->
+            <if test="payStartTime != null and payStartTime != ''">
+                and tsspo.create_time >= #{payStartTime}
+            </if>
+            <!--        订单结束时间-->
+            <if test="payEndTime != null and payEndTime != ''">
+                and  <![CDATA[tsspo.create_time <= #{payEndTime}
+                ]]>
+            </if>
+            <!--        订单充值编号查询-->
+            <if test="orderNum != null and orderNum != ''">
+                and tsspo.order_num like concat('%', #{orderNum}, '%')
+            </if>
+            <!--        支付方式-->
+            <if test="payType != null and payType > 0">
+                and tsspo.pay_type = #{payType}
+            </if>
+            <!--        订购模板-->
+            <if test="templateId != null and templateId > 0">
+                and tsspo.shop_template_info_id = #{templateId}
+            </if>
+            <if test="userId != null and userId > 0">
+                and tsspo.account_id = #{userId}
+            </if>
+        </where>
+        order by tsspo.create_time desc
+    </select>
+
+    <select id="selectBoughtEnterpriseVersion" resultType="java.lang.Integer">
+        SELECT
+        count( tsspo.id )
+        FROM
+        t_sys_shop_package_order AS tsspo
+        LEFT JOIN t_sys_shop_package AS tssp ON tssp.id = tsspo.package_id
+        <where>
+            tsspo.STATUS = 2
+            AND tenant_id = #{tenantId}
+            AND tssp.LEVEL > 1
+        </where>
+
+        LIMIT 1
+    </select>
+
+    <select id="selectByAgentOrder" resultType="java.math.BigDecimal">
+        SELECT paid_payable
+        FROM t_sys_shop_package_order AS sspo
+        WHERE `status` = 2
+          AND order_source = 0
+          AND sspo.account_id IN
+              (SELECT account_id FROM t_platform_account_info WHERE is_deleted = 0 AND agent_id = #{agentId})
+    </select>
+</mapper>

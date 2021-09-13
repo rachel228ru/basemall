@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.MiniInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.MiniInfo">
+        <id column="id" property="id"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="default_status" property="defaultStatus"/>
+        <result column="account_id" property="accountId"/>
+        <result column="app_id" property="appId"/>
+        <result column="mini_name" property="miniName"/>
+        <result column="service_type_info" property="serviceTypeInfo"/>
+        <result column="verify_type_info" property="verifyTypeInfo"/>
+        <result column="user_name" property="userName"/>
+        <result column="principal_type" property="principalType"/>
+        <result column="principal_name" property="principalName"/>
+        <result column="realname_status" property="realnameStatus"/>
+        <result column="qualification_verify" property="qualificationVerify"/>
+        <result column="naming_verify" property="namingVerify"/>
+        <result column="annual_review" property="annualReview"/>
+        <result column="annual_review_begin_time" property="annualReviewBeginTime"/>
+        <result column="annual_review_end_time" property="annualReviewEndTime"/>
+        <result column="signature" property="signature"/>
+        <result column="signature_modify_used_count" property="signatureModifyUsedCount"/>
+        <result column="signature_modify_quota" property="signatureModifyQuota"/>
+        <result column="head_image_url" property="headImageUrl"/>
+        <result column="head_modify_used_count" property="headModifyUsedCount"/>
+        <result column="head_modify_quota" property="headModifyQuota"/>
+        <result column="mini_code" property="miniCode"/>
+        <result column="qrcode" property="qrcode"/>
+        <result column="experience_code" property="experienceCode"/>
+        <result column="authorizer_flag" property="authorizerFlag"/>
+        <result column="run_flag" property="runFlag"/>
+        <result column="auth_time" property="authTime"/>
+        <result column="remark" property="remark"/>
+        <result column="current_version_id" property="currentVersionId"/>
+        <result column="template_detail_minis_id" property="templateDetailMinisId"/>
+        <result column="current_aidit_id" property="currentAiditId"/>
+        <result column="aidit_id" property="aiditId"/>
+        <result column="combo_id" property="comboId"/>
+        <result column="business_info" property="businessInfo"/>
+        <result column="expiration_time" property="expirationTime"/>
+        <result column="forbid_status" property="forbidStatus"/>
+        <result column="alias" property="alias"/>
+    </resultMap>
+
+    <resultMap id="miniListDto" type="com.medusa.gruul.platform.model.dto.MiniListDto" extends="BaseResultMap">
+        <result column="combo_name" property="comboName"/>
+        <result column="account_phone" property="phone"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="reason" property="reason"/>
+        <result column="user_version" property="userVersion"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        is_deleted,
+        create_time,
+        update_time,default_status,mini_name,service_type_info,verify_type_info,user_name,
+        id, tenant_id, account_id, app_id, principal_type, principal_name, realname_status,
+        qualification_verify, naming_verify, annual_review, annual_review_begin_time, annual_review_end_time,
+        signature, signature_modify_used_count, signature_modify_quota, head_image_url, head_modify_used_count,
+        head_modify_quota, mini_code, qrcode, experience_code, authorizer_flag,
+        run_flag,auth_time, remark,alias,
+        current_version_id, current_aidit_id, aidit_id, combo_id,business_info,expiration_time,forbid_status
+    </sql>
+    <select id="getLastMini" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mini_info
+        where
+        id = ( select max(id) from t_mini_info)
+    </select>
+
+</mapper>

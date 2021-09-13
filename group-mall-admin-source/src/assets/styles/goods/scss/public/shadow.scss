@@ -1,0 +1,34 @@
+/*阴影*/
+
+/*shadow*/
+
+/*
+box-shadow: h-shadow v-shadow blur spread color inset;
+h-shadow   必需。水平阴影的位置。允许负值。   测试
+v-shadow   必需。垂直阴影的位置。允许负值。   测试
+blur   可选。模糊距离。   测试
+spread 可选。阴影的尺寸。  测试
+color  可选。阴影的颜色。请参阅 CSS 颜色值。  测试
+inset  可选。将外部阴影 (outset) 改为内部阴影。  测试
+*/
+
+/*box-shadow*/
+.shadow-1px-lb-black{
+    box-shadow: 20px 20px 20px black;
+}
+.shadow-1px-lb-fa{
+    box-shadow: 2px 2px 2px #fafafa;
+}
+.shadow-1px-20px-lb-fa{
+    box-shadow: 2px 2px 20px #fafafa;
+}
+.shadow-1px-20px-lb-f4{
+    box-shadow: 2px 2px 20px #f4f4f4;
+}
+.shadow-1px-20px-lb-33{
+    box-shadow: 2px 2px 20px #333333;
+}
+.shadow-theme-0-999{
+    box-shadow: 0 0 20px #999999;
+}
+/*text-shadow*/

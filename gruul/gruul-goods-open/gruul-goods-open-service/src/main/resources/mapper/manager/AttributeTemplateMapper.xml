@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.AttributeTemplateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.AttributeTemplateVo">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="content" property="content"/>
+        <collection property="attributeTemplates"
+                    ofType="com.medusa.gruul.goods.api.model.vo.manager.AttributeTemplateSecondVo" column="id"
+                    select="queryChildren"></collection>
+    </resultMap>
+
+    <resultMap id="ChildrenResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.AttributeTemplateSecondVo">
+        <id column="c_id" property="id"/>
+        <result column="c_parent_id" property="parentId"/>
+        <result column="c_name" property="name"/>
+        <result column="c_content" property="content"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        a.tenant_id,
+        a.create_time,
+        a.update_time,
+        a.is_deleted,
+        a.id, a.parent_id, a.name, a.content
+    </sql>
+
+    <sql id="Children_Column_List">
+        ac.tenant_id AS c_tenant_id,
+        ac.create_time AS c_create_time,
+        ac.update_time AS c_update_time,
+        ac.is_deleted AS c_is_deleted,
+        ac.id AS c_id, ac.parent_id AS c_parent_id, ac.name AS c_name, ac.content AS c_content
+    </sql>
+
+    <select id="queryAllAttributeTemplateList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_attribute_template a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.parent_id = 0
+    </select>
+
+    <select id="queryByParentId" resultMap="ChildrenResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Children_Column_List"/>
+        FROM
+        t_attribute_template ac
+        WHERE
+        ac.is_deleted = 0
+        AND
+        ac.parent_id = #{parentId}
+    </select>
+
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_attribute_template a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.id = #{id}
+    </select>
+
+    <select id="queryAttributeTemplateList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.AttributeTemplateParam">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_attribute_template a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.parent_id = 0
+    </select>
+
+    <select id="queryChildren" resultMap="ChildrenResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Children_Column_List"/>
+        FROM
+        t_attribute_template ac
+        WHERE
+        ac.is_deleted = 0
+        AND
+        ac.parent_id = #{id}
+    </select>
+
+    <select id="queryDefaultAttributeTemplateList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_attribute_template a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.parent_id = 0
+        limit 1
+    </select>
+
+</mapper>

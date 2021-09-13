@@ -1,0 +1,1 @@
+{"version":3,"sources":["uni-app:///src/main.ts?{\"page\":\"subcontract%2Fpages%2Flive%2Flive\"}"],"names":[],"mappings":";;;;;;;;;;;;AAAA;;AAEA;;;;AACA,UAAU,CAAC,aAAD,CAAV,C","file":"subcontract/pages/live/live.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './subcontract/pages/live/live.vue'\ncreatePage(Page)"],"sourceRoot":""}

@@ -1,0 +1,90 @@
+@charset "UTF-8";
+page.data-v-08490ba8 {
+  min-height: 100%;
+  background: #f1f2f6;
+}
+view.data-v-08490ba8 {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*按钮*/
+button.data-v-08490ba8 {
+  line-height: inherit;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  opacity: 1;
+  background-color: inherit;
+}
+button.data-v-08490ba8::after {
+    border: 0;
+}
+.m__button.data-v-08490ba8 {
+  min-width: 140rpx;
+  padding: 6rpx 0;
+  text-align: center;
+  border-radius: 30rpx;
+  border: 2rpx solid #989898;
+  outline: none;
+  background: #fff;
+  margin-left: 20rpx;
+}
+.m__button.primary.data-v-08490ba8 {
+    background: #fe4e63;
+    border-color: #fe4e63;
+    color: #fff;
+}
+.m__button.primary[disabled].data-v-08490ba8 {
+      border-color: #fda7b2;
+      background: #fda7b2;
+      color: #fff3f6;
+}
+.text__pink.data-v-08490ba8 {
+  color: #fe4e63;
+}
+.text__green.data-v-08490ba8 {
+  color: #08bb07;
+}
+.text__primary.data-v-08490ba8 {
+  color: #000000;
+}
+/* BEM support Func
+ -------------------------- */
+/* BEM
+ -------------------------- */
+.stepperBox.data-v-08490ba8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.stepperBox__redu.data-v-08490ba8 {
+    width: 42rpx;
+    height: 42rpx;
+    border-radius: 100rpx;
+    border: 2rpx solid #7d7d7d;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    padding-bottom: 4rpx;
+}
+.stepperBox__redu--del.data-v-08490ba8 {
+      width: 20rpx;
+      height: 4rpx;
+      background-color: #fd435b;
+}
+.stepperBox__input.data-v-08490ba8 {
+    width: 80rpx;
+}
+

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.api.ApiProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiProductVo">
+        <id column="id" property="id"/>
+        <result column="provider_id" property="providerId"/>
+        <result column="provider_name" property="providerName"/>
+        <result column="attribute_id" property="attributeId"/>
+        <result column="attribute_name" property="attributeName"/>
+        <result column="distribution_mode" property="distributionMode"/>
+        <result column="freight_template_id" property="freightTemplateId"/>
+        <result column="sale_mode" property="saleMode"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="wide_pic" property="widePic"/>
+        <result column="album_pics" property="albumPics"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="sale" property="sale"/>
+        <result column="unit" property="unit"/>
+        <result column="weight" property="weight"/>
+        <result column="service_ids" property="serviceIds"/>
+        <result column="detail" property="detail"/>
+        <result column="is_open_specs" property="openSpecs"/>
+        <result column="attribute" property="attribute"/>
+        <result column="sale_describe" property="saleDescribe"/>
+        <result column="score" property="score"/>
+        <collection property="skuStocks" ofType="com.medusa.gruul.goods.api.model.vo.api.ApiSkuStockVo" column="id"
+                    select="querySkuStock"></collection>
+        <collection property="productAttributes" ofType="com.medusa.gruul.goods.api.model.vo.api.ApiProductAttributeVo"
+                    column="id" select="queryAttribute"></collection>
+        <collection property="productShowCategorys"
+                    ofType="com.medusa.gruul.goods.api.model.vo.api.ApiProductShowCategoryVo"
+                    column="id" select="queryProductShowCategory"></collection>
+    </resultMap>
+
+    <resultMap id="SkuStockResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiSkuStockVo">
+        <id column="s_id" property="id"/>
+        <result column="s_version" property="version"/>
+        <result column="s_product_id" property="productId"/>
+        <result column="s_sku_code" property="skuCode"/>
+        <result column="s_specs" property="specs"/>
+        <result column="s_pic" property="pic"/>
+        <result column="s_price" property="price"/>
+        <result column="s_original_price" property="originalPrice"/>
+        <result column="s_stock" property="stock"/>
+        <result column="s_low_stock" property="lowStock"/>
+        <result column="s_sale" property="sale"/>
+        <result column="s_per_limit" property="perLimit"/>
+    </resultMap>
+
+
+
+    <resultMap id="AttributeResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiProductAttributeVo">
+        <id column="a_id" property="id"/>
+        <result column="a_product_id" property="productId"/>
+        <result column="a_name" property="name"/>
+        <result column="a_value" property="value"/>
+    </resultMap>
+
+    <resultMap id="ProductShowCategoryResultMap"
+               type="com.medusa.gruul.goods.api.model.vo.api.ApiProductShowCategoryVo">
+        <id column="ps_id" property="id"/>
+        <result column="ps_name" property="name"/>
+        <result column="ps_show_category_id" property="showCategoryId"/>
+        <result column="ps_parent_id" property="parentId"/>
+        <collection property="productShowCategorySeconds"
+                    ofType="com.medusa.gruul.goods.api.model.vo.api.ApiProductShowCategorySecondVo" column="ps_id"
+                    select="queryProductShowCategorySecond"></collection>
+    </resultMap>
+
+    <resultMap id="ProductShowCategorySecondResultMap"
+               type="com.medusa.gruul.goods.api.model.vo.api.ApiProductShowCategorySecondVo">
+        <id column="pss_id" property="id"/>
+        <result column="pss_name" property="name"/>
+        <result column="pss_show_category_id" property="showCategoryId"/>
+        <result column="pss_parent_id" property="parentId"/>
+    </resultMap>
+
+    <sql id="Base_Product_List">
+        p.id, p.provider_id, p.attribute_id,
+        p.attribute_name, p.distribution_mode, p.freight_template_id, p.sale_mode,
+        p.limit_type, p.name, p.pic, p.wide_pic, p.album_pics, p.video_url, p.product_sn, p.status,
+        p.sort, p.sale, p.unit, p.weight, p.service_ids, p.detail, p.is_open_specs,
+        p.attribute, p.score,  p.sale_describe
+    </sql>
+
+    <sql id="Activity_Product_List">
+        p.id, p.sale_mode,p.limit_type, p.name, p.pic, p.product_sn,
+        p.distribution_mode
+    </sql>
+
+    <sql id="Base_Sku_Stock_List">
+        s.id AS s_id, s.version AS s_version, s.product_id AS s_product_id, s.sku_code AS s_sku_code,
+        s.specs AS s_specs, s.pic AS s_pic, s.price AS s_price, s.original_price AS s_original_price,
+        s.stock AS s_stock, s.low_stock AS s_low_stock, s.sale AS s_sale, s.per_limit AS s_per_limit
+    </sql>
+
+    <sql id="Base_Member_Price_List">
+        m.id AS m_id, m.product_id AS m_product_id, m.sku_id AS m_sku_id, m.member_level_id AS m_member_level_id,
+        m.member_price AS m_member_price, m.member_level_name AS m_member_level_name
+    </sql>
+
+    <sql id="Base_Rebate_List">
+        r.id AS r_id, r.product_id AS r_product_id, r.sku_id AS r_sku_id, r.rebate_price AS r_rebate_price
+    </sql>
+
+    <sql id="Base_Attribute_List">
+        a.id AS a_id, a.product_id AS a_product_id, a.name AS a_name, a.value AS a_value
+    </sql>
+
+    <sql id="Base_ProductShowCategory_List">
+        ps.id AS ps_id, ps.parent_id AS ps_parent_id, ps.show_category_id as ps_show_category_id, tsc.name AS ps_name
+    </sql>
+
+    <sql id="Base_ProductShowCategorySecond_List">
+        pss.id AS pss_id, pss.parent_id AS pss_parent_id, pss.show_category_id as pss_show_category_id, tsc.name AS pss_name
+    </sql>
+
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_product p
+        WHERE
+        p.is_deleted = 0
+        AND
+        p.id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <select id="queryList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.api.ApiProductParam">
+        SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_product p
+        <where>
+            p.is_deleted = 0
+            and p.status <![CDATA[<>]]> 0
+            <if test="apiProductParam.saleMode!=null">
+                AND p.sale_mode = #{apiProductParam.saleMode}
+            </if>
+            <if test="apiProductParam.name!=null and apiProductParam.name!=''">
+                AND p.name LIKE CONCAT('%',#{apiProductParam.name},'%')
+            </if>
+            <if test="apiProductParam.showCategoryId!=null">
+                AND EXISTS (
+                SELECT
+                ps.id
+                FROM
+                t_product_show_category ps
+                WHERE
+                ps.product_id = p.id and ps.is_deleted = 0
+                AND
+                (ps.show_category_id = #{apiProductParam.showCategoryId} OR ps.parent_id =
+                #{apiProductParam.showCategoryId})
+                )
+            </if>
+        </where>
+        ORDER
+        BY
+        p.create_time
+        DESC
+    </select>
+
+    <select id="querySuperMarketProductList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.api.ApiProductParam">
+        SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_product p
+        <where>
+            p.is_deleted = 0
+            AND p.sale_mode = #{apiProductParam.saleMode}
+            AND p.status <![CDATA[<>]]> 0
+            <if test="apiProductParam.showCategoryId != null">
+                AND EXISTS (
+                SELECT
+                ps.id
+                FROM
+                t_product_show_category ps
+                WHERE
+                ps.product_id = p.id and ps.is_deleted = 0
+                AND
+                (ps.show_category_id = #{apiProductParam.showCategoryId} OR ps.parent_id =
+                #{apiProductParam.showCategoryId})
+                )
+            </if>
+            <if test="apiProductParam.name != null and apiProductParam.name != ''">
+                AND p.name LIKE CONCAT('%',#{apiProductParam.name},'%')
+            </if>
+            <if test="apiProductParam.createBeginTime != null and apiProductParam.createBeginTime != ''">
+                AND DATE_FORMAT(p.create_time,'%Y-%m-%d') <![CDATA[>=]]> #{apiProductParam.createBeginTime}
+            </if>
+            <if test="apiProductParam.createEndTime!=null and apiProductParam.createEndTime != ''">
+                AND DATE_FORMAT(p.create_time,'%Y-%m-%d') <![CDATA[<=]]> #{apiProductParam.createEndTime}
+            </if>
+        </where>
+        ORDER BY
+        p.create_time
+        DESC
+    </select>
+
+
+
+    <select id="querySolitaireActivityProduct" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Activity_Product_List"/>
+        FROM
+        t_product p
+        <where>
+            p.is_deleted = 0
+            AND p.status = 1
+            <choose>
+                <when test="productType == 1">
+                    AND p.id in
+                    <foreach collection="productIds" index="index" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </when>
+                <when test="productType == 2">
+                    AND p.id not in
+                    <foreach collection="productIds" index="index" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </when>
+                <otherwise>
+                </otherwise>
+            </choose>
+        </where>
+        ORDER BY
+        p.create_time
+        DESC
+    </select>
+
+    <select id="querySkuStock" resultMap="SkuStockResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Sku_Stock_List"/>
+        FROM
+        t_sku_stock s
+        WHERE
+        s.is_deleted = 0
+        AND
+        s.product_id = #{id}
+    </select>
+
+    <select id="queryAttribute" resultMap="AttributeResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Attribute_List"/>
+        FROM
+        t_product_attribute a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.product_id = #{id}
+    </select>
+
+    <select id="queryProductShowCategory" resultMap="ProductShowCategoryResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_ProductShowCategory_List"/>
+        FROM
+        t_product_show_category ps inner join t_show_category tsc on ps.show_category_id = tsc.id
+        WHERE
+        ps.is_deleted = 0
+        AND
+        ps.parent_id = 0
+        AND
+        ps.product_id = #{id}
+    </select>
+
+    <select id="queryProductShowCategorySecond" resultMap="ProductShowCategorySecondResultMap"
+            parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_ProductShowCategorySecond_List"/>
+        FROM
+        t_product_show_category pss inner join t_show_category tsc on pss.show_category_id = tsc.id
+        WHERE
+        pss.is_deleted = 0
+        AND
+        pss.parent_id = #{ps_id}
+    </select>
+
+</mapper>

@@ -1,0 +1,88 @@
+{
+  "name": "group-mall-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "cross-env vue-cli-service serve",
+    "commit": "git cz",
+    "prepare": "husky install",
+    "analyzer": "cross-env ANALYZER=1 vue-cli-service serve --mode test",
+    "build:develop": "cross-env vue-cli-service build --mode development",
+    "build:pro": "cross-env vue-cli-service build --mode production",
+    "lint": "eslint --config .eslintrc.js --fix --ext .ts,.vue src",
+    "lint:quiet": "eslint --config .eslintrc.js --fix --ext .ts,.vue src --quiet"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.172",
+    "axios": "^0.19.0",
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
+    "dayjs": "^1.9.3",
+    "echarts": "^4.7.0",
+    "element-china-area-data": "^5.0.2",
+    "element-ui": "^2.13.1",
+    "howler": "^2.1.3",
+    "js-base64": "^2.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.29.1",
+    "normalize.css": "^8.0.1",
+    "qrcodejs2": "^0.0.2",
+    "qs": "^6.9.1",
+    "sockjs-client": "^1.4.0",
+    "vue": "^2.6.10",
+    "vue-amap": "^0.5.10",
+    "vue-class-component": "^7.1.0",
+    "vue-clipboard2": "^0.3.1",
+    "vue-drag-resize": "^1.5.4",
+    "vue-eslint-parser": "^7.0.0",
+    "vue-lazyload": "^1.3.3",
+    "vue-progressbar": "^0.7.5",
+    "vue-property-decorator": "^8.2.2",
+    "vue-router": "^3.1.3",
+    "vuedraggable": "^2.23.2",
+    "vuex": "^3.1.1",
+    "vuex-class": "^0.3.2",
+    "wangeditor": "^4.4.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^13.1.0",
+    "@types/echarts": "^4.9.10",
+    "@types/howler": "^2.1.2",
+    "@types/qs": "^6.9.0",
+    "@types/vuedraggable": "^2.23.1",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-typescript": "^3.11.0",
+    "@vue/cli-service": "^3.11.0",
+    "babel-plugin-import": "^1.12.1",
+    "commitizen": "^4.2.4",
+    "commitlint": "^13.1.0",
+    "compression-webpack-plugin": "^6.1.1",
+    "cross-env": "^6.0.0",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^4.0.2",
+    "husky": "^7.0.1",
+    "install": "^0.13.0",
+    "lint-staged": "^9.5.0",
+    "node-sass": "^4.14.1",
+    "npm": "^6.14.5",
+    "qrcodejs2": "^0.0.2",
+    "sass-loader": "^8.0.2",
+    "typescript": "^3.6.2",
+    "vue-template-compiler": "^2.6.10",
+    "vuex-module-decorators": "^1.0.1",
+    "webpack-bundle-analyzer": "^4.1.0"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,vue}": [
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}

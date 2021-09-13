@@ -1,0 +1,225 @@
+$bg_color: #f8fcff;
+$sub--item_color: #2e99f3;
+.admin__menu {
+  width: 180px;
+  overflow-x: hidden;
+  &--item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 24px;
+    position: relative;
+    background-color: #fff;
+    border: none;
+    &:hover {
+      background-color: $bg_color;
+    }
+    .item--mask {
+      background-color: $bg_color;
+      right: -2px;
+    }
+  }
+  .item--title {
+    color: #676767;
+    display: flex;
+    span {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #676767;
+    }
+    .iconfont {
+      font-size: 20px;
+      margin-right: 10px;
+      color: #676767;
+    }
+  }
+  .active .item--title span {
+    color: rgba(64, 158, 255, 0.9);
+  }
+  // .active .item--title.noActive {
+  //   span {
+  //     color: #676767;
+  //   }
+  //   .iconfont {
+  //     color: #676767;
+  //   }
+  // }
+  .pt20 {
+    padding-top: 20px;
+    padding-bottom: 0;
+  }
+  .sub--item {
+    width: 74px;
+  }
+  .sub--item,
+  .modal--item {
+    a {
+      display: flex;
+      line-height: 18px;
+      align-items: center;
+      //justify-content: center;
+      color: #767676;
+      .iconfont {
+        margin-left: 2px;
+        color: #767676;
+      }
+      &:hover {
+        color: #2e99f3;
+        .iconfont {
+          color: #2e99f3;
+        }
+      }
+    }
+  }
+  .item--modal {
+    display: block;
+    padding: 15px 6px;
+    padding-left: 10px;
+    background-color: $bg_color;
+    right: -100px;
+    visibility: hidden;
+    &.pl5 {
+      padding-left: 0px;
+      padding-right: 0px;
+      .modal--item {
+        padding-right: 0px;
+      }
+    }
+    .modal--item {
+      .iconfont {
+        margin-right: 2px;
+      }
+    }
+  }
+  .floatmenuBox {
+    padding: 20px 6px;
+    padding-left: 15px;
+    padding-top: 16px;
+    .modal--item {
+      padding: 0 !important;
+    }
+  }
+}
+.w14 {
+  display: inline-block;
+  width: 14px;
+}
+.sub-active {
+  width: 40px;
+  height: 24px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 4px;
+  background-color: rgb(92, 185, 92);
+}
+.admin__menu .active {
+  background-color: #f5f5f5;
+}
+.active_v {
+  display: block !important;
+  visibility: visible !important;
+}
+.admin__menu .active {
+  background-color: #f8fcff;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: calc(100% - 8px);
+    width: 4px;
+    transform: translateY(-50%);
+    background-color: #2e99f3;
+  }
+}
+.admin__menu--item a.active {
+  color: #2e99f3 !important;
+}
+.admin__menu .active .item--title .f14 {
+  color: #2e99f3;
+}
+.admin__menu .active .item--title span {
+  color: #2e99f3;
+  .iconfont {
+    color: #2e99f3;
+  }
+}
+.block {
+  display: block;
+}
+.f14 {
+  font-size: 14px !important;
+}
+.aside-wrap {
+  height: 100%;
+}
+.side-nav-wrap {
+  height: calc(100% - 78px);
+  position: relative;
+  .side-nav-wrap-main {
+    height: 100%;
+    background-color: #fff;
+    -ms-scroll-chaining: chained;
+    -ms-overflow-style: none;
+    -ms-content-zooming: zoom;
+    -ms-scroll-rails: none;
+    -ms-content-zoom-limit-min: 100%;
+    -ms-content-zoom-limit-max: 500%;
+    -ms-scroll-snap-type: proximity;
+    -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+    -ms-overflow-style: none;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+.floatmenuBox {
+  position: absolute;
+  display: none;
+  padding: 20px 6px;
+  padding-left: 15px;
+  padding-top: 16px;
+  background-color: $bg_color;
+  right: -116px;
+  visibility: hidden;
+  width: 116px;
+  border: 1px solid rgba(238, 241, 246, 1);
+  border-left: 1px solid $bg_color;
+  &.pl5 {
+    padding-left: 0px;
+    padding-right: 0px;
+    .modal--item {
+      padding-right: 0px;
+    }
+  }
+  .modal--item {
+    a {
+      display: flex;
+      line-height: 40px;
+      align-items: center;
+      //justify-content: center;
+      color: #767676;
+      text-decoration: none;
+      .iconfont {
+        margin-right: 5px;
+        color: #767676;
+      }
+      &:hover {
+        color: #2e99f3;
+        .iconfont {
+          color: #2e99f3;
+        }
+      }
+    }
+    .active {
+      color: #2e99f3;
+    }
+  }
+}
+.hidden {
+  overflow: hidden !important;
+}
+.bgf8 {
+  background-color: $bg_color;
+}

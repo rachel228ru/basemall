@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.order.mapper.OrderItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.order.api.entity.OrderItem">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_original_price" property="productOriginalPrice"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="product_sku_code" property="productSkuCode"/>
+        <result column="promotion_amount" property="promotionAmount"/>
+        <result column="coupon_amount" property="couponAmount"/>
+        <result column="real_amount" property="realAmount"/>
+        <result column="specs" property="specs"/>
+        <result column="provider_id" property="providerId"/>
+        <result column="refund_amount" property="refundAmount"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+        id, shop_id, order_id, product_id, product_pic, product_name, product_sn, product_price,
+        product_original_price, product_quantity, product_sku_id, product_sku_code, promotion_amount, coupon_amount,
+         real_amount, specs,
+        provider_id,  refund_amount
+    </sql>
+
+    <!-- SimpleOrderItemVo查询映射结果 -->
+    <resultMap id="SimpleOrderItemVoMap" type="com.medusa.gruul.order.model.SimpleOrderItemVo">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_original_price" property="productOriginalPrice"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="real_amount" property="realAmount"/>
+        <result column="specs" property="specs"/>
+        <association column="{orderId=order_id,productSkuId=product_sku_id}" property="afs"
+                     select="com.medusa.gruul.order.mapper.AfsOrderMapper.selectByOrderIdAndProductSkuId">
+        </association>
+    </resultMap>
+
+    <select id="selectSimpleOrderItemVoByOrderId" resultMap="SimpleOrderItemVoMap">
+        select
+        id, order_id, product_id, product_pic, product_name, product_price, product_original_price, product_quantity,
+         product_sku_id, real_amount, specs
+        from t_order_item
+        where order_id = #{orderId}
+    </select>
+    <select id="selectSolitaireOrderItemVoByOrderId" resultType="com.medusa.gruul.order.model.SolitaireOrderItemVo">
+        select
+        product_name, product_quantity
+        from t_order_item
+        where order_id = #{orderId}
+    </select>
+    <select id="selectItemDtoByOrderIds" resultType="com.medusa.gruul.goods.api.param.OperateStockDto">
+        SELECT
+        DISTINCT(product_sku_id) as sku_id,
+        SUM(product_quantity) as number
+        FROM
+        `t_order_item`
+        WHERE
+        order_id IN
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+        GROUP BY
+        product_sku_id
+    </select>
+    <select id="selectByOrderId" resultType="com.medusa.gruul.order.api.entity.OrderItem">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order_item
+        where order_id = #{orderId}
+    </select>
+
+    <resultMap id="OrderItemVoMap" type="com.medusa.gruul.order.api.model.OrderItemVo">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_original_price" property="productOriginalPrice"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="product_sku_code" property="productSkuCode"/>
+        <result column="promotion_amount" property="promotionAmount"/>
+        <result column="coupon_amount" property="couponAmount"/>
+        <result column="real_amount" property="realAmount"/>
+        <result column="specs" property="specs"/>
+        <result column="provider_id" property="providerId"/>
+        <result column="refund_amount" property="refundAmount"/>
+        <association column="{orderId=order_id,productSkuId=product_sku_id}" property="afs"
+                     select="com.medusa.gruul.order.mapper.AfsOrderMapper.selectByOrderIdAndProductSkuId">
+        </association>
+    </resultMap>
+
+    <select id="selectOrderItemVoByOrderId" resultMap="OrderItemVoMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order_item
+        where order_id = #{orderId}
+    </select>
+
+
+    <!-- GoodsBean查询映射结果 -->
+    <resultMap id="GoodsBeanMap" type="com.medusa.gruul.order.api.model.GoodsBean">
+        <result column="product_id" property="goodId"/>
+        <result column="product_pic" property="img"/>
+        <result column="product_name" property="goodName"/>
+        <result column="product_quantity" property="num"/>
+        <result column="product_sku_id" property="goodSkuId"/>
+        <result column="product_sku_code" property="goodSkuCode"/>
+        <result column="product_price" property="realPrice"/>
+        <result column="specs" property="goodSpecs"/>
+    </resultMap>
+    <select id="selectGoodsBeanByOrderIds" resultMap="GoodsBeanMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order_item
+        where
+        order_id = #{orderId}
+    </select>
+    <select id="countSkuPurchased" resultType="java.lang.Integer">
+        SELECT
+            SUM( oi.product_quantity )
+        FROM
+            t_order_item as oi
+            LEFT JOIN t_order as o ON o.id = oi.order_id
+        WHERE
+            oi.product_sku_id = #{productSkuId}
+            AND o.user_id= #{userId}
+            AND o.`status` &lt; 300
+    </select>
+
+
+</mapper>

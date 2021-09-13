@@ -1,0 +1,1 @@
+{"version":3,"sources":["uni-app:///src/main.ts?{\"page\":\"subcontract%2Fpages%2Fcoupon%2Fcoupon\"}"],"names":[],"mappings":";;;;;;;;;;;;AAAA;;AAEA;;;;AACA,UAAU,CAAC,eAAD,CAAV,C","file":"subcontract/pages/coupon/coupon.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './subcontract/pages/coupon/coupon.vue'\ncreatePage(Page)"],"sourceRoot":""}

@@ -1,0 +1,42 @@
+//小标签
+/deep/ .tip {
+  vertical-align: center;
+  padding: 15px 15px 15px 0;
+
+  .tip__title {
+    margin-left: 12px;
+    color: #586884;
+    font-weight: 700;
+  }
+
+  .tip__lump {
+    display: inline-block;
+    width: 3px;
+    height: 12px;
+    background-color: rgba(255, 153, 0, 1);
+  }
+}
+
+/deep/ .remittance {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+
+  &__info {
+    background: rgba(246, 248, 250, 1);
+    color: #AEB9CA;
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+
+/deep/ .el-input-width {
+  width: 320px;
+}

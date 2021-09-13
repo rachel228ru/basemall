@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.ShopsRenovationPluginMapper">
+
+
+    <resultMap id="ShopsRenovationPluginVoMap" type="com.medusa.gruul.shops.model.vo.ShopsRenovationPluginVo">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="template_id" property="templateId"/>
+        <result column="plugin_properties" property="pluginProperties"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="operator_id" property="operatorId"/>
+        <result column="operator_name" property="operatorName"/>
+        <result column="spare" property="spare"/>
+        <result column="plugin_name_cn" property="pluginNameCn"/>
+        <result column="plugin_name_en" property="pluginNameEn"/>
+        <result column="is_selection" property="isSelection"/>
+        <result column="is_mandatory" property="isMandatory"/>
+    </resultMap>
+
+
+    <!-- 获取商铺装修模板list -->
+    <select id="listPlugin" resultMap="ShopsRenovationPluginVoMap">
+        select
+        *
+        from
+        `t_shops_renovation_plugin`
+        where
+         `is_deleted` = '0'
+        and
+         `template_id` = #{templateId}
+         <if test="isSelection != null and isSelection != ''" >
+             and
+             `is_selection` = #{isSelection}
+         </if>
+        <if test="pluginNameEn != null and pluginNameEn != ''" >
+            and
+            `plugin_name_en` = #{pluginNameEn}
+        </if>
+    </select>
+
+</mapper>

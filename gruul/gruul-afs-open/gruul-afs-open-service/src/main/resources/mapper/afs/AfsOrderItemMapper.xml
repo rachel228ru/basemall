@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.afs.mapper.AfsOrderItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.afs.api.entity.AfsOrderItem">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="afs_id" property="afsId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="specs" property="specs"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="refund_amount" property="refundAmount"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+        id, shop_id, afs_id, order_id, product_id, product_sku_id, product_quantity, specs, product_pic, product_name,
+        product_price, refund_amount
+    </sql>
+
+    <select id="selectExchangeOrderIdsByOriginalOrderId" resultType="java.lang.Long">
+        SELECT
+            ao.order_id
+        FROM
+            t_afs_order_item AS aoi
+            LEFT JOIN t_afs_order AS ao ON aoi.afs_id = ao.id
+        WHERE
+            aoi.order_id = #{orderId}
+            AND ao.order_id IS NOT NULL
+    </select>
+
+    <select id="userApplyItem"  resultMap="BaseResultMapInfo">
+
+        SELECT
+            count(*) AS userApplyNumber,product_sku_id
+        FROM
+            t_afs_order_item
+        WHERE
+            order_id  = #{orderId}
+        GROUP BY product_sku_id
+
+    </select>
+    <resultMap id="BaseResultMapInfo" type="java.util.Map">
+        <result column="userApplyNumber" property="userApplyNumber"/>
+        <result column="product_sku_id" property="productSkuId"/>
+    </resultMap>
+
+</mapper>

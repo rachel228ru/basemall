@@ -1,0 +1,11 @@
+var isCurrentTab = function(currentTab, name) {
+  if(name){
+    return currentTab === name;
+  }else{
+    return currentTab === "home";
+  }
+};
+
+module.exports = {
+  isCurrentTab: isCurrentTab,
+};

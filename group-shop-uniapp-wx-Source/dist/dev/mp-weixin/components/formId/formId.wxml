@@ -1,0 +1,1 @@
+<view class="data-v-e90b1938"><form report-submit="{{true}}" data-event-opts="{{[['submit',[['getFormId',['$event']]]]]}}" bindsubmit="__e" class="data-v-e90b1938"><button class="formid__button data-v-e90b1938" form-type="submit"><slot></slot></button></form></view>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.CsvProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.ProductVo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="sorting_category_name" property="sortingCategoryName"/>
+        <result column="provider_id" property="providerId"/>
+        <result column="provider_name" property="providerName"/>
+        <result column="distribution_mode" property="distributionMode"/>
+        <result column="freight_template_id" property="freightTemplateId"/>
+        <result column="attribute_id" property="attributeId"/>
+        <result column="attribute_name" property="attributeName"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="album_pics" property="albumPics"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="status" property="status"/>
+        <result column="place" property="place"/>
+        <result column="csv_url" property="csvUrl"/>
+        <result column="sort" property="sort"/>
+        <result column="sale" property="sale"/>
+        <result column="unit" property="unit"/>
+        <result column="weight" property="weight"/>
+        <result column="service_ids" property="serviceIds"/>
+        <result column="detail" property="detail"/>
+        <result column="is_open_specs" property="openSpecs"/>
+        <result column="attribute" property="attribute"/>
+        <result column="score" property="score"/>
+        <collection property="skuStocks" ofType="com.medusa.gruul.goods.api.model.vo.manager.SkuStockVo" column="id"
+                    select="querySkuStock"></collection>
+    </resultMap>
+
+    <resultMap id="SkuStockResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.SkuStockVo">
+        <id column="s_id" property="id"/>
+        <result column="s_version" property="version"/>
+        <result column="s_product_id" property="productId"/>
+        <result column="s_sku_code" property="skuCode"/>
+        <result column="s_specs" property="specs"/>
+        <result column="s_weight" property="weight"/>
+        <result column="s_pic" property="pic"/>
+        <result column="s_price" property="price"/>
+        <result column="s_original_price" property="originalPrice"/>
+        <result column="s_stock" property="stock"/>
+        <result column="s_low_stock" property="lowStock"/>
+        <result column="s_sale" property="sale"/>
+        <result column="s_per_limit" property="perLimit"/>
+    </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Product_List">
+        p.id, p.create_time, p.sale_mode,
+        p.distribution_mode, p.name, p.pic, p.album_pics, p.video_url,
+        p.product_sn, p.status, p.sale, p.unit, p.detail,p.csv_url
+    </sql>
+
+    <sql id="Base_Sku_List">
+        s.id AS s_id, s.version AS s_version, s.product_id AS s_product_id, s.sku_code AS s_sku_code, s.specs AS s_specs, s.weight as s_weight, s.pic AS s_pic, s.price AS s_price, s.original_price AS s_original_price, s.stock AS s_stock, s.low_stock AS s_low_stock, s.sale AS s_sale, s.per_limit AS s_per_limit
+    </sql>
+
+
+    <select id="queryCsvProductList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.ProductParam">
+        SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_product p
+        <where>
+            p.is_deleted = 0
+            <if test="productParam.productSn != null and productParam.productSn != ''">
+                AND p.product_sn LIKE CONCAT('%',#{productParam.productSn},'%')
+            </if>
+            <if test="productParam.name != null and productParam.name != ''">
+                AND p.name LIKE CONCAT('%',#{productParam.name},'%')
+            </if>
+            <if test="productParam.status != null and productParam.status != ''">
+                AND p.status LIKE CONCAT('%',#{productParam.status},'%')
+            </if>
+            <choose>
+                <when test="productParam.place == 1">
+                    AND p.place = #{productParam.place}
+                </when>
+                <otherwise>
+                    AND p.place = 0
+                </otherwise>
+            </choose>
+        </where>
+        ORDER BY
+        p.create_time
+        DESC
+    </select>
+
+    <select id="querySkuStock" resultMap="SkuStockResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Sku_List"/>
+        FROM
+        t_sku_stock s
+        WHERE
+        s.is_deleted = 0
+        AND
+        s.product_id = #{id}
+    </select>
+
+</mapper>

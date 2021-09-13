@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.order.mapper.AfsOrderMapper">
+
+
+    <select id="selectByOrderId" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+            ao.*
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND aoi.order_id = #{orderId}
+            AND ao.status &lt; 99
+            ORDER BY ao.create_time DESC
+    </select>
+    <select id="selectByOrderIdAndProductSkuId" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+        ao.*
+        FROM
+        t_afs_order AS ao
+        LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+        ao.is_deleted = 0
+        AND aoi.order_id = #{orderId}
+        AND aoi.product_sku_id = #{productSkuId}
+        ORDER BY ao.create_time DESC
+        LIMIT 1
+    </select>
+    <select id="selectProgressByOrderId" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+            ao.*
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND aoi.order_id = #{orderId}
+            AND ao.status &lt; 99
+            ORDER BY ao.create_time DESC
+    </select>
+    <select id="countProgressByPointId" resultType="java.lang.Long">
+        SELECT
+            count(ao.id)
+        FROM
+            t_afs_order AS ao
+        WHERE
+            ao.is_deleted = 0
+            AND ao.point_id = #{pointId}
+            AND ao.status &lt; 99
+            AND ao.status > 1
+            ORDER BY ao.create_time DESC
+    </select>
+    <select id="selectOriginalOrderIdByOrderId" resultType="java.lang.Long">
+        SELECT
+            aoi.order_id
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND ao.order_id = #{orderId}
+            AND ao.type = 4
+        LIMIT 1
+    </select>
+    <select id="selectCountProgressByOrderIds" resultType="java.lang.Integer">
+        SELECT
+        COUNT(ao.id)
+        FROM
+        t_afs_order AS ao
+        LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+        ao.is_deleted = 0
+        AND aoi.order_id in
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+        AND ao.status &lt; 99
+    </select>
+    <select id="countSkuReturn" resultType="java.lang.Integer">
+       SELECT
+            SUM(aoi.product_quantity)
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+			AND ao.user_id = #{userId}
+            AND ao.type in (2,3,5)
+            AND ao.status = 100
+            AND aoi.product_sku_id = #{productSkuId}
+    </select>
+
+</mapper>

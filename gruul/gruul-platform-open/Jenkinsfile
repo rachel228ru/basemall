@@ -1,0 +1,95 @@
+pipeline {
+
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '2'))
+        skipDefaultCheckout true
+    }
+    environment {
+        PROJECT_VERSION = 0.1 // 项目版本, 公共基础库为 public
+        EVN = "-e SPRING_CLOUD_NACOS_DISCOVERY_METADATA_VERSION=${PROJECT_VERSION}"
+        DOCKER_REGISTRY = "ip:81" //镜像上传选地址
+        IMAGE_NAME = "gruul/gruul-platform-open"
+        IMAGE_VERSION = "open-${PROJECT_VERSION}"
+        MODEL_NAME = "gruul-platform-open"
+        SERVICE_NAME = "${MODEL_NAME}-${PROJECT_VERSION}"
+        DEV_NODE = "node-1"
+        PORT = "10200"
+        MAPPING_PATH = "-v /tmp/logs/gruul:/tmp/logs/gruul -v /etc/localtime:/etc/localtime -v /data/pay-certificate/:/data/pay-certificate/"
+        //映射地址
+    }
+
+    stages {
+        stage('check out') {
+
+            agent { label 'master' }
+
+            steps {
+
+                checkout scm
+
+                echo "current branch: $BRANCH_NAME"
+
+
+                echo "$IMAGE_VERSION"
+
+            }
+
+        }
+
+        stage('mvn build & deploy') {
+
+            agent { label 'master' }
+
+            steps {
+                withMaven(maven: 'maven3.6.2', mavenSettingsConfig: '3ea105df-717e-4eb7-8f6b-8a429180b140') {
+                    sh "mvn clean package -U -Dmaven.test.skip=true deploy"
+
+                }
+            }
+        }
+
+        stage('docker build & push') {
+
+            agent { label 'master' }
+
+            steps {
+
+                script {
+                    echo 'master branch build & push'
+
+                    docker.withRegistry("http://${DOCKER_REGISTRY}", "harbor") {
+                        def customImage = docker.build("${IMAGE_NAME}:${IMAGE_VERSION}")
+                        customImage.push()
+                    }
+                }
+            }
+        }
+
+        //docker部署
+        stage('docker deploy to dev') {
+
+            agent { label "$DEV_NODE" }
+
+
+            steps {
+
+                echo 'stop old container'
+
+                sh '''CID=$(docker ps -a | grep $MODEL_NAME | awk \'{print $1}\')
+                    if [ "$CID" != "" ];then
+                        docker rm -f $CID
+                    fi'''
+
+                echo 'remove images'
+
+                sh "docker pull $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION"
+
+                echo 'restart'
+
+                sh "docker run  -d --name $SERVICE_NAME  --restart always  -p $PORT:$PORT $MAPPING_PATH $EVN -e SPRING_PROFILES_ACTIVE=open $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION"
+            }
+        }
+    }
+}

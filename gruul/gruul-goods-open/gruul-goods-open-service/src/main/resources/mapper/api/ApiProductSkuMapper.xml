@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.api.ApiProductSkuMapper">
+
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiProductVo">
+        <id column="id" property="id"/>
+        <result column="provider_id" property="providerId"/>
+        <result column="provider_name" property="providerName"/>
+        <result column="attribute_id" property="attributeId"/>
+        <result column="attribute_name" property="attributeName"/>
+        <result column="distribution_mode" property="distributionMode"/>
+        <result column="freight_template_id" property="freightTemplateId"/>
+        <result column="sale_mode" property="saleMode"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="wide_pic" property="widePic"/>
+        <result column="album_pics" property="albumPics"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="sale" property="sale"/>
+        <result column="unit" property="unit"/>
+        <result column="weight" property="weight"/>
+        <result column="service_ids" property="serviceIds"/>
+        <result column="detail" property="detail"/>
+        <result column="is_open_specs" property="openSpecs"/>
+        <result column="attribute" property="attribute"/>
+        <result column="sale_describe" property="saleDescribe"/>
+        <result column="score" property="score"/>
+        <collection property="skuStocks" ofType="com.medusa.gruul.goods.api.model.vo.api.ApiSkuStockVo" column="id"
+                    select="querySkuStock"></collection>
+    </resultMap>
+
+    <resultMap id="SkuStockResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiSkuStockVo">
+        <id column="s_id" property="id"/>
+        <result column="s_version" property="version"/>
+        <result column="s_product_id" property="productId"/>
+        <result column="s_sku_code" property="skuCode"/>
+        <result column="s_specs" property="specs"/>
+        <result column="s_pic" property="pic"/>
+        <result column="s_price" property="price"/>
+        <result column="s_original_price" property="originalPrice"/>
+        <result column="s_stock" property="stock"/>
+        <result column="s_low_stock" property="lowStock"/>
+        <result column="s_sale" property="sale"/>
+        <result column="s_per_limit" property="perLimit"/>
+    </resultMap>
+
+    <sql id="Activity_Product_List">
+        p.id,p.sale_mode,p.limit_type, p.name, p.pic, p.product_sn,
+         p.distribution_mode
+    </sql>
+
+    <sql id="Base_Sku_Stock_List">
+        s.id AS s_id, s.version AS s_version, s.product_id AS s_product_id, s.sku_code AS s_sku_code,
+        s.specs AS s_specs, s.pic AS s_pic, s.price AS s_price, s.original_price AS s_original_price,
+        s.stock AS s_stock, s.low_stock AS s_low_stock, s.sale AS s_sale, s.per_limit AS s_per_limit
+    </sql>
+
+
+    <select id="querySolitaireActivityProductByParam" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Activity_Product_List"/>
+        FROM
+        t_product p
+        <where>
+            p.is_deleted = 0
+            AND p.status = 1
+            and p.distribution_mode = #{distributionMode}
+            <choose>
+                <when test="productType == 1">
+                    AND p.id in
+                    <foreach collection="productIds" index="index" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </when>
+                <when test="productType == 2">
+                    AND p.id not in
+                    <foreach collection="productIds" index="index" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </when>
+                <otherwise>
+                </otherwise>
+            </choose>
+        </where>
+        ORDER BY
+        p.create_time
+        DESC
+    </select>
+
+    <select id="querySkuStock" resultMap="SkuStockResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Sku_Stock_List"/>
+        FROM
+        t_sku_stock s
+        WHERE
+        s.is_deleted = 0
+        AND
+        s.product_id = #{id}
+    </select>
+
+</mapper>

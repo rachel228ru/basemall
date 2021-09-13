@@ -1,0 +1,320 @@
+// 商品
+
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(goods-item) {
+  position: relative;
+  
+  @include when(circle) {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  @include when(shadow) {
+    // box-shadow: 0 0 4px rgba($color: #000000, $alpha: 0.4);
+    box-shadow:0px 1px 56px 6px rgba(109,109,109,0.1);
+  }
+  @include when(border) {
+    border: 1px solid #eeeeee;
+  }
+
+  @include e(img) {
+    height: 180px;
+    overflow: hidden;
+    background-color: rgba(233, 247, 253, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @include e(name) {
+    @include utils-ellipsis;
+    padding-top: 10px;
+    @include when(bold) {
+      font-weight: bold;
+    }
+  }
+
+  @include e(bottom) {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    padding: 10px 0;
+  }
+
+  @include e(price) {
+    color: red;
+    line-height: 37px;
+  }
+
+  @include e(icon) {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: red;
+    border-radius: 100%;
+    color: #ffffff;
+  }
+
+  @include e(cart1) {
+    float: right;
+    height: 28px;
+    width: 28px;
+    background-color: rgba(252, 98, 63, 1);
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+
+    img {
+      display: inline-block;
+      width: 19px;
+      height: 19px;
+    }
+  }
+
+  @include e(cart) {
+    float: right;
+    height: 25px;
+    width: 25px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
+
+  @include e(cart1) {
+    background-color: #fff;
+
+    img {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  @include e(cart2) {
+    background:linear-gradient(164deg,rgba(243,243,243,1),rgba(229,56,46,1),rgba(253,78,38,1));
+    box-shadow:0px 2px 7px 0px rgba(255,14,0,0.27);
+    border-radius:50%;
+
+    img {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @include e(cart3) {
+    border: 1px solid rgba(252, 98, 63, 1);
+    width: auto;
+    padding: 0 5px;
+    color: rgba(252, 98, 63, 1);
+    font-size: 12px;
+    border-radius: 12px;
+    height: 22px;
+    line-height: 22px;
+    margin-top: 10px;
+  }
+
+  @include e(cart4) {
+    border: 1px solid rgba(252, 98, 63, 1);
+    background-color: rgba(252, 98, 63, 1);
+    width: auto;
+    padding: 0 5px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 12px;
+    height: 22px;
+    line-height: 22px;
+    margin-top: 10px;
+  }
+
+  @include e(coner) {
+    position: absolute;
+
+    img, span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+
+  @include e(coner1) {
+    left: -1px;
+    top: 6px;
+    width: 38px;
+    height: 22px;
+  }
+
+  @include e(coner2) {
+    left: 0px;
+    top: 0px;
+    width: 38px;
+    height: 41px;
+  }
+
+  @include e(coner3) {
+    left: 8px;
+    top: 7px;
+    width: 42px;
+    height: 21px;
+  }
+}
+
+@include b(goods-style) {
+  @include m(two) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include b(goods-item) {
+      width: 49%;
+    }
+  }
+
+  @include m(three) {
+    @include b(goods-item) {
+      display: flex;
+      width: 100%;
+
+      @include e(img) {
+        height: 128px;
+        width: 128px;
+        margin-right: 10px;
+        flex: none;
+      }
+
+      @include e(foot) {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      @include e(name) {
+        @include utils-ellipsis(2);
+      }
+    }
+  }
+
+  @include m(four) {
+    white-space: nowrap;
+    overflow-x: auto;
+    @include b(goods-item) {
+      display: inline-block;
+      width: 128px;
+
+      @include e(img) {
+        height: 128px;
+        width: 128px;
+        margin-right: 10px;
+      }
+
+      @include e(foot) {
+      }
+
+      @include e(name) {
+        @include utils-ellipsis;
+      }
+    }
+  }
+}
+
+@include b(goods-view) {
+  margin: 0;
+  padding: 0;
+
+  @include e(del) {
+    position: absolute;
+    display: none;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  @include e(item) {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    width: 70px;
+    height: 70px;
+    border: 1px dotted #eeeeee;
+    margin: 0 8px 8px 0;
+    vertical-align: middle;
+    &:hover {
+      border-color: #1e83d3;
+      @include e(del) {
+        display: inline;
+      }
+    }
+  }
+
+  @include e(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(add) {
+    line-height: 70px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    &:hover {
+      color: #1e83d3;
+    }
+  }
+
+  @include e(addmart) {
+    margin-top: 10px;
+  }
+}
+
+.no__goods-item {
+  width: 100%;
+  height: 265px;
+  background-color: #e9f7fd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    display: inline-block;
+    width: 44px;
+    height: 46px;
+  }
+}
+
+.goods-style--three {
+  .goods-item__foot {
+    position: relative;
+
+    .spellpre__goods--delivery {
+      position: absolute;
+      width: 100%;
+      top: 28px;
+
+      .i_box {
+        border: 2rpx solid #e93826;
+        border-radius: 34rpx;
+        color: #E93826;
+        font-size: 22rpx;
+        display: inline-block;
+        padding: 0 12rpx;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "component": true,
+  "usingComponents": {
+    "auth": "/components/auth/auth",
+    "shop-manage": "/components/shopManage/shopManage",
+    "cube-box": "/pages/index/modules/home/components/cube-box/cube-box",
+    "shop-nav": "/pages/index/modules/home/components/shop-nav/shop-nav",
+    "home-swiper": "/pages/index/modules/home/components/home-swiper/home-swiper",
+    "separator": "/pages/index/modules/home/components/home-separator/home-separator",
+    "blank-paceholder": "/pages/index/modules/home/components/blank-paceholder/blank-paceholder",
+    "image-com": "/pages/index/modules/home/components/imageCom/imageCom",
+    "goods-ponents": "/pages/index/modules/home/components/goods-ponents/goods-ponents",
+    "search-comp": "/pages/index/modules/home/components/search-comp/search-comp",
+    "title-bar": "/pages/index/modules/home/components/title-bar/title-bar",
+    "rich-text": "/pages/index/modules/home/components/rich-text/rich-text",
+    "goods-swiper": "/pages/index/modules/home/components/goods-swiper/goods-swiper",
+    "video-com": "/pages/index/modules/home/components/video-com/video-com"
+  }
+}

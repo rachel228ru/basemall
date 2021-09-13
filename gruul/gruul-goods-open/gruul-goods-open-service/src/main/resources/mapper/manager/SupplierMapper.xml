@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.SupplierMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.SupplierVo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="supplier_sn" property="supplierSn"/>
+        <result column="name" property="name"/>
+        <result column="mobile" property="mobile"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="country" property="country"/>
+        <result column="address" property="address"/>
+        <result column="area" property="area"/>
+        <result column="product_info" property="productInfo"/>
+        <result column="status" property="status"/>
+        <result column="score" property="score"/>
+        <result column="come_from" property="comeFrom"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+        id, supplier_sn, name, mobile, province, city, country, address, area, product_info, status, score, come_from
+    </sql>
+
+    <sql id="Base_Info_List">
+        supplier_sn, name, mobile, area, product_info
+    </sql>
+
+    <select id="queryAllSupplierList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_supplier
+        WHERE
+        is_deleted = 0
+        and status = 1
+    </select>
+
+    <select id="queryAllCount" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        t_supplier
+    </select>
+
+    <select id="querySupplierList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.SupplierParam">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_supplier
+        <where>
+            is_deleted = 0
+            <if test="supplierParam.supplierSn!=null">
+                AND supplier_sn LIKE CONCAT('%',#{supplierParam.supplierSn},'%')
+            </if>
+            <if test="supplierParam.name!=null and supplierParam.name!=''">
+                AND name LIKE CONCAT('%',#{supplierParam.name},'%')
+            </if>
+            <if test="supplierParam.mobile!=null and supplierParam.mobile!=''">
+                AND mobile LIKE CONCAT('%',#{supplierParam.mobile},'%')
+            </if>
+            <if test="supplierParam.status!=null">
+                AND status = #{supplierParam.status}
+            </if>
+        </where>
+        ORDER BY
+        create_time
+        DESC
+    </select>
+
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_supplier
+        WHERE
+        id = #{id}
+        AND
+        is_deleted = 0
+    </select>
+
+    <select id="queryDataSetSupplierList" resultMap="BaseResultMap"
+            parameterType="java.util.List">
+        SELECT
+        <include refid="Base_Info_List"/>
+        FROM
+        t_supplier t
+        where t.is_deleted = 0
+        and t.id in
+        <foreach collection="supplierIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY t.id desc
+    </select>
+</mapper>

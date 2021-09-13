@@ -1,0 +1,1 @@
+<view class="top__mode-page data-v-833b5f02"><block wx:for="{{HeadList}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="tab__item data-v-833b5f02" style="{{(item.id===activeId?styleType.style1:styleType.style2)}}" data-item="{{item}}" data-event-opts="{{[['tap',[['changeActiveItem',['$event']]]]]}}" bindtap="__e">{{''+item.name+''}}</view></block></view>

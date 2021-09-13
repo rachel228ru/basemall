@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "分类",
+  "usingComponents": {
+    "second-goodslist": "/subcontract/pages/spellPage/components/second-goodslist/second-goodslist",
+    "second-goodsdetail": "/subcontract/pages/spellPage/components/second-goodsdetail/second-goodsdetail",
+    "search-plugin": "/subcontract/pages/spellPage/components/search-plugin/search-plugin"
+  }
+}

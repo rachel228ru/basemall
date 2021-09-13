@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.SysShopPackageMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.SysShopPackage">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="name" property="name"/>
+        <result column="remark" property="remark"/>
+        <result column="level" property="level"/>
+        <result column="package_price" property="packagePrice"/>
+        <result column="package_price_unit" property="packagePriceUnit"/>
+        <result column="discounts_json" property="discountsJson"/>
+        <result column="functionDesc" property="functionDesc"/>
+        <result column="open_state" property="openState"/>
+        <result column="template_version_id" property="templateVersionId"/>
+        <result column="operate_id" property="operateId"/>
+        <result column="operate_name" property="operateName"/>
+        <result column="template_id" property="templateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        is_deleted,
+        update_time,
+        id,
+        name,
+        remark,
+        level,
+        package_price,
+        package_price_unit,
+        discounts_json,
+        functionDesc,
+        open_state,
+        template_version_id,
+        template_id,
+        operate_id,
+        operate_name
+    </sql>
+
+    <select id="selectByTemplateLastPackage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_sys_shop_package
+        WHERE template_version_id = ( SELECT max( template_version_id ) FROM `t_sys_shop_package` WHERE is_deleted = 0
+        and template_id = #{templateId} )
+    </select>
+</mapper>

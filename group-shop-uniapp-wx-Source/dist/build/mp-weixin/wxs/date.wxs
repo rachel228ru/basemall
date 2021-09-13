@@ -1,0 +1,24 @@
+'use strict';
+
+var getTimeDifference = function getTimeDifference(endTime, needTime) {
+  var now = getDate();
+  var diffTime = getDate(endTime).getTime() - now.getTime();
+  var days = Math.floor(diffTime / (24 * 3600 * 1000));
+  var leave1 = diffTime % (24 * 3600 * 1000);
+  var hours = Math.floor(leave1 / (3600 * 1000));
+  var leave2 = leave1 % (3600 * 1000);
+  var minutes = Math.floor(leave2 / (60 * 1000));
+  var leave3 = leave2 % (60 * 1000);
+  var seconds = Math.round(leave3 / 1000);
+  var date = (days > 0 ? days : '0') + "天" + (hours > 0 ? hours : '0') + "小时" + (minutes > 0 ? minutes : '0') + "分钟";
+
+  if (needTime) {
+    date += seconds > 0 ? seconds : 0 + "秒";
+  }
+
+  return date;
+};
+
+module.exports = {
+  getTimeDifference: getTimeDifference
+};

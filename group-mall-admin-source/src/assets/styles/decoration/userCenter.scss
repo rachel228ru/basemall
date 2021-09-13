@@ -1,0 +1,152 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@mixin bottom-line($weight: 1px, $color: rgba(69, 64, 60, 0.21)) {
+  border-bottom: $weight solid $color;
+}
+
+// 页面主色
+$page-main-color: #fe4e63;
+// 字体颜色
+$page-text-color: #45403c;
+// 背景颜色
+$page-background-color: #f9f9f9;
+// 边框颜色
+$page-border-color: #ebeef5;
+// 默认边距
+$default-side: 10px;
+// 默认字体大小
+$default-font-size: 14px;
+// 内容字体大小
+$content-font-size: 16px;
+// 手机屏幕宽度
+$screen-width: 340px;
+
+.decoration__page {
+  position: relative;
+
+  .usercenter {
+    @include flex(space-around);
+    position: relative;
+    font-size: $default-font-size;
+    color: $page-text-color;
+    margin: 10px;
+  }
+}
+
+/* 设置 */
+@include b(setting) {
+  width: 400px;
+  height: 600px;
+  overflow-y: scroll;
+  align-self: flex-start;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.12);
+
+  @include e(collapse) {
+    border: 1px dashed $page-border-color;
+    margin-bottom: 10px;
+
+    @include m(header) {
+      padding: 10px;
+      background-color: #f1f2f6;
+    }
+
+    @include m(content) {
+      padding: 0 10px;
+    }
+  }
+}
+
+@include b(setinfo) {
+  background-color: #ffffff;
+}
+
+@include b(setorder) {
+  background-color: #ffffff;
+
+  @include e(item) {
+    @include flex(space-between);
+    height: 48px;
+    padding-left: 15px;
+    border-bottom: 1px solid $page-border-color;
+
+    @include m(text) {
+    }
+    @include m(icon) {
+      color: #9797a1;
+      font-size: $content-font-size;
+    }
+  }
+}
+
+@include b(submit) {
+  //position: fixed;
+  @include flex;
+  //width: calc(100%);
+  padding: 20px;
+  margin-top: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.divContant {
+  height: 40px;
+  width: 110px;
+  padding: 5px;
+  background-color: #ffffff;
+  border: 1px solid #e3e2e5;
+  border-radius: 4px;
+  @include flex(space-around);
+
+  .color-picker {
+    display: inline-block;
+  }
+}
+
+.splitFlag {
+  margin-bottom: 10px;
+}
+
+@include b(menu) {
+  @include e(form) {
+    padding-left: 15px;
+    @include m(item) {
+      @include flex(flex-start);
+      &__label {
+        width: 100px;
+        text-align: left;
+      }
+    }
+  }
+}
+
+/deep/ .drag__list .el-icon-arrow-right {
+  font-size: 14px;
+  color: #5f646e;
+  font-weight: bolder;
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/deep/ .drag__list .el-collapse-item__wrap {
+  background-color: transparent;
+}
+
+/deep/ .drag__list .el-collapse-item__content {
+  padding-bottom: 5px;
+}
+
+/deep/ .el-collapse-item__wrap {
+  overflow: visible;
+}
+
+/deep/ .el-collapse-item {
+  margin: 1px 0;
+}
+
+// 复选框尺寸
+/deep/ .el-checkbox__label {
+  font-size: 13px;
+}

@@ -1,0 +1,1 @@
+ren *.css *.scss

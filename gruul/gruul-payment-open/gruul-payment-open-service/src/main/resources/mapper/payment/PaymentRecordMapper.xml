@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.payment.mapper.PaymentRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.payment.api.entity.PaymentRecord">
+        <id column="id" property="id" />
+        <result column="request_params" property="requestParams" />
+        <result column="send_param" property="sendParam" />
+        <result column="notify_param" property="notifyParam" />
+        <result column="payment_id" property="paymentId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, request_params, send_param, notify_param, payment_id
+    </sql>
+
+</mapper>

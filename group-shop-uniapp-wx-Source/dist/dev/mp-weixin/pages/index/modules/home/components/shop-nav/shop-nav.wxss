@@ -1,0 +1,99 @@
+@charset "UTF-8";
+page.data-v-dba85c90 {
+  min-height: 100%;
+  background: #f1f2f6;
+}
+view.data-v-dba85c90 {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*按钮*/
+button.data-v-dba85c90 {
+  line-height: inherit;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  opacity: 1;
+  background-color: inherit;
+}
+button.data-v-dba85c90::after {
+    border: 0;
+}
+.m__button.data-v-dba85c90 {
+  min-width: 140rpx;
+  padding: 6rpx 0;
+  text-align: center;
+  border-radius: 30rpx;
+  border: 2rpx solid #989898;
+  outline: none;
+  background: #fff;
+  margin-left: 20rpx;
+}
+.m__button.primary.data-v-dba85c90 {
+    background: #fe4e63;
+    border-color: #fe4e63;
+    color: #fff;
+}
+.m__button.primary[disabled].data-v-dba85c90 {
+      border-color: #fda7b2;
+      background: #fda7b2;
+      color: #fff3f6;
+}
+.text__pink.data-v-dba85c90 {
+  color: #fe4e63;
+}
+.text__green.data-v-dba85c90 {
+  color: #08bb07;
+}
+.text__primary.data-v-dba85c90 {
+  color: #000000;
+}
+/* BEM support Func
+ -------------------------- */
+/* BEM
+ -------------------------- */
+.shopNav.data-v-dba85c90 {
+  margin: 20rpx 0;
+  background: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  padding: 6rpx 20rpx;
+}
+.shopNav-item.data-v-dba85c90 {
+  position: relative;
+  text-align: center;
+  width: 140.5rpx;
+  height: 185rpx;
+  padding-top: 22rpx;
+}
+.shopNav-item__image.data-v-dba85c90 {
+    width: 100rpx;
+    height: 100rpx;
+}
+.shopNav-item__text.data-v-dba85c90 {
+    margin-top: 8rpx;
+    font-size: 24rpx;
+    color: #000000;
+}
+.contact-style.data-v-dba85c90 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+

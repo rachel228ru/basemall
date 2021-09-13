@@ -1,0 +1,27 @@
+$blue: #1e83d3 !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #fe5f4b !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #c4bfbf !default;
+/* info */
+
+$font-family-base: "Hiragino Sans GB",
+"Helvetica Neue",
+"Microsoft YaHei",
+"PingFang SC",
+Helvetica,
+"微软雅黑",
+Arial,
+sans-serif;
+$label-margin-bottom:0;
+$font-size-base:.875rem;
+/* $font-weight-base:'';
+$font-height-base:'';
+$body-bg:'';
+$body-color:''; */
+@import "../../../node_modules/bootstrap/scss/bootstrap";

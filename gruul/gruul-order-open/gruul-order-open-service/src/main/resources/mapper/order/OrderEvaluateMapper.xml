@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.order.mapper.OrderEvaluateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.order.api.entity.OrderEvaluate">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="order_id" property="orderId"/>
+        <result column="shop_rate" property="shopRate"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+        id, shop_id, user_id, user_name, user_avatar_url, order_id,  shop_rate
+    </sql>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="ManageEvaluateVoMap" type="com.medusa.gruul.order.model.ManageEvaluateVo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="order_id" property="orderId"/>
+        <result column="shop_rate" property="shopRate"/>
+        <collection column="order_id" property="itemList" javaType="ArrayList"
+                    select="com.medusa.gruul.order.mapper.OrderProductEvaluateMapper.selectByOrderId">
+        </collection>
+    </resultMap>
+    <select id="searchOrderEvaluate" resultMap="ManageEvaluateVoMap">
+        SELECT
+        *
+        FROM
+        t_order_evaluate as oe
+        WHERE
+        id IN (
+        SELECT
+        DISTINCT
+        oe.id
+        FROM t_order_evaluate as oe
+        LEFT JOIN t_order as o ON oe.order_id = o.id
+        LEFT JOIN t_order_product_evaluate as ope ON oe.order_id = ope.order_id
+        WHERE
+        oe.is_deleted = 0
+        AND ope.is_deleted = 0
+        <if test="dto.goodsName!=null and dto.goodsName!=''">
+            AND ope.product_name LIKE concat('%',#{dto.goodsName},'%')
+        </if>
+        <if test="dto.payTimeStart!=null and dto.payTimeStart!='' and dto.payTimeEnd!=null and dto.payTimeEnd!=''  ">
+            AND o.pay_time BETWEEN concat(#{dto.payTimeStart},' 00:00:00') AND concat(#{dto.payTimeEnd},' 23:59:59')
+        </if>
+        <if test="dto.orderId!=null  and dto.orderId!=''">
+            AND oe.order_id LIKE concat('%',#{dto.orderId},'%')
+        </if>
+        <if test="dto.rate!=null and dto.rate!=0">
+            AND ( oe.shop_rate = #{dto.rate} or
+            ope.rate = #{dto.rate})
+        </if>
+        )
+        ORDER BY oe.create_time DESC
+    </select>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="ApiOrderEvaluateVoMap" type="com.medusa.gruul.order.model.ApiOrderEvaluateVo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="order_id" property="orderId"/>
+        <collection column="order_id" property="itemList" javaType="ArrayList"
+                    select="com.medusa.gruul.order.mapper.OrderProductEvaluateMapper.selectByOrderId">
+        </collection>
+    </resultMap>
+    <select id="userSearchOrderEvaluate" resultMap="ApiOrderEvaluateVoMap">
+        SELECT
+        oe.id as id,
+        oe.create_time as create_time,
+        oe.order_id as order_id,
+        oe.shop_rate as shop_rate
+        FROM t_order_evaluate as oe
+        WHERE
+        oe.is_deleted = 0
+        AND oe.user_id = #{userId}
+        ORDER BY oe.create_time DESC
+    </select>
+</mapper>

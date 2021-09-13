@@ -1,0 +1,49 @@
+/*
+ * @description: 抽离开源版本
+ * @Author: chuyinlong
+ * @Date: 2021-08-12 15:36:21
+ * @LastEditors: chuyinlong
+ * @LastEditTime: 2021-08-30 14:28:44
+ */
+/** 序列化地址 */
+var getAddress = function (orderDelivery) {
+  orderDelivery = orderDelivery || {};
+  return (
+    orderDelivery.receiverProvince +
+    orderDelivery.receiverCity +
+    orderDelivery.receiverRegion +
+    orderDelivery.receiverDetailAddress
+  );
+};
+
+/** 能更改地址的状态 */
+var canUpdateAddress = function (status) {
+  return status === "WAIT_FOR_SEND";
+};
+
+/** 状态icon */
+var getStatusIcon = function (status) {
+  return {
+    // 待付款
+    WAIT_FOR_PAY: "icondingdanxiangqing-daifukuan",
+    // 待发货
+    WAIT_FOR_SEND: "icondingdanxiangqing-daifahuo",
+    // 待提货
+    WAIT_FOR_PICKUP: "icondingdanxiangqing-daitihuo",
+    // 已完成
+    COMPLETE: "icondingdanxiangqing-yiwancheng",
+    // 待评价
+    WAIT_FOR_COMMENT: "icondingdanxiangqing-yiwancheng",
+    // 已关闭
+    BUYER_PAY_TIMEOUT_CLOSE: "icondingdanxiangqing-yiguanbi",
+    BUYER_CANCEL_CLOSE: "icondingdanxiangqing-yiguanbi",
+    SELLER_CANCEL_CLOSE: "icondingdanxiangqing-yiguanbi",
+    EXCHANGE_SUCCESS_CLOSE: "icondingdanxiangqing-yiguanbi",
+  }[status];
+};
+
+module.exports = {
+  getAddress: getAddress,
+  getStatusIcon: getStatusIcon,
+  canUpdateAddress: canUpdateAddress,
+};

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+page.data-v-316dad94 {
+  min-height: 100%;
+  background: #f1f2f6;
+}
+view.data-v-316dad94 {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*按钮*/
+button.data-v-316dad94 {
+  line-height: inherit;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  opacity: 1;
+  background-color: inherit;
+}
+button.data-v-316dad94::after {
+    border: 0;
+}
+.m__button.data-v-316dad94 {
+  min-width: 140rpx;
+  padding: 6rpx 0;
+  text-align: center;
+  border-radius: 30rpx;
+  border: 2rpx solid #989898;
+  outline: none;
+  background: #fff;
+  margin-left: 20rpx;
+}
+.m__button.primary.data-v-316dad94 {
+    background: #fe4e63;
+    border-color: #fe4e63;
+    color: #fff;
+}
+.m__button.primary[disabled].data-v-316dad94 {
+      border-color: #fda7b2;
+      background: #fda7b2;
+      color: #fff3f6;
+}
+.text__pink.data-v-316dad94 {
+  color: #fe4e63;
+}
+.text__green.data-v-316dad94 {
+  color: #08bb07;
+}
+.text__primary.data-v-316dad94 {
+  color: #000000;
+}
+/* BEM support Func
+ -------------------------- */
+/* BEM
+ -------------------------- */
+.spellpre.data-v-316dad94 {
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.spellpre__header.data-v-316dad94 {
+    color: #333;
+    height: 80rpx;
+    line-height: 80rpx;
+    position: relative;
+}
+.spellpre__header--title.data-v-316dad94 {
+      float: left;
+      font-size: 36rpx;
+      font-weight: 700;
+      margin-left: 40rpx;
+}
+.spellpre__header--more.data-v-316dad94 {
+      font-size: 28rpx;
+      font-weight: 400;
+      float: right;
+      margin-right: 40rpx;
+}
+.spellpre__header .add__line.data-v-316dad94 {
+      height: 100%;
+      width: 8rpx;
+      background-color: red;
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      top: 0;
+}
+.contact-style.data-v-316dad94 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+

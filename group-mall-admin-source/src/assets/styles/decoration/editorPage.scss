@@ -1,0 +1,425 @@
+@import "../variable";
+@import "goods.scss";
+@import "goodGroup.scss";
+@import "titleBar.scss";
+@import "storeNavigation.scss";
+@import "information.scss";
+@import "search.scss";
+
+.editorWrapper {
+  height: 100%;
+}
+
+.change_text_box {
+  cursor: pointer;
+  color: #1296da;
+  font-size: 14px;
+  height: 64px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .change_text {
+    margin-left: 2px;
+  }
+}
+.editorPage {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  .tab_con {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .editorPage_right {
+    overflow: scroll;
+    display: flex;
+    flex: 1;
+    .tab_con {
+      flex: 1;
+      display: flex;
+    }
+    .editorPage_right_con {
+      flex: 1;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .wraper_top {
+      border-bottom: 1px solid #edf1f6;
+      height: 65px;
+      display: flex;
+      margin-bottom: 5px;
+      position: relative;
+    }
+    .dec_footer {
+      margin-top: 16px;
+      width: 120px;
+      position: absolute;
+      margin-left: -60px;
+      left: 46%;
+      button {
+        padding: 12px 20px;
+      }
+    }
+    .editor_tab_title_top {
+      cursor: pointer;
+      font-size: 14px;
+      width: 126px;
+      height: 65px;
+      cursor: pointer;
+      color: #2e3c45;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      display: flex;
+      border-right: 1px solid rgba(237, 241, 246, 1);
+      border-bottom: 1px solid rgba(237, 241, 246, 1);
+    }
+    .editor_tab_icon1 {
+      background: url(https://ma.faisys.com/image/mbg01.png?v=202003041237) -1718px -40px
+        no-repeat;
+      width: 19px;
+      height: 21px;
+      margin-right: 12px;
+      margin-top: 0;
+    }
+    .editor_tab_icon2 {
+      background: url(https://ma.faisys.com/image/mbg01.png?v=202003041237) -1754px -40px
+        no-repeat;
+      width: 19px;
+      height: 21px;
+      margin-right: 12px;
+      margin-top: 0;
+    }
+    .submit_edit {
+      height: 55px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+  &__preview {
+    width: 375px;
+    height: 667px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    background-color: #eeeeee;
+  }
+
+  &__from {
+    width: 435px;
+
+    /deep/ .banner {
+      @mixin b-w {
+        width: 390px;
+        border: 1px solid #e4e4e4;
+      }
+      &--upload {
+        @include flex;
+        @include b-w;
+
+        flex-direction: column;
+
+        height: 100px;
+
+        span {
+          color: #3088f0;
+          cursor: pointer;
+        }
+        p {
+          font-size: 12px;
+          color: #a7a7a7;
+        }
+      }
+      &--form {
+        @include b-w;
+        margin-top: 15px;
+        padding: 15px 10px 0;
+      }
+    }
+  }
+
+  &__component {
+    width: 300px;
+
+    .component--list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .component--item {
+      width: 100%;
+      height: 130px;
+      line-height: 130px;
+      border-radius: 4px;
+      border: 1px solid #e4e4e4;
+      text-align: center;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .el-tabs__nav {
+      width: 100%;
+      display: flex;
+      justify-items: center;
+      justify-content: space-between;
+      .el-tabs__header {
+        background: none;
+      }
+      .el-tabs__item {
+        flex: 1;
+        text-align: center;
+        background: none;
+      }
+    }
+  }
+}
+.editor__from {
+  width: 435px;
+  height: 667px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding-bottom: 50px;
+  /deep/ .banner {
+    @mixin b-w {
+      width: 390px;
+      border: 1px solid #e4e4e4;
+    }
+    &--upload {
+      @include flex;
+      @include b-w;
+      flex-direction: column;
+      height: 100px;
+      span {
+        color: #3088f0;
+        cursor: pointer;
+      }
+      p {
+        font-size: 12px;
+        color: #a7a7a7;
+      }
+    }
+    &--form {
+      @include b-w;
+      margin-top: 15px;
+      padding: 15px 10px 0;
+    }
+  }
+}
+
+.editor__component {
+  width: 300px;
+  height: calc(100vh - 70px);
+  overflow: auto;
+  color: #333;
+  box-sizing: border-box;
+  padding-bottom: 50px;
+  .component--list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .component--item {
+    width: 100%;
+    height: 130px;
+    border-radius: 4px;
+    border: 1px solid #e4e4e4;
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+
+    span {
+      position: absolute;
+      width: 100%;
+      height: 36px;
+      line-height: 30px;
+      left: 0;
+      bottom: 0px;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+  .el-tabs__nav {
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+    .el-tabs__header {
+      background: none;
+    }
+    .el-tabs__item {
+      flex: 1;
+      text-align: center;
+      background: none;
+    }
+  }
+}
+
+.editor_tab {
+  height: 100%;
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  background: #273239;
+  .editor_tab_title {
+    background: #2e3c45;
+    width: 70px;
+    height: 65px;
+  }
+  .left_menu {
+    width: 70px;
+    background: #273239;
+    flex: 1;
+    position: relative;
+
+    .slider—span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border: 7px solid transparent;
+      border-right-color: #fff;
+      -webkit-transition: top 0.3s;
+      transition: top 0.3s;
+    }
+  }
+  .tab_item {
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 96px;
+    border-top: 1px solid #2d363e;
+    text-align: center;
+    color: #5d666d;
+    font-size: 13px;
+
+    .tab_item_title {
+      color: #5d666d;
+    }
+
+    .tab-bg__icon1 {
+      background-position: -144px 1px;
+    }
+
+    .tab-bg__icon2 {
+      background-position: -145px -42px;
+    }
+
+    .tab-bg__icon3 {
+      background-position: -144px -87px;
+    }
+  }
+
+  .tab-bg__icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 30px auto 12px;
+    background: url(https://ma.faisys.com/image/mbg01.png?v=202003041237)
+      no-repeat;
+    position: relative;
+  }
+
+  .tab_item_active {
+    .tab_item_title {
+      color: #fff;
+    }
+
+    .tab-bg__icon1 {
+      background-position: -99px 1px;
+    }
+
+    .tab-bg__icon2 {
+      background-position: -100px -42px;
+    }
+
+    .tab-bg__icon3 {
+      background-position: -99px -87px;
+    }
+  }
+}
+
+.editor__preview {
+  position: relative;
+  // padding-bottom: 15px;
+  .preNavBar {
+    width: 373px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  overflow: auto;
+  width: 375px;
+  height: calc(100vh - 70px);
+  border: 1px solid #ccc;
+  background-color: #fff; // #eeeeee
+  box-sizing: border-box;
+  margin-bottom: 100px;
+  .component--item {
+    position: relative;
+    border: 1px dotted #fff;
+    box-sizing: border-box;
+  }
+
+  .iscur__component--item {
+    border: 1.5px dashed red;
+  }
+  .select__component--item {
+    border: 1.5px dashed rgba(45, 140, 240, 0.7);
+  }
+  .component--item__icon {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    z-index: 999;
+    cursor: pointer;
+    font-size: 18px;
+  }
+}
+
+.editor__component_new {
+  height: calc(100vh - 80px) !important;
+  padding-bottom: 0 !important;
+  border: 1px solid #dcdfe6;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  .el-tabs__content {
+    display: none;
+  }
+  .el-tabs--border-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .editor_component_wrap {
+    flex: 1;
+    overflow: hidden;
+  }
+  .editor_component_wrap_main {
+    width: 300px;
+    padding: 10px;
+  }
+}

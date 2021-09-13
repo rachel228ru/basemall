@@ -1,0 +1,56 @@
+// 商品分组
+
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(goodGroup) {
+  display: block;
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+@include b(goodGroup-list) {
+  display: inline-block;
+
+  @include when(style-one) {
+    border-left: 1px solid #eeeeee;
+    margin: 10px 4px;
+  }
+
+  @include when(style-two) {
+    border-radius: 10px;
+    padding: 4px 8px;
+    & + & {
+      margin-left: 20px;
+    }
+  }
+
+  @include when(style-three) {
+    padding: 4px 8px;
+    border-bottom: 2px solid transparent;
+    & + & {
+      margin-left: 20px;
+    }
+  }
+}
+
+@include b(goodGroup-form-group) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  & > li {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @include e(del) {
+    color: red;
+    cursor: pointer;
+  }
+}
+
+

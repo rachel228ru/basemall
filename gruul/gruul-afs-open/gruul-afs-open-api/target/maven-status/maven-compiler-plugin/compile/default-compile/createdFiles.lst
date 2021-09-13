@@ -1,0 +1,13 @@
+com\medusa\gruul\afs\api\constant\AfsQueueNameConstant.class
+com\medusa\gruul\afs\api\enums\AfsOrderTypeEnum.class
+com\medusa\gruul\afs\api\constant\AfsConstant.class
+com\medusa\gruul\afs\api\entity\AfsReason.class
+com\medusa\gruul\afs\api\constant\AfsQueueEnum.class
+com\medusa\gruul\afs\api\entity\AfsNegotiateHistory.class
+com\medusa\gruul\afs\api\enums\AfsOrderTypeEnum$1.class
+com\medusa\gruul\afs\api\enums\AfsOrderStatusEnum.class
+com\medusa\gruul\afs\api\feign\RemoteAfsService.class
+com\medusa\gruul\afs\api\model\AfsSimpleVo.class
+com\medusa\gruul\afs\api\entity\AfsOrder.class
+com\medusa\gruul\afs\api\enums\AfsOrderCloseTypeEnum.class
+com\medusa\gruul\afs\api\entity\AfsOrderItem.class

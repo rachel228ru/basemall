@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.PlatformAccountRechargeMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.PlatformAccountRecharge">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="account_id" property="accountId"/>
+        <result column="recharge_num" property="rechargeNum"/>
+        <result column="pay_num" property="payNum"/>
+        <result column="pay_type" property="payType"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="pay_info" property="payInfo"/>
+        <result column="account_amount" property="accountAmount"/>
+        <result column="status" property="status"/>
+        <result column="pay_source" property="paySource"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="prepay_id" property="prepayId"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="invoice_status" property="invoiceStatus"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        is_deleted,
+        update_time,
+        tenant_id,
+        id,
+        account_id,
+        recharge_num,
+        pay_num,
+        pay_type,
+        finish_time,
+        pay_amount,
+        pay_info,
+        account_amount,
+        status,
+        pay_source,
+        prepay_id,
+        audit_time,invoice_status
+    </sql>
+
+    <resultMap id="PlatformAccountRechargeDtoMap" type="com.medusa.gruul.platform.model.dto.PlatformAccountRechargeDto"
+               extends="BaseResultMap">
+        <result column="nike_name" property="nikeName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="phone" property="phone"/>
+    </resultMap>
+    <select id="selectPayOrder" resultMap="PlatformAccountRechargeDtoMap">
+        select tpar.*, tpai.nike_name, tpai.avatar_url, tpai.phone
+        from t_platform_account_recharge as tpar
+        left join t_platform_account_info as tpai on tpai.id = tpar.account_id
+        <where>
+            <!--   用户昵称搜索 -->
+            <if test="nikeName != null and nikeName != ''">
+                and tpai.nike_name like concat('%', #{nikeName}, '%')
+            </if>
+            <!--        用户手机号搜索-->
+            <if test="phone != null and phone != ''">
+                and tpai.phone like concat('%', #{phone}, '%')
+            </if>
+            <!--            订单状态-->
+            <if test="status == null or status == 0">
+                and tpar.status > 0
+            </if>
+            <!--            订单状态-->
+            <if test="status != null and status > 0">
+                and tpar.status = #{status}
+            </if>
+            <!--        订单开发时间-->
+            <if test="payStartTime != null and payStartTime != ''">
+                and tpar.create_time >= #{payStartTime}
+            </if>
+            <!--        订单结束时间-->
+            <if test="payEndTime != null and payEndTime != ''">
+                and  <![CDATA[tpar.create_time <= #{payEndTime}
+                ]]>
+            </if>
+            <!--        订单充值编号查询-->
+            <if test="rechargeNum != null and rechargeNum != ''">
+                and tpar.recharge_num like concat('%', #{rechargeNum}, '%')
+            </if>
+            <!--        支付方式-->
+            <if test="payType != null and payType > 0">
+                <if test="payType == 1">
+                    and tpar.pay_type in(1,11)
+                </if>
+                <if test="payType == 2">
+                    and tpar.pay_type in(2,12)
+                </if>
+                <if test="payType == 3">
+                    and tpar.pay_type in(3,13)
+                </if>
+                <if test="payType == 4">
+                    and tpar.pay_type in(14)
+                </if>
+            </if>
+        </where>
+        order by tpar.create_time desc
+    </select>
+</mapper>

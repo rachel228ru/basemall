@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.PlatformShopInfoMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.PlatformShopInfo">
+        <id column="id" property="id"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="logo_url" property="logoUrl"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="status" property="status"/>
+        <result column="due_time" property="dueTime"/>
+        <result column="is_due" property="isDue"/>
+        <result column="shop_template_id" property="shopTemplateId"/>
+        <result column="account_id" property="accountId"/>
+        <result column="agree_on" property="agreeOn"/>
+        <result column="package_id" property="packageId"/>
+        <result column="is_privatization_deployment" property="isPrivatizationDeployment"/>
+        <result column="create_join" property="createJoin"/>
+        <result column="business_hours" property="businessHours"/>
+        <result column="shop_phone" property="shopPhone"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="bind_mini_id" property="bindMiniId"/>
+        <result column="bind_mp_id" property="bindMpId"/>
+        <result column="certificate_path" property="certificatePath"/>
+        <result column="mch_key" property="mchKey"/>
+        <result column="mch_id" property="mchId"/>
+        <result column="pay_type" property="payType"/>
+        <result column="shop_template_detail_id" property="shopTemplateDetailId"/>
+        <result column="package_order_id" property="packageOrderId"/>
+        <result column="mini_bottom_log" property="miniBottomLog"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        is_deleted,
+        create_time,
+        update_time,
+        create_join,
+        mini_bottom_log,
+        shop_phone,
+        business_hours,
+        tenant_id,
+        shop_template_detail_id,
+        id,
+        logo_url,
+        shop_name,
+        status,
+        due_time,
+        is_due,
+        shop_template_id,
+        account_id,
+        agree_on,
+        is_privatization_deployment,
+        package_id,
+        certificate_path,
+        mch_key,
+        mch_id,
+        pay_type,
+        bind_mini_id,
+        bind_mp_id,
+        package_order_id
+    </sql>
+    <select id="getLastTenantId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_platform_shop_info
+        where id = (select max(id) from t_platform_shop_info)
+    </select>
+
+    <select id="amdinSelectPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_platform_shop_info
+        <where>
+            is_deleted = 0
+            <if test="null != deployType">
+                and is_privatization_deployment = #{deployType}
+            </if>
+            <if test="null != search">
+                and (
+                account_id in (
+                select id
+                from t_platform_account_info
+                where is_deleted = 0
+                and phone LIKE CONCAT('%', #{search}, '%')
+                )
+                or shop_name LIKE CONCAT('%', #{search}, '%')
+                )
+            </if>
+            <if test="null != templateInfoId">
+                and shop_template_id = #{templateInfoId}
+            </if>
+            <if test="null != shopStatus">
+                and status = #{shopStatus}
+            </if>
+            <if test="null != versionId">
+                and shop_template_detail_id = #{versionId}
+            </if>
+            <if test="null != packageId">
+                and package_id = #{packageId}
+            </if>
+            <if test="null != agentId">
+                and (
+                account_id in(
+                select id
+                from t_platform_account_info
+                where is_deleted = 0
+                and agent_id  = #{agentId}
+                )
+                )
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+    <select id="selectByCancelAuthMiniShops"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_platform_shop_info
+        WHERE is_deleted = 0
+        AND shop_template_id = #{shopTemplateId}
+        AND tenant_id IN (
+        SELECT tenant_id FROM t_mini_info
+        WHERE
+        is_deleted = 0
+        AND
+                service_type_info = 3
+        AND (
+             authorizer_flag = 0
+        OR
+             aidit_id is null
+        )
+        )
+    </select>
+
+    <select id="selectAccountShops" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_platform_shop_info
+        <where>
+            is_deleted = 0
+            <if test="null != accountIds">
+                and account_id in
+                <foreach collection="accountIds" item="accountId" separator="," open="(" close=")">
+                    #{accountId}
+                </foreach>
+            </if>
+            <if test="null != shopStatus">
+                and status = #{shopStatus}
+            </if>
+            <if test="null != search and search != ''">
+                and shop_name LIKE CONCAT('%', #{search}, '%')
+            </if>
+            <if test="null != packageIds">
+                and package_id in <foreach collection="packageIds" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and  create_time >= #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[
+                and create_time <= #{endTime}
+                ]]>
+            </if>
+        </where>
+        order by create_time
+        <if test="orderBy == 1">
+            asc
+        </if>
+        <if test="orderBy == 2">
+            desc
+        </if>
+    </select>
+</mapper>

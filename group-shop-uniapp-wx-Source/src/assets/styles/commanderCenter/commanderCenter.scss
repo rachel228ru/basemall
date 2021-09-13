@@ -1,0 +1,411 @@
+.applyCommander {
+    padding-bottom: 50px;
+  
+    .van-cell {
+      background-color: #f4f4f4 !important;
+    }
+  
+    .get_code_button {
+      width: 26%;
+      margin-right: 2%;
+  
+      button {
+        padding: 0 8px;
+      }
+    }
+  
+    .title {
+      display: flex;
+      align-items: center;
+      padding-left: 40px;
+      height: 35px;
+  
+      &__text {
+        font-size: 13px;
+        color: #cacaca;
+      }
+    }
+  
+    .input {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      padding-left: 40px;
+      height: 55px;
+      border-bottom: 1rpx solid #f1f2f6;
+  
+      &__item {
+        position: relative;
+        font-size: 14px;
+        margin-left: 20px;
+        font-weight: bold;
+        width: 60px;
+      }
+  
+      &__val {
+        font-size: 12px;
+        padding: 28rpx;
+        flex: 1;
+      }
+    }
+  
+    .agree {
+      padding-left: 100px;
+      height: 155px;
+      line-height: 32px;
+  
+      &__text {
+        color: red;
+        line-height: 20px;
+      }
+    }
+  
+    .button {
+      font-size: 14px;
+    }
+  
+    .commit {
+      z-index: 99;
+      position: fixed;
+      width: 100%;
+      height: 70px;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background: white;
+  
+      .detail__button {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 640rpx;
+        height: 88rpx;
+        margin: 0 auto;
+        background-color: #fc425a;
+        color: #ffffff;
+        border-radius: 50rpx;
+      }
+    }
+  
+    .detail {
+  
+      background-color: white;
+      padding-left: 20px;
+      padding-top: 20px;
+      height: 150px;
+      margin-bottom: 25px;
+  
+      &__text {
+        display: flex;
+  
+        &--msg {
+          font-weight: bold;
+          margin-left: 15px;
+          position: relative;
+          font-size: 14px;
+        }
+      }
+  
+  
+    }
+  }
+  
+  .commanderWorkspace {
+    .back {
+      height: 75.5px;
+      width: 375px;
+      background-color: #fe4e63;
+      border-radius: 0 0 50% 50%;
+      background: linear-gradient(#fe4e63, #fe4e63);
+    }
+  
+    .info {
+      height: 170px;
+    }
+  
+    .title {
+      line-height: 14px;
+      font-size: 15px;
+      text-align: center;
+      font-weight: normal;
+      color: rgba(69, 64, 60, 1);
+      margin-top: 50px;
+    }
+  
+    .user_head {
+      width: 59px;
+      height: 59px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      position: absolute;
+      top: 50px;
+      left: 159px;
+  
+      .user_img {
+        flex: 0 0 118rpx;
+        width: 118rpx;
+        height: 118rpx;
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px #ffffff;
+      }
+    }
+  
+    .middle {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: 182px;
+      width: 355px;
+      padding: 15px 10rpx 15px 0px;
+      background: rgba(248, 248, 248, 1);
+      margin-left: 10px;
+      margin-right: 10px;
+      position: relative;
+  
+      .middle_text {
+        height: 16px;
+        font-size: 16px;
+        font-weight: normal;
+        color: rgba(69, 64, 60, 1);
+        opacity: 0.6;
+        margin-top: 5px;
+      }
+  
+      .top_bg {
+        width: 13px;
+        height: 13px;
+        background: url("@/assets/images/icon-sanjiao.jpg");
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+  
+      .middle_color {
+        font-size: 18px;
+        font-family: Hiragino Sans GB;
+        font-weight: 800;
+        color: #f64e3f;
+      }
+  
+      .mid_box {
+        width: 230rpx;
+        height: 81px;
+        text-align: center;
+      }
+    }
+  
+    .bottom {
+      margin-top: 35px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      width: 355px;
+      height: 301px;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 1px 12px 0px rgba(0, 0, 0, 0.05);
+      border-radius: 5px;
+  
+      .topbar {
+        width: 42px;
+        height: 6px;
+        background: rgba(254, 78, 99, 1);
+        border-radius: 5px;
+      }
+  
+      .bot_box {
+        display: flex;
+        justify-content: space-between;
+        width: 680rpx;
+        height: 40px;
+        margin-left: 20rpx;
+        margin-top: 26px;
+        position: relative;
+      }
+  
+      .bot_title {
+        width: 80px;
+        font-size: 16px;
+        font-family: Hiragino Sans GB;
+        font-weight: normal;
+        color: rgba(69, 64, 60, 1);
+      }
+  
+      .bot_text {
+        width: 200px;
+        font-size: 14px;
+        font-family: Hiragino Sans GB;
+        font-weight: normal;
+        color: rgba(69, 64, 60, 1);
+        opacity: 0.54;
+      }
+  
+      .bot_money {
+        text-align: right;
+        width: 100px;
+        font-size: 18px;
+        font-family: Hiragino Sans GB;
+        font-weight: 800;
+        color: rgba(69, 64, 60, 1);
+        font-weight: 400;
+        position: absolute;
+        right: 25px;
+        top: 10px;
+      }
+    }
+  }
+  
+  .independentMealWorkspace {
+    background-image: url("https://oss-tencent.bgniao.cn/api/commander-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    background-color: #F4F5F9;
+  
+    .avator {
+      position: relative;
+      height: 334rpx;
+  
+      .user_head {
+        padding-top: 43rpx;
+        padding-bottom: 5rpx;
+        text-align: center;
+  
+        .user_img {
+          width: 133rpx;
+          height: 133rpx;
+          border-radius: 100%;
+          border: 6rpx solid #fff;
+        }
+      }
+  
+      .title {
+        text-align: center;
+        color: #fff;
+      }
+  
+      .scan {
+        position: absolute;
+        top: 15rpx;
+        right: 16rpx;
+        color: #fff;
+  
+        .iconfont {
+          font-size: 50rpx;
+        }
+      }
+    }
+  
+    .summary_info {
+      margin: 0 auto 16rpx;
+      display: flex;
+      flex-wrap: wrap;
+      width: 711rpx;
+      height: 297rpx;
+      padding: 32rpx 0;
+      border-radius: 20rpx;
+      background-color: #fff;
+  
+      .mid_box {
+        margin-bottom: 40rpx;
+        width: 33%;
+        text-align: center;
+      }
+  
+      .middle_text {
+        font-size: 26rpx;
+        color: #8C8C8C;
+      }
+  
+      .count {
+        margin-bottom: 10rpx;
+      }
+  
+      .middle_color {
+        font-size: 36rpx;
+        color: #313131;
+      }
+    }
+  
+    .account_info {
+      margin: 0 auto 16rpx;
+      display: flex;
+      width: 711rpx;
+      height: 212rpx;
+      padding: 30rpx 0;
+      border-radius: 20rpx;
+      background-color: #fff;
+  
+      .account_info_item {
+        flex: 1;
+        text-align: center;
+      }
+  
+      .iconfont {
+        font-size: 50rpx;
+        color: #FC7A7D;
+      }
+  
+      .label {
+        padding: 8rpx 0;
+        color: #8C8C8C;
+        font-size: 26rpx;
+      }
+  
+      .value {
+        font-size: 36rpx;
+        color: #313131;
+      }
+    }
+  
+    .detail_entrance {
+      margin: 0 auto 16rpx;
+      width: 711rpx;
+      border-radius: 20rpx;
+      background-color: #fff;
+      padding: 40rpx;
+      padding-bottom: 0rpx;
+  
+      .entrance_item {
+        margin-bottom: 32rpx;
+      }
+  
+      .content {
+        color: #585858;
+        height: 30rpx;
+        line-height: 30rpx;
+      }
+  
+      .tip {
+        line-height: 48rpx;
+        font-size: 22rpx;
+        color: #ABABAB;
+      }
+  
+      .label {
+        float: left;
+        font-size: 28rpx;
+      }
+  
+      .value {
+        margin-right: 20rpx;
+        float: right;
+        font-size: 30rpx;
+      }
+  
+      .entrance_icon {
+        float: right;
+        font-size: 28rpx;
+        color: #ABABAB;
+      }
+    }
+  }
+  
+  .page__assition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    padding-bottom: 20px;
+    font-size: 14px;
+    color: #0C83FE;
+  }

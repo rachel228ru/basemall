@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.logistics.mapper.LogisticsAddressMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsAddressVo">
+        <id column="id"  property="id"/>
+        <result column="name"  property="name"/>
+        <result column="address"  property="address"/>
+        <result column="province"  property="province"/>
+        <result column="province_id"  property="provinceId"/>
+        <result column="city"  property="city"/>
+        <result column="city_id"  property="cityId"/>
+        <result column="country"  property="country"/>
+        <result column="country_id"  property="countryId"/>
+        <result column="zip_code"  property="zipCode"/>
+        <result column="phone"  property="phone"/>
+        <result column="def_send"  property="defSend"/>
+        <result column="def_receive"  property="defReceive"/>
+        <result column="lat"  property="lat"/>
+        <result column="lng"  property="lng"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, `name`, province, province_id, city, city_id, country, country_id, address, zip_code, phone, def_send, def_receive, lat, lng
+    </sql>
+
+    <select id="queryLogisticsAddressList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.logistics.model.param.LogisticsAddressParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_address
+        where is_deleted=0
+    </select>
+
+    <select id="queryAllLogisticsAddressList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_address
+        where is_deleted=0
+    </select>
+
+    <select id="queryLogisticsAddressByExpressCode" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select a.province, a.city, a.country, a.address
+        from t_logistics_address a
+        inner join t_logistics_express e
+        on a.id = e.address_id
+        where a.is_deleted=0 and e.is_deleted=0 and e.code = #{expressCode}
+    </select>
+
+    <select id="queryDefaultAddress" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_address
+        where 1=1
+        <if test="type == 1">
+            AND def_send = 1
+        </if>
+        <if test="type == 2">
+            AND def_receive = 1
+        </if>
+    </select>
+
+</mapper>

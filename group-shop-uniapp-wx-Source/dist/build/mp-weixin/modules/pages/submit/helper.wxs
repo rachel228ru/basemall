@@ -1,0 +1,21 @@
+/*
+ * @description: 抽离开源版本
+ * @Author: chuyinlong
+ * @Date: 2021-08-12 15:36:20
+ * @LastEditors: chuyinlong
+ * @LastEditTime: 2021-08-30 14:15:50
+ */
+var isSelfPick = function (key) {
+  return key === "SELF_PICKUP";
+};
+
+var getCanUseCoupon = function (coupons) {
+  return coupons.filter(function (item) {
+    return !!item.canUse
+  })
+};
+
+module.exports = {
+  isSelfPick: isSelfPick,
+  getCanUseCoupon: getCanUseCoupon,
+};

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.ShopsSearchTermsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="ShopsSearchTermsVoResultMap" type="com.medusa.gruul.shops.model.vo.ShopsSearchTermsVo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="terms" property="terms"/>
+        <result column="def_terms" property="defTerms"/>
+        <result column="is_show" property="isShow"/>
+    </resultMap>
+
+
+    <select id="getTerms" resultMap="ShopsSearchTermsVoResultMap">
+        select
+        *
+        from
+        `t_shops_search_terms`
+    </select>
+
+
+</mapper>

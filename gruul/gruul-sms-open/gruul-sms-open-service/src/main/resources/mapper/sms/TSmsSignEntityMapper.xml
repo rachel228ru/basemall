@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.medusa.gruul.sms.dao.mapper.TSmsSignEntityMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.sms.dao.entity.TSmsSignEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+          <result column="user_id" property="userId" jdbcType="BIGINT"/>
+          <result column="sms_provider_id" property="smsProviderId" jdbcType="BIGINT"/>
+          <result column="sms_sign" property="smsSign" jdbcType="VARCHAR"/>
+          <result column="sms_sign_is_pass" property="smsSignIsPass" jdbcType="TINYINT"/>
+          <result column="sms_sign_remark" property="smsSignRemark" jdbcType="VARCHAR"/>
+          <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+          <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+          <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+          <result column="sms_sign_type" property="smsSignType" jdbcType="INTEGER"/>
+          <result column="sign_type" property="signType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+         id, user_id,  sms_provider_id,  sms_sign,  sms_sign_is_pass,  sms_sign_remark,  is_deleted,  create_time,  update_time,  sms_sign_type,  sign_type, sign_type 
+    </sql>
+
+    <!-- 根据id实现条件查询-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_sign
+        where id =  #{id}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_sms_sign  where id =  #{id}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.medusa.gruul.sms.dao.entity.TSmsSignEntity">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_sms_sign ( id,
+	      user_id,
+          sms_provider_id,
+          sms_sign,
+          sms_sign_is_pass,
+          sms_sign_remark,
+          is_deleted,
+          create_time,
+          update_time,
+          sms_sign_type,
+          sign_type,
+        )
+        values ( #{id},
+         #{userId,jdbcType=BIGINT},
+         #{smsProviderId,jdbcType=BIGINT},
+         #{smsSign,jdbcType=VARCHAR},
+         #{smsSignIsPass,jdbcType=TINYINT},
+         #{smsSignRemark,jdbcType=VARCHAR},
+         #{isDeleted,jdbcType=TINYINT},
+         #{createTime,jdbcType=TIMESTAMP},
+         #{updateTime,jdbcType=TIMESTAMP},
+         #{smsSignType,jdbcType=INTEGER},
+         #{signType,jdbcType=INTEGER},
+         )
+
+    </insert>
+
+
+    <insert id="insertSelective" parameterType="com.medusa.gruul.sms.dao.entity.TSmsSignEntity">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into  t_sms_sign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="smsProviderId != null">
+                sms_provider_id,
+            </if>
+            <if test="smsSign != null">
+                sms_sign,
+            </if>
+            <if test="smsSignIsPass != null">
+                sms_sign_is_pass,
+            </if>
+            <if test="smsSignRemark != null">
+                sms_sign_remark,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="smsSignType != null">
+                sms_sign_type,
+            </if>
+            <if test="signType != null">
+                sign_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            #{id},
+            </if>
+                 <if test="userId != null">
+                     #{userId,jdbcType=BIGINT},
+                 </if>
+                 <if test="smsProviderId != null">
+                     #{smsProviderId,jdbcType=BIGINT},
+                 </if>
+                 <if test="smsSign != null">
+                     #{smsSign,jdbcType=VARCHAR},
+                 </if>
+                 <if test="smsSignIsPass != null">
+                     #{smsSignIsPass,jdbcType=TINYINT},
+                 </if>
+                 <if test="smsSignRemark != null">
+                     #{smsSignRemark,jdbcType=VARCHAR},
+                 </if>
+                 <if test="isDeleted != null">
+                     #{isDeleted,jdbcType=TINYINT},
+                 </if>
+                 <if test="createTime != null">
+                     #{createTime,jdbcType=TIMESTAMP},
+                 </if>
+                 <if test="updateTime != null">
+                     #{updateTime,jdbcType=TIMESTAMP},
+                 </if>
+                 <if test="smsSignType != null">
+                     #{smsSignType,jdbcType=INTEGER},
+                 </if>
+                 <if test="signType != null">
+                     #{signType,jdbcType=INTEGER},
+                 </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.medusa.gruul.sms.dao.entity.TSmsSignEntity">
+        update t_sms_sign
+        <set>
+            <if test="id != null">
+            id =  #{id},
+            </if>
+               <if test="userId != null">
+                   user_id = #{userId,jdbcType=BIGINT},
+               </if>
+               <if test="smsProviderId != null">
+                   sms_provider_id = #{smsProviderId,jdbcType=BIGINT},
+               </if>
+               <if test="smsSign != null">
+                   sms_sign = #{smsSign,jdbcType=VARCHAR},
+               </if>
+               <if test="smsSignIsPass != null">
+                   sms_sign_is_pass = #{smsSignIsPass,jdbcType=TINYINT},
+               </if>
+               <if test="smsSignRemark != null">
+                   sms_sign_remark = #{smsSignRemark,jdbcType=VARCHAR},
+               </if>
+               <if test="isDeleted != null">
+                   is_deleted = #{isDeleted,jdbcType=TINYINT},
+               </if>
+               <if test="createTime != null">
+                   create_time = #{createTime,jdbcType=TIMESTAMP},
+               </if>
+               <if test="updateTime != null">
+                   update_time = #{updateTime,jdbcType=TIMESTAMP},
+               </if>
+               <if test="smsSignType != null">
+                   sms_sign_type = #{smsSignType,jdbcType=INTEGER},
+               </if>
+               <if test="signType != null">
+                   sign_type = #{signType,jdbcType=INTEGER},
+               </if>
+        </set>
+        where id =  #{id}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.medusa.gruul.sms.dao.entity.TSmsSignEntity">
+        update t_sms_sign
+        set 
+        user_id = #{userId,jdbcType=BIGINT},
+
+        sms_provider_id = #{smsProviderId,jdbcType=BIGINT},
+
+        sms_sign = #{smsSign,jdbcType=VARCHAR},
+
+        sms_sign_is_pass = #{smsSignIsPass,jdbcType=TINYINT},
+
+        sms_sign_remark = #{smsSignRemark,jdbcType=VARCHAR},
+
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+
+        sms_sign_type = #{smsSignType,jdbcType=INTEGER},
+
+        sign_type = #{signType,jdbcType=INTEGER},
+        where  id =  #{id}
+    </update>
+
+
+    <select id="searchByEntityCount" resultType="java.lang.Integer" parameterType="com.medusa.gruul.sms.dao.entity.TSmsSignEntity">
+        select count(*)
+        from  t_sms_sign
+        <where>
+            <if test="id != null">
+                  id = #{id,jdbcType=BIGINT}
+            </if>
+               <if test="userId != null">
+                   AND user_id = #{userId,jdbcType=BIGINT}
+               </if>
+               <if test="smsProviderId != null">
+                   AND sms_provider_id = #{smsProviderId,jdbcType=BIGINT}
+               </if>
+               <if test="smsSign != null">
+                   AND sms_sign = #{smsSign,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSignIsPass != null">
+                   AND sms_sign_is_pass = #{smsSignIsPass,jdbcType=TINYINT}
+               </if>
+               <if test="smsSignRemark != null">
+                   AND sms_sign_remark = #{smsSignRemark,jdbcType=VARCHAR}
+               </if>
+               <if test="isDeleted != null">
+                   AND is_deleted = #{isDeleted,jdbcType=TINYINT}
+               </if>
+               <if test="createTime != null">
+                   AND create_time = #{createTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="updateTime != null">
+                   AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="smsSignType != null">
+                   AND sms_sign_type = #{smsSignType,jdbcType=INTEGER}
+               </if>
+               <if test="signType != null">
+                   AND sign_type = #{signType,jdbcType=INTEGER}
+               </if>
+        </where>
+    </select>
+
+
+    <select id="searchByEntity" resultMap="BaseResultMap" parameterType="com.medusa.gruul.sms.dao.entity.TSmsSignEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from  t_sms_sign
+        <where>
+            <if test="id != null">
+            id = #{id,jdbcType=BIGINT}
+            </if>
+               <if test="userId != null">
+                   AND    user_id = #{userId,jdbcType=BIGINT}
+               </if>
+               <if test="smsProviderId != null">
+                   AND    sms_provider_id = #{smsProviderId,jdbcType=BIGINT}
+               </if>
+               <if test="smsSign != null">
+                   AND    sms_sign = #{smsSign,jdbcType=VARCHAR}
+               </if>
+               <if test="smsSignIsPass != null">
+                   AND    sms_sign_is_pass = #{smsSignIsPass,jdbcType=TINYINT}
+               </if>
+               <if test="smsSignRemark != null">
+                   AND    sms_sign_remark = #{smsSignRemark,jdbcType=VARCHAR}
+               </if>
+               <if test="isDeleted != null">
+                   AND    is_deleted = #{isDeleted,jdbcType=TINYINT}
+               </if>
+               <if test="createTime != null">
+                   AND    create_time = #{createTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="updateTime != null">
+                   AND    update_time = #{updateTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="smsSignType != null">
+                   AND    sms_sign_type = #{smsSignType,jdbcType=INTEGER}
+               </if>
+               <if test="signType != null">
+                   AND    sign_type = #{signType,jdbcType=INTEGER}
+               </if>
+        </where>
+    </select>
+
+
+</mapper>

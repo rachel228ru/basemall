@@ -1,0 +1,14 @@
+"use strict";
+
+var isInputItem = function isInputItem(type) {
+  return ["phone", "id", "text", "number"].indexOf(type) !== -1;
+};
+
+var isDateItem = function isDateItem(type) {
+  return ["date", "datetime", "time"].indexOf(type) !== -1;
+};
+
+module.exports = {
+  isInputItem: isInputItem,
+  isDateItem: isDateItem
+};

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.logistics.mapper.LogisticsTemplateMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsTemplateVo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="valuation_model" property="valuationModel"/>
+        <result column="choice_condition_postage" property="choiceConditionPostage"/>
+        <collection property="logisticsShippingModelVos" ofType="com.medusa.gruul.logistics.model.vo.LogisticsShippingModelVo" column="id"
+                    select="queryShippingModel"></collection>
+        <collection property="logisticsIncludePostageVos" ofType="com.medusa.gruul.logistics.model.vo.LogisticsIncludePostageVo"
+                    column="id" select="queryIncludePostage"></collection>
+    </resultMap>
+
+    <resultMap id="LogisticsShippingModelResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsShippingModelVo">
+        <id column="s_id" property="id"/>
+        <result column="s_logistics_id" property="logisticsId"/>
+        <result column="s_valuation_model" property="valuationModel"/>
+        <result column="s_first_piece" property="firstPiece"/>
+        <result column="s_first_weight" property="firstWeight"/>
+        <result column="s_first_amount" property="firstAmount"/>
+        <result column="s_second_piece" property="secondPiece"/>
+        <result column="s_second_weight" property="secondWeight"/>
+        <result column="s_second_amount" property="secondAmount"/>
+        <result column="s_region_json" property="region"/>
+    </resultMap>
+
+    <resultMap id="LogisticsIncludePostageResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsIncludePostageVo">
+        <id column="a_id" property="id"/>
+        <result column="a_logistics_id" property="logisticsId"/>
+        <result column="a_type" property="type"/>
+        <result column="a_region" property="region"/>
+        <result column="a_piece_num" property="pieceNum"/>
+        <result column="a_weight" property="weight"/>
+        <result column="a_amount_num" property="amountNum"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        t.id, t.`name`, t.valuation_model, t.choice_condition_postage
+    </sql>
+
+    <sql id="Base_Shipping_Model_List">
+        s.id AS s_id, s.logistics_id AS s_logistics_id, s.valuation_model AS s_valuation_model, s.first_piece AS s_first_piece,
+        s.first_weight AS s_first_weight, s.first_amount AS s_first_amount, s.second_piece AS s_second_piece, s.second_weight AS s_second_weight,
+        s.second_amount AS s_second_amount, s.region_json AS s_region_json
+    </sql>
+
+    <sql id="Base_Include_Postage_List">
+        a.logistics_id AS a_logistics_id, a.type AS a_type, a.region AS a_region, a.piece_num AS a_piece_num, a.weight as a_weight, a.amount_num AS a_amount_num
+    </sql>
+
+    <select id="queryTemplateList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_template t
+        where t.is_deleted = 0
+        order by t.create_time desc
+    </select>
+
+    <select id="queryShippingModel" resultMap="LogisticsShippingModelResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Shipping_Model_List"/>
+        FROM
+        t_logistics_shipping_model s
+        WHERE
+        s.is_deleted = 0
+        AND
+        s.logistics_id = #{id}
+    </select>
+
+    <select id="queryIncludePostage" resultMap="LogisticsIncludePostageResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Include_Postage_List"/>
+        FROM
+        t_logistics_include_postage a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.logistics_id = #{id}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_template t
+        where
+        t.is_deleted = 0
+        and t.id = #{id}
+    </select>
+</mapper>

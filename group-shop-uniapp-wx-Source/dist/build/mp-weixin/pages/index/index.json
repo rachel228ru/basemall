@@ -1,0 +1,14 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "guide": "/components/guide/guide",
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "b-tab-bar": "/components/b-tab-bar/index",
+    "loading": "/components/loading/index",
+    "home": "/pages/index/modules/home/home",
+    "mall": "/pages/index/modules/mall/mall",
+    "m-icon": "/components/m-icon/m-icon",
+    "shop-car": "/pages/index/modules/shopCar/shopCar",
+    "me": "/pages/index/modules/me/me"
+  }
+}

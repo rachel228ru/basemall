@@ -1,0 +1,58 @@
+/***** border-radius *****/
+
+.radius-all {
+    border-radius: 100%;
+}
+
+.radius-left {
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.radius-right {
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+.radius-top {
+    border-top-right-radius: 40px;
+    border-top-left-radius: 40px;
+}
+.radius-bottom {
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+.radius-top-20 {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.radius-bottom-20 {
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.radius-bottom-10 {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.radius-4 {
+    border-radius: 4px;
+}
+
+.radius-6 {
+    border-radius: 6px;
+}
+.radius-10 {
+    border-radius: 10px;
+}
+
+.radius-20 {
+    border-radius: 20px;
+}
+
+.radius-30 {
+    border-radius: 30px;
+}
+
+.radius-40 {
+    border-radius: 40px;
+}

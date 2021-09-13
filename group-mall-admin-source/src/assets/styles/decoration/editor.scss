@@ -1,0 +1,89 @@
+@import "../variable";
+@import "goods.scss";
+@import "goodGroup.scss";
+@import "titleBar.scss";
+@import "storeNavigation.scss";
+@import "information.scss";
+@import "search.scss";
+
+.editor {
+  @include flex(space-between, flex-start);
+
+  &__preview {
+    width: 375px;
+    height: 667px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    background-color: #eeeeee;
+    // background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlQTFRF9fX18PDwAAAABQ8/pgAAAAN0Uk5T/yIA41y2EwAAABhJREFUeJxjYIAC0VAQcGCQWgUCDUONBgDH8Fwzu33LswAAAABJRU5ErkJggg==");
+  }
+
+  &__from {
+    width: 435px;
+
+    /deep/ .banner {
+      @mixin b-w {
+        width: 390px;
+        border: 1px solid #e4e4e4;
+      }
+      &--upload {
+        @include flex;
+        @include b-w;
+
+        flex-direction: column;
+
+        height: 100px;
+
+        span {
+          color: #3088f0;
+          cursor: pointer;
+        }
+        p {
+          font-size: 12px;
+          color: #a7a7a7;
+        }
+      }
+      &--form {
+        @include b-w;
+        margin-top: 15px;
+        padding: 15px 10px 0;
+      }
+    }
+  }
+
+  &__component {
+    width: 300px;
+
+    .component--list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .component--item {
+      width: 100%;
+      height: 130px;
+      line-height: 130px;
+      border-radius: 4px;
+      border: 1px solid #e4e4e4;
+      text-align: center;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .el-tabs__nav {
+      width: 100%;
+      display: flex;
+      justify-items: center;
+      justify-content: space-between;
+      .el-tabs__header {
+        background: none;
+      }
+      .el-tabs__item {
+        flex: 1;
+        text-align: center;
+        background: none;
+      }
+    }
+  }
+}

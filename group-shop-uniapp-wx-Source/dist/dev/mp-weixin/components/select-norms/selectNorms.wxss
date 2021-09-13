@@ -1,0 +1,201 @@
+@charset "UTF-8";
+page.data-v-7d2a0526 {
+  min-height: 100%;
+  background: #f1f2f6;
+}
+view.data-v-7d2a0526 {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*按钮*/
+button.data-v-7d2a0526 {
+  line-height: inherit;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  opacity: 1;
+  background-color: inherit;
+}
+button.data-v-7d2a0526::after {
+    border: 0;
+}
+.m__button.data-v-7d2a0526 {
+  min-width: 140rpx;
+  padding: 6rpx 0;
+  text-align: center;
+  border-radius: 30rpx;
+  border: 2rpx solid #989898;
+  outline: none;
+  background: #fff;
+  margin-left: 20rpx;
+}
+.m__button.primary.data-v-7d2a0526 {
+    background: #fe4e63;
+    border-color: #fe4e63;
+    color: #fff;
+}
+.m__button.primary[disabled].data-v-7d2a0526 {
+      border-color: #fda7b2;
+      background: #fda7b2;
+      color: #fff3f6;
+}
+.text__pink.data-v-7d2a0526 {
+  color: #fe4e63;
+}
+.text__green.data-v-7d2a0526 {
+  color: #08bb07;
+}
+.text__primary.data-v-7d2a0526 {
+  color: #000000;
+}
+/* BEM support Func
+ -------------------------- */
+/* BEM
+ -------------------------- */
+.center--middle.data-v-7d2a0526 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.specific.data-v-7d2a0526 {
+  height: 920rpx;
+}
+.specific2.data-v-7d2a0526 {
+  height: 450rpx;
+}
+.specific__info.data-v-7d2a0526 {
+  width: 100%;
+  height: 250rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  box-sizing: border-box;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+          align-items: flex-end;
+}
+.specific__info--image.data-v-7d2a0526 {
+  width: 220rpx;
+  height: 220rpx;
+}
+.specific__info--product.data-v-7d2a0526 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+}
+.specific__info--product .product__price.data-v-7d2a0526 {
+    font-size: 34rpx;
+    font-weight: bold;
+    color: #fa5555;
+}
+.specific__info--product .product__price.data-v-7d2a0526::before {
+    content: '￥';
+    font-weight: normal;
+    font-size: 26rpx;
+}
+.specific__info--product .product__line.data-v-7d2a0526 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    margin-top: 24rpx;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+}
+.specific__info--product .product__max.data-v-7d2a0526 {
+    font-size: 26rpx;
+    color: #fa5555;
+}
+.specific__info--product .product__stock.data-v-7d2a0526 {
+    height: 30rpx;
+    line-height: 30rpx;
+    font-size: 26rpx;
+    margin-right: 20rpx;
+}
+.select.data-v-7d2a0526 {
+  padding: 40rpx 30rpx 20rpx 40rpx;
+  font-size: 30rpx;
+}
+.select__title.data-v-7d2a0526 {
+  font-size: 28rpx;
+}
+.select__list.data-v-7d2a0526 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin-top: 20rpx;
+  overflow: auto;
+}
+.select__list.data-v-7d2a0526::-webkit-scrollbar {
+  display: none;
+}
+.select__list--value.data-v-7d2a0526 {
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+  margin-right: 40rpx;
+}
+.select__list--value .select__list--value--info.data-v-7d2a0526 {
+    height: 54rpx;
+    border-radius: 100rpx;
+    font-size: 26rpx;
+    padding: 24rpx;
+}
+.btn.data-v-7d2a0526 {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  font-size: 36rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  height: 60rpx;
+  position: fixed;
+  width: 100%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  bottom: 160rpx;
+}
+.poup.data-v-7d2a0526 {
+  position: fixed;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  bottom: 0;
+}
+.poup__btn.data-v-7d2a0526 {
+    width: 50%;
+    height: 98rpx;
+    background-color: #515151;
+    text-align: center;
+    line-height: 98rpx;
+    font-size: 30rpx;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: #fff;
+}
+

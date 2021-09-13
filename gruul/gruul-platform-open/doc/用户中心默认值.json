@@ -1,0 +1,438 @@
+{
+  "uniqueIdentification": "ACCOUNT_CENTRE_DEFAULT",
+  "version": "v1.2.3",
+  "buildAction": 1,
+  "importDirectUse": 0,
+  "url": "/",
+  "mq": {
+    "exchange": "gruul.shops.exchange",
+    "routeKey": "gruul.shops.center.queue.init"
+  },
+  "kv": {
+    "headStyle": 2,
+    "customStyle": {
+      "backgroundImage": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/53684d812d8e446fa688976d079f1fc0.jpg",
+      "cardColor": "#89bf04",
+      "textColor": "#E7C898"
+    },
+    "getCartText": "领卡文案",
+    "hideCartInlet": false,
+    "orderInfo": {
+      "afterSaleIcon": {
+        "name": "售后",
+        "url": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/ca9c9c65daeb4b3eb8afbfba8686998d.png"
+      },
+      "waitIcon": {
+        "name": "待付款",
+        "url": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/c3dfb900d9b14730939a7b5e206644bc.png"
+      },
+      "waitPickingIcon": {
+        "name": "待提货",
+        "url": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/9939df2bfa5f46ceac080d33ba40aaba.png"
+      },
+      "deliveryIcon": {
+        "name": "配送中",
+        "url": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/9435ecaa9f304b1fa5555e8be01367ad.png"
+      },
+      "evaluateIcon": {
+        "name": "评价中心",
+        "url": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/26354a7bdab144c98f46844c06e18e3f.png"
+      }
+    },
+    "menuStyle": 1,
+    "codeStyle": 2,
+    "menuVos": [
+      {
+        "menuName": "积分商城",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/jifen.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/jifen.png",
+        "styleType": 1,
+        "sortIndex": 0,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": true,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "name": "积分商城",
+          "id": 1,
+          "type": 4,
+          "url": "/pages/integralShop/integralShop",
+          "append": "group"
+        },
+        "subMenu": []
+      },
+      {
+        "menuName": "团长中心",
+        "menuIconUrl": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/394b4cfae2c04f4aa6992a72806abec4.png",
+        "defaultIcon": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/394b4cfae2c04f4aa6992a72806abec4.png",
+        "styleType": 1,
+        "sortIndex": 2,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 10,
+          "type": 0,
+          "name": "团长中心",
+          "url": "/pages/commanderCenter/commanderCenter"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "团长信息",
+        "menuIconUrl": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/ca0c22ca947e41229082a32ab013ea73.png",
+        "defaultIcon": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/ca0c22ca947e41229082a32ab013ea73.png",
+        "styleType": 1,
+        "sortIndex": 3,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 11,
+          "type": 0,
+          "name": "团长信息",
+          "url": "/pages/commanderInfo/commanderInfo"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "提货点后台",
+        "menuIconUrl": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/cc7dfc2ecdbf4271aecf3a11d1ab51e2.png",
+        "defaultIcon": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/cc7dfc2ecdbf4271aecf3a11d1ab51e2.png",
+        "styleType": 1,
+        "sortIndex": 4,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": true,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 12,
+          "type": 0,
+          "name": "提货点后台",
+          "url": "/pages/pointBackground/pointBackground"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "资源入驻",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/ziyuanruzhu.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/ziyuanruzhu.png",
+        "styleType": 1,
+        "sortIndex": 5,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 5,
+          "type": 0,
+          "name": "资源入驻",
+          "url": "/pages/resourceApply/resourceApply"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "领券中心",
+        "menuIconUrl": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/d517511764824280840012b28e834fd7.png",
+        "defaultIcon": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/d517511764824280840012b28e834fd7.png",
+        "styleType": 1,
+        "sortIndex": 7,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 3,
+          "type": 4,
+          "name": "领券中心",
+          "url": "/pages/coupon/couponCenter/couponCenter"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "我的优惠券",
+        "menuIconUrl": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/1f471a7fab9c4a47ac714d6a6515992c.png",
+        "defaultIcon": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/1f471a7fab9c4a47ac714d6a6515992c.png",
+        "styleType": 1,
+        "sortIndex": 8,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 4,
+          "type": 4,
+          "name": "我的优惠券",
+          "url": "/pages/coupon/coupon"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "购物车",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/gouwuche.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/gouwuche.png",
+        "styleType": 1,
+        "sortIndex": 9,
+        "pId": "0",
+        "hideMenu": false,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 4,
+          "type": 0,
+          "name": "购物车",
+          "url": "/pages/index/index",
+          "append": "shopCar"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "地址管理",
+        "menuIconUrl": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/708afcdfc62443938c9f07ef5d07daf5.png",
+        "defaultIcon": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/708afcdfc62443938c9f07ef5d07daf5.png",
+        "styleType": 1,
+        "sortIndex": 11,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 7,
+          "type": 0,
+          "name": "地址管理",
+          "url": "/pages/address/address"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "设置",
+        "menuIconUrl": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/80c68ba092174f3ea2067adf8944dbb6.png",
+        "defaultIcon": "https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/80c68ba092174f3ea2067adf8944dbb6.png",
+        "styleType": 1,
+        "sortIndex": 12,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 9,
+          "type": 0,
+          "name": "设置",
+          "url": "/pages/mySetting/mySetting"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName":"积分商城",
+        "menuIconUrl":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/jifen.png",
+        "defaultIcon":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/jifen.png",
+        "styleType":2,
+        "sortIndex":0,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":true,
+        "allowUse":1,
+        "linkSelectItem":{
+          "name":"积分商城",
+          "id":1,
+          "type":4,
+          "url":"/pages/integralShop/integralShop",
+          "append":"group"
+        },
+        "subMenu":[
+
+        ]
+      },
+      {
+        "menuName":"团长中心",
+        "menuIconUrl":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/394b4cfae2c04f4aa6992a72806abec4.png",
+        "defaultIcon":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/394b4cfae2c04f4aa6992a72806abec4.png",
+        "styleType":2,
+        "sortIndex":2,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":10,
+          "type":0,
+          "name":"团长中心",
+          "url":"/pages/commanderCenter/commanderCenter"
+        },
+        "subMenu":[
+
+        ]
+      },
+      {
+        "menuName":"团长信息",
+        "menuIconUrl":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/ca0c22ca947e41229082a32ab013ea73.png",
+        "defaultIcon":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/ca0c22ca947e41229082a32ab013ea73.png",
+        "styleType":2,
+        "sortIndex":3,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":11,
+          "type":0,
+          "name":"团长信息",
+          "url":"/pages/commanderInfo/commanderInfo"
+        },
+        "subMenu":[
+
+        ]
+      },
+      {
+        "menuName":"提货点后台",
+        "menuIconUrl":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/cc7dfc2ecdbf4271aecf3a11d1ab51e2.png",
+        "defaultIcon":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/cc7dfc2ecdbf4271aecf3a11d1ab51e2.png",
+        "styleType":2,
+        "sortIndex":4,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":true,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":12,
+          "type":0,
+          "name":"提货点后台",
+          "url":"/pages/pointBackground/pointBackground"
+        },
+        "subMenu":[
+
+        ]
+      },
+      {
+        "menuName":"资源入驻",
+        "menuIconUrl":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/ziyuanruzhu.png",
+        "defaultIcon":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/ziyuanruzhu.png",
+        "styleType":2,
+        "sortIndex":5,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":5,
+          "type":0,
+          "name":"资源入驻",
+          "url":"/pages/resourceApply/resourceApply"
+        },
+        "subMenu":[
+
+        ]
+      },
+      {
+        "menuName":"领券中心",
+        "menuIconUrl":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/d517511764824280840012b28e834fd7.png",
+        "defaultIcon":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/d517511764824280840012b28e834fd7.png",
+        "styleType":2,
+        "sortIndex":7,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":3,
+          "type":4,
+          "name":"领券中心",
+          "url":"/pages/coupon/couponCenter/couponCenter"
+        },
+        "subMenu":[
+        ]
+      },
+      {
+        "menuName":"我的优惠券",
+        "menuIconUrl":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/1f471a7fab9c4a47ac714d6a6515992c.png",
+        "defaultIcon":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/1f471a7fab9c4a47ac714d6a6515992c.png",
+        "styleType":2,
+        "sortIndex":8,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":4,
+          "type":4,
+          "name":"我的优惠券",
+          "url":"/pages/coupon/coupon"
+        },
+        "subMenu":[
+        ]
+      },
+      {
+        "menuName":"购物车",
+        "menuIconUrl":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/gouwuche.png",
+        "defaultIcon":"http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/gouwuche.png",
+        "styleType":2,
+        "sortIndex":9,
+        "pId":"0",
+        "hideMenu":false,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":4,
+          "type":0,
+          "name":"购物车",
+          "url":"/pages/index/index",
+          "append":"shopCar"
+        },
+        "subMenu":[
+        ]
+      },
+
+      {
+        "menuName":"地址管理",
+        "menuIconUrl":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/708afcdfc62443938c9f07ef5d07daf5.png",
+        "defaultIcon":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/708afcdfc62443938c9f07ef5d07daf5.png",
+        "styleType":2,
+        "sortIndex":11,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":7,
+          "type":0,
+          "name":"地址管理",
+          "url":"/pages/address/address"
+        },
+        "subMenu":[
+
+        ]
+      },
+      {
+        "menuName":"设置",
+        "menuIconUrl":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/80c68ba092174f3ea2067adf8944dbb6.png",
+        "defaultIcon":"https://medusa-small-file-1253272780.cos.ap-shanghai.myqcloud.com/gruul/20200418/80c68ba092174f3ea2067adf8944dbb6.png",
+        "styleType":2,
+        "sortIndex":12,
+        "pId":"0",
+        "hideMenu":true,
+        "splitFlag":false,
+        "allowUse":1,
+        "linkSelectItem":{
+          "id":9,
+          "type":0,
+          "name":"设置",
+          "url":"/pages/mySetting/mySetting"
+        },
+        "subMenu":[
+
+        ]
+      }
+    ]
+  }
+}

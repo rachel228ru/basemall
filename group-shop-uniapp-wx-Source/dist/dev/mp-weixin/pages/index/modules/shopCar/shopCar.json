@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "goods": "/pages/index/modules/shopCar/components/goods/goods",
+    "stepper": "/components/stepper/stepper",
+    "unusable": "/pages/index/modules/shopCar/components/unusable/unusable",
+    "sku": "/pages/index/modules/shopCar/components/pop/sku/sku",
+    "m-icon": "/components/m-icon/m-icon"
+  }
+}

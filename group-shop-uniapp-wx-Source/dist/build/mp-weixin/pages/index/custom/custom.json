@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "custom",
+  "usingComponents": {
+    "home": "/pages/index/modules/home/home"
+  }
+}

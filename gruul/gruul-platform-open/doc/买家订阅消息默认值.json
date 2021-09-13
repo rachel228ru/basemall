@@ -1,0 +1,305 @@
+{
+  "uniqueIdentification": "PLATFROM_SHOP_MSG",
+  "version": "v1.2.3",
+  "buildAction": 3,
+  "importDirectUse": 0,
+  "url": "/",
+  "mq": {
+  },
+  "kv": {
+    "useType": "1",
+    "items": [
+      {
+        "title": "订单发货提醒",
+        "messageType": 1,
+        "miniOpen": 0,
+        "mark": "sendMsg",
+        "miniMsg": {
+          "sendRule": "商家后台点请上传审核小程序之后再开启击发货后，立即提醒",
+          "templateId": null,
+          "title": "订单发货提醒",
+          "tId": 467,
+          "type": 2,
+          "categoryId": 311,
+          "kIds": "1,10,2,4,5",
+          "rules": "character_string,date,thing,character_string,name",
+          "firstClass": "商家自营",
+          "firstId": 304,
+          "secondClass": "家电/数码/手机",
+          "exampleJson": {
+            "title": "订单发货提醒",
+            "items": [
+              {
+                "k": "订单编号",
+                "v": "20191111232312"
+              },
+              {
+                "k": "发货时间",
+                "v": "2019年12月12日 14:02"
+              },
+              {
+                "k": "商品详情",
+                "v": "华为手机1件"
+              },
+              {
+                "k": "快递单号",
+                "v": "sf2312312122"
+              },
+              {
+                "k": "收货人",
+                "v": "某某某"
+              }
+            ]
+          }
+        },
+        "codeOpen": 0,
+        "codeMsg": "",
+        "mpOpen": 0,
+        "mpMsg": {
+          "sendRule": "等待商家后台点发货的订单，立即提醒",
+          "templateId": "I7wGGmIF6zjLU5CCyM_g_jzy0RuVP58VsjNk7WN1k9I",
+          "title": "订单待发货提醒",
+          "type": 3,
+          "exampleJson": {
+            "title": "您有一个新的待发货订单",
+            "items": [
+              {
+                "k": "订单号",
+                "v": "3705121411"
+              },
+              {
+                "k": "订单金额",
+                "v": "666"
+              },
+              {
+                "k": "买家",
+                "v": "小王子"
+              },
+              {
+                "k": "小王子",
+                "v": "已支付"
+              },
+              {
+                "k": "备注",
+                "v": "客户已付款，尽快发货吧"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "title": "审核结果通知",
+        "messageType": 3,
+        "miniOpen": 0,
+        "mark": "auditMsg",
+        "miniMsg": {
+          "sendRule": "客户申请合伙人通知商家同意后，立即提醒",
+          "templateId": null,
+          "title": "审核结果通知",
+          "tId": 4599,
+          "type": 2,
+          "categoryId": 620,
+          "kIds": "2,3,4",
+          "rules": "thing,date,name",
+          "firstClass": "工具",
+          "firstId": 287,
+          "secondClass": "企业管理",
+          "exampleJson": {
+            "title": "审核结果通知",
+            "items": [
+              {
+                "k": "审核结果",
+                "v": "您的申请已通过"
+              },
+              {
+                "k": "审核时间",
+                "v": "2017-1-10"
+              },
+              {
+                "k": "申请人",
+                "v": "张三"
+              }
+            ]
+          }
+        },
+        "codeOpen": 0,
+        "codeMsg": "",
+        "mpOpen": 0,
+        "mpTemplateId": "BKYQci1ZTTQVMY8S5ZnymH6Q8Q3x6KHMOF62Xw7zf_I",
+        "mpMsg": {
+          "sendRule": "客户申请供应商提交成功后，立即提醒",
+          "title": "供应商申请通知",
+          "type": 3,
+          "exampleJson": {
+            "title": "您有一个申请",
+            "items": [
+              {
+                "k": "申请名称",
+                "v": "市场文档资料"
+              },
+              {
+                "k": "申请人",
+                "v": "小刘"
+              },
+              {
+                "k": "申请类型",
+                "v": "编辑"
+              },
+              {
+                "k": "申请时间",
+                "v": "2016-01-16 16:16"
+              },
+              {
+                "k": "备注",
+                "v": "请及时审核"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "title": "会员开通通知",
+        "messageType": 1,
+        "miniOpen": 0,
+        "mark": "memberCartOpen",
+        "miniMsg": {
+          "sendRule": "用户开通会员卡时通知开卡成功",
+          "templateId": null,
+          "title": "会员开通通知",
+          "tId": 8883,
+          "type": 2,
+          "categoryId": 311,
+          "kIds": "1,2,4,5",
+          "rules": "character_string,thing,thing,thing",
+          "firstClass": "工具",
+          "firstId": 304,
+          "secondClass": "家电/数码/手机",
+          "exampleJson": {
+            "title": "会员开通通知",
+            "items": [
+              {
+                "k": "会员编号",
+                "v": "11231132"
+              },
+              {
+                "k": "会员名称",
+                "v": "张三"
+              },
+              {
+                "k": "会员期限",
+                "v": "永久"
+              },
+              {
+                "k": "备注",
+                "v": "会员权益"
+              }
+            ]
+          }
+        },
+        "codeOpen": 0,
+        "codeMsg": "",
+        "mpOpen": 0,
+        "mpTemplateId": "",
+        "mpMsg":null
+      },
+      {
+        "title": "退款通知",
+        "messageType": 1,
+        "miniOpen": 0,
+        "mark": "orderRefund",
+        "miniMsg": {
+          "sendRule": "订单退款通知",
+          "templateId": null,
+          "title": "订单退款通知",
+          "tId": 2491,
+          "type": 2,
+          "categoryId": 784,
+          "kIds": "1,6,5,2,10",
+          "rules": "number,thing,phrase,amount,thing",
+          "firstClass": "商家自营",
+          "firstId": 304,
+          "secondClass": "海淘",
+          "exampleJson": {
+            "title": "订单退款通知",
+            "items": [
+              {
+                "k": "订单号",
+                "v": "2019111900000001"
+              },
+              {
+                "k": "商品名称",
+                "v": "这是个商品名称"
+              },
+              {
+                "k": "退款状态",
+                "v": "退款失败"
+              },
+              {
+                "k": "退款金额",
+                "v": "￥100"
+              },
+              {
+                "k": "退回积分",
+                "v": "100积分"
+              }
+            ]
+          }
+        },
+        "codeOpen": 0,
+        "codeMsg": "",
+        "mpOpen": 0,
+        "mpTemplateId": "",
+        "mpMsg":null
+      },
+      {
+        "title": "提醒买家退货通知",
+        "messageType": 1,
+        "miniOpen": 0,
+        "mark": "orderRefundNotify",
+        "miniMsg": {
+          "sendRule": "订单退款通知",
+          "templateId": null,
+          "title": "提醒买家退货通知",
+          "tId": 4932,
+          "type": 2,
+          "categoryId": 784,
+          "kIds": "1,2,3,5,4",
+          "rules": "character_string,thing,amount,thing,thing",
+          "firstClass": "商家自营",
+          "firstId": 304,
+          "secondClass": "海淘",
+          "exampleJson": {
+            "title": "填写退货信息提醒",
+            "items": [
+              {
+                "k": "订单编号",
+                "v": "1234567890"
+              },
+              {
+                "k": "商品名称",
+                "v": "iPhone"
+              },
+              {
+                "k": "退款金额",
+                "v": "100积分+￥2"
+              },
+              {
+                "k": "退回积分",
+                "v": "100积分"
+              },
+              {
+                "k": "温馨提示",
+                "v": "商家已同意退款申请，请及时退货！"
+              }
+            ]
+          }
+        },
+        "codeOpen": 0,
+        "codeMsg": "",
+        "mpOpen": 0,
+        "mpTemplateId": "",
+        "mpMsg":null
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.SkuStockMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="SkuStockResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.ItemVo">
+        <id column="id" property="productSkuId"/>
+        <result column="sku_code" property="productSkuCode"/>
+        <result column="specs" property="specs"/>
+        <result column="pic" property="productSkuPic"/>
+        <result column="price" property="productPrice"/>
+        <result column="original_price" property="productOriginalPrice"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="per_limit" property="perLimit"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="distribution_mode" property="distributionMode"/>
+        <result column="weight" property="weight"/>
+        <result column="freight_template_id" property="freightTemplateId"/>
+        <result column="provider_id" property="providerId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Sku_List">
+         s.id as id, s.specs as specs, s.pic as pic, s.price as price, s.original_price as original_price, s.per_limit as per_limit,
+         t.id as product_id, t.pic as product_pic, t.name as product_name, t.product_sn as product_sn,
+         s.weight as weight, t.freight_template_id as freight_template_id, t.distribution_mode as distribution_mode, t.provider_id as provider_id, t.limit_type as limit_type
+    </sql>
+
+    <sql id="Base_Member_List">
+        m.id AS m_id, m.product_id AS m_product_id, m.sku_id AS m_sku_id, m.member_level_id AS m_member_level_id, m.member_price AS m_member_price, m.member_level_name AS m_member_level_name
+    </sql>
+
+    <sql id="Base_Rebate_List">
+        r.id AS r_id, r.product_id AS r_product_id, r.sku_id AS r_sku_id, r.rebate_price AS r_rebate_price
+    </sql>
+
+    <sql id="Default_Sku_List">
+        id, version, product_id, sku_code, specs, weight, pic, price, original_price, stock, low_stock, sale, per_limit, limit_type
+    </sql>
+
+    <select id="queryItemVoByIds" resultMap="SkuStockResultMap">
+        SELECT
+        <include refid="Base_Sku_List"/>
+        FROM
+        t_sku_stock s
+        inner join t_product t
+        on s.product_id = t.id
+        WHERE
+        s.is_deleted = 0
+        AND
+        s.id in
+        <foreach collection="skuIds" item="skuId" open="(" separator="," close=")">
+            #{skuId}
+        </foreach>
+    </select>
+
+
+</mapper>

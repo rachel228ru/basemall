@@ -1,0 +1,51 @@
+/**
+ 
+   components: IComponentItem[] = [
+    {
+      icon: "",
+      value: "Banner",
+      label: "轮播图",
+    },
+    {
+      icon: "",
+      value: "Goods",
+      label: "商品",
+    },
+    {
+      icon: "",
+      value: "GoodGroup",
+      label: "商品分组",
+    },
+    {
+      icon: "",
+      value: "TitleBar",
+      label: "标题栏",
+    },
+    {
+      icon: "",
+      value: "StoreNavigation",
+      label: "店铺导航",
+    },
+    {
+      icon: "",
+      value: "Information",
+      label: "资讯",
+    },
+    {
+      icon: "",
+      value: "Search",
+      label: "搜索",
+    },
+    {
+      icon: "",
+      value: "BlankPaceholder",
+      label: "空白占位",
+    },
+    {
+      icon: "",
+      value: "Separator",
+      label: "分隔符",
+    },
+  ];
+  
+ */

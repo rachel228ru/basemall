@@ -1,0 +1,4 @@
+# 启动方法 VERSION=s1.0.6 (所需版本) BRANCH=test docker-compose up -d              down
+# VERSION=s1.0.6 BRANCH=test ACTIVE=master docker-compose -f docker-compose_copy.yml down
+version: '2'
+services:

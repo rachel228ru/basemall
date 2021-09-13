@@ -1,0 +1,72 @@
+@include b(spike) {
+  @include e(activity) {
+    @include m(form) {
+      margin-bottom: 10px;
+
+      .form--item {
+        margin-right: 10px;
+      }
+    }
+
+    @include m(list) {
+      .activity--item {
+        @include flex(space-between);
+
+        .item--l {
+          & > div {
+            margin: 7px 0;
+          }
+          .status {
+            margin-left: 80px;
+            color: red;
+            font-weight: bold;
+          }
+
+          .statistics {
+            color: #7c7c7c;
+          }
+        }
+
+        .item--r {
+        }
+      }
+
+      .m__card {
+        padding: 10px 20px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  @include e(setting) {
+    .form--item {
+      width: 308px;
+    }
+    .form--button {
+      margin-left: 10px;
+
+      &.del {
+        border-color: red;
+        color: red;
+      }
+    }
+    .tips {
+      color: #ccc;
+    }
+
+    .setting--uploader {
+      @include flex;
+
+      width: 308px;
+      height: 82px;
+      border: 1px dashed rgb(141, 141, 141);
+      background: rgb(231, 231, 231);
+      color: #999999;
+      border-radius: 5px;
+    }
+
+    .el-button {
+      border-style: dashed;
+    }
+  }
+}

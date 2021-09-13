@@ -1,0 +1,1 @@
+{"version":3,"sources":["uni-app:///src/main.ts?{\"page\":\"subcontract%2Fpages%2Fmyfund%2Fmyfund\"}"],"names":[],"mappings":";;;;;;;;;;;;AAAA;;AAEA;;;;AACA,UAAU,CAAC,eAAD,CAAV,C","file":"subcontract/pages/myfund/myfund.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './subcontract/pages/myfund/myfund.vue'\ncreatePage(Page)"],"sourceRoot":""}

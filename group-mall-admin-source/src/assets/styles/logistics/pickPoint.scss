@@ -1,0 +1,277 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(pickpage) {
+
+  @include e(head) {
+
+    @include m(search) {
+      width: 246px;
+      float: right;
+    }
+
+    @include m(type) {
+      float: right;
+      width: 150px;
+      margin-right: 15px;
+    }
+  }
+}
+
+@include b(addrtabel) {
+  margin-top: 17px;
+
+  /deep/ thead tr th {
+    background-color: #f6f8fa;
+  }
+}
+
+@include b(setupdia) {
+  /deep/ .el-dialog__body {
+    padding-top: 10px;
+  }
+}
+
+@include b(setupcon) {
+  @include e(item) {
+    margin: 25px 0;
+  }
+
+  @include e(item1) {
+    margin-bottom: 30px;
+
+    span:nth-of-type(2) {
+      color: rgb(164, 176, 196);
+      display: inline-block;
+    }
+
+    @include m(input) {
+      width: 200px;
+      margin: 0 20px;
+    }
+  }
+
+  @include e(item3) {
+    @include m(order) {
+      margin-bottom: 15px;
+    }
+
+    @include m(num1) {
+      display: inline-block;
+      width: 55px;
+      text-align: right;
+    }
+
+    @include m(tip1) {
+      display: inline-block;
+      width: 35px;
+      text-align: center;
+    }
+
+    @include m(num2) {
+      width: 80px;
+    }
+
+    @include m(tip2) {
+      display: inline-block;
+      margin: 0 10px 0 22px;
+
+      b {
+        color: red;
+        display: inline-block;
+        margin-right: 2px;
+      }
+    }
+
+    @include m(money) {
+      width: 150px;
+      vertical-align: middle;
+    }
+
+    @include m(delete) {
+      color: red;
+      margin-left: 20px;
+    }
+
+    @include m(addnew) {
+      margin-left: 45px;
+    }
+
+    .setupcon__item3--order:nth-last-of-type(1) {
+      margin-bottom: 10px;
+    }
+  }
+
+  @include e(item4) {
+    @include m(money) {
+      width: 100px;
+      margin-right: 10px;
+    }
+  }
+}
+
+@include b(setupfooter) {
+  text-align: center;
+}
+
+
+@include b(poiontdia) {
+  /deep/ .el-dialog__body {
+    padding-top: 15px;
+    border-top: 1px solid rgb(239, 239, 239);
+  }
+
+  @include e(form) {
+    margin: 15px 0;
+
+    @include m(label) {
+      display: inline-block;
+      width: 100px;
+
+      b {
+        display: inline-block;
+        margin-right: 2px;
+        color: red;
+      }
+    }
+
+    @include m(con) {
+      display: inline-block;
+      width: 380px;
+      vertical-align: text-top;
+
+      /deep/ .el-upload--picture-card,
+      /deep/ .el-upload-list--picture-card .el-upload-list__item {
+        width: 118px;
+        height: 118px;
+      }
+    }
+
+    @include m(addblock) {
+      width: 100%;
+    }
+
+    @include m(address) {
+      width: 120px;
+    }
+
+    .poiontdia__form--address:nth-of-type(2) {
+      margin: 0 10px;
+    }
+
+    @include m(searchcon) {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    @include m(adddetail) {
+      flex: 1;
+    }
+
+    @include m(searchtbn) {
+      width: 55px;
+      margin-left: 15px;
+    }
+
+    @include m(mapbox) {
+      height: 260px;
+      position: relative;
+    }
+
+    @include m(searchmap) {
+      position: absolute;
+      top: 1px;
+      left: 0px;
+      width: 210px;
+      height: 30px;
+    }
+
+    @include m(addline) {
+      margin-left: 10px;
+    }
+  }
+
+  @include e(footer) {
+    text-align: right;
+  }
+}
+
+
+@include b(linedia) {
+  @include e(form) {
+    display: flex;
+    margin-bottom: 20px;
+
+    @include m(label) {
+      display: inline-block;
+      width: 90px;
+      text-align: right;
+      box-sizing: border-box;
+      padding-right: 10px;
+      padding-top: 5px;
+
+      b {
+        color: red;
+        margin-right: 2px;
+      }
+    }
+
+    @include m(con) {
+      flex: 1;
+    }
+
+    @include m(address) {
+      flex: 1;
+    }
+
+    .linedia__form--address:nth-of-type(2) {
+      margin: 0 5px;
+    }
+
+    @include m(addr) {
+      width: 100%;
+
+      .el-cascader--small {
+        width: 100%;
+      }
+    }
+  }
+
+  @include e(footer) {
+    text-align: right;
+    margin-top: 30px;
+  }
+}
+
+
+@include b(pointarea) {
+  z-index: 2003;
+
+  /deep/ .el-dialog__body {
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+
+  @include e(form) {
+    display: flex;
+    margin-bottom: 20px;
+
+    @include m(con) {
+      flex: 1;
+    }
+
+    @include m(delbtn) {
+      margin-left: 10px;
+      color: #606266;
+    }
+  }
+
+  @include e(footer) {
+    box-sizing: border-box;
+    padding-top: 15px;
+    margin-top: 30px;
+    border-top: 1px solid #DCDFE6;
+    text-align: right;
+  }
+}

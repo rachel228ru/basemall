@@ -1,0 +1,193 @@
+@import "../variable";
+
+.order {
+  .is-active {
+    .el-dropdown-selfdefine {
+      color: #409eff;
+    }
+  }
+
+  &__quickly {
+    @include flex();
+    .name {
+      display: inline-block;
+      margin-right: -15px;
+    }
+  }
+
+  /deep/ .order--header {
+    width: 100%;
+    position: relative;
+  }
+
+  /deep/ .iconPC-beizhu {
+    font-size: 24px;
+    position: absolute;
+    margin-left: -15px;
+    margin-top: -5px;
+    right: 0;
+    cursor: pointer;
+
+    &.red {
+      color: red;
+    }
+  }
+  .el-dropdown-selfdefine {
+    padding-left: 10px;
+  }
+  /deep/ &__control {
+    &--top {
+      @include flex(space-between);
+
+      margin-top: 10px;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    &--bottom {
+      @include flex(space-between);
+
+      width: 300px;
+      margin-top: 15px;
+      // position: absolute;
+    }
+  }
+
+  .el-pagination {
+    text-align: right;
+    margin-right: -20px;
+  }
+
+  /deep/ .el-pagination__sizes {
+    margin-top: -3px;
+    height: 28px;
+    margin-right: -7px;
+  }
+
+  /deep/ .el-tabs__item {
+    &:nth-child(1) {
+      padding: 0 20px;
+    }
+    padding: 0 35px;
+  }
+
+  /deep/ .btn-container {
+    @include flex;
+  }
+
+  /deep/ .text--center {
+    text-align: center;
+  }
+}
+
+/deep/ .table {
+  &__goods {
+    @include flex(flex-start, stretch);
+
+    &--image {
+      $s: 64px;
+      width: $s;
+      height: $s;
+      background: #ccc;
+      margin-right: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      flex: 0 0 $s;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &--info {
+      @include flex(flex-start, space-between);
+      flex-direction: column;
+      justify-content: space-between;
+
+      width: 184px;
+      height: auto;
+      line-height: 16px;
+
+      .goods--name {
+        color: #586884;
+      }
+
+      .goods--specs {
+        color: #586884;
+      }
+
+      .goods--specification {
+        @include flex(space-between);
+
+        .l {
+          color: #999999;
+        }
+      }
+
+      .goods--price {
+        @include flex(space-between);
+        color: #586884;
+        margin-top: 5px;
+      }
+
+      .specs {
+        color: #586884;
+        margin-right: 28px;
+      }
+    }
+  }
+
+  &__user {
+    @include flex(flex-start);
+
+    padding-left: 15px;
+
+    .user--head {
+      $s: 35px;
+      width: $s;
+      height: $s;
+      border-radius: 50%;
+      background: blue;
+      margin-right: 10px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .user--name {
+      word-break: break-all;
+      span {
+        color: #2e99f3;
+      }
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    &.button--warning {
+      color: #fa8b03;
+    }
+  }
+
+  .el-pagination__sizes {
+    position: relative;
+    top: -3px;
+    margin-right: 0;
+  }
+}
+
+.iconPC-beizhu {
+  font-size: 24px;
+  position: absolute;
+  margin-left: -15px;
+  margin-top: -5px;
+  right: 0;
+  cursor: pointer;
+
+  &.red {
+    color: red;
+  }
+}

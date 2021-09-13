@@ -1,0 +1,1 @@
+{"version":3,"sources":["uni-app:///src/main.ts?{\"page\":\"subcontract%2Fpages%2Fmysend%2Fmysend\"}"],"names":[],"mappings":";;;;;;;;;;;;AAAA;;AAEA;;;;AACA,UAAU,CAAC,eAAD,CAAV,C","file":"subcontract/pages/mysend/mysend.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './subcontract/pages/mysend/mysend.vue'\ncreatePage(Page)"],"sourceRoot":""}

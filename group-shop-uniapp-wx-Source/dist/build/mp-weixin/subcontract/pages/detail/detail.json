@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "usingComponents": {
+    "m-icon": "/components/m-icon/m-icon",
+    "sign": "/components/sign/sign",
+    "auth": "/components/auth/auth",
+    "canvas-com": "/subcontract/pages/detail/cavasCom/canvasCom",
+    "select-norms": "/components/select-norms/selectNorms"
+  }
+}

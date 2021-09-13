@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.AccountCenterMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.shops.api.entity.AccountCenterMenu">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="menu_icon_url" property="menuIconUrl"/>
+        <result column="defaul_icon" property="defaultIcon"/>
+        <result column="split_flag" property="splitFlag"/>
+        <result column="style_type" property="styleType"/>
+        <result column="sort_index" property="sortIndex"/>
+        <result column="p_id" property="pId"/>
+        <result column="hide_menu" property="hideMenu"/>
+        <result column="allow_use" property="allowUse"/>
+        <result column="link_select_item" property="linkSelectItem"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        split_flag,
+        is_deleted,
+        update_time,
+        tenant_id,
+        id, menu_name, menu_icon_url, style_type, sort_index, p_id, hide_menu, allow_use, link_select_item,defaul_icon
+    </sql>
+
+</mapper>

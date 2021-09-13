@@ -1,0 +1,22 @@
+@import "../variable";
+
+.decoration {
+  /deep/ &__form {
+    @include flex(space-between);
+    margin-bottom: 10px;
+
+    &--l {
+    }
+    &--r {
+    }
+  }
+}
+
+/deep/ .form {
+  &__input {
+    &--right {
+      width: 200px;
+      margin-left: 10px;
+    }
+  }
+}

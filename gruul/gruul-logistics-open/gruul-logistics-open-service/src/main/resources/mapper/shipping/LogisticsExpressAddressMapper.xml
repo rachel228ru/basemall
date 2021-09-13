@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.logistics.mapper.LogisticsExpressAddressMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsExpressAddressVo">
+        <id column="express_id"  property="expressId"/>
+        <result column="express_name"  property="expressName"/>
+        <result column="express_code"  property="expressCode"/>
+        <result column="address_id"  property="addressId"/>
+        <result column="customer_name"  property="customerName"/>
+        <result column="customer_password"  property="customerPassword"/>
+        <result column="province"  property="province"/>
+        <result column="city"  property="city"/>
+        <result column="country"  property="country"/>
+        <result column="address"  property="address"/>
+        <result column="receive_name"  property="receiveName"/>
+        <result column="receive_phone"  property="receivePhone"/>
+        <result column="zip_code"  property="zipCode"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        e.id as express_id, e.name as express_name, e.code as express_code, e.address_id as addressId,
+        e.customer_name, e.customer_password, a.province, a.city, a.country, a.address,
+        a.name as receive_name, a.phone as receive_phone, a.zip_code
+    </sql>
+
+    <sql id="Base_Select_List">
+        e.id as express_id, e.name as express_name, e.code as express_code, e.address_id as addressId,
+        a.province, a.city, a.country, a.address,
+        a.name as receive_name, a.phone as receive_phone, a.zip_code
+    </sql>
+
+    <select id="queryByExpressId" resultMap="BaseResultMap"
+            parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_express e
+        inner join t_logistics_address a
+        on a.id = e.address_id
+        where a.is_deleted=0 and e.is_deleted=0 and e.id = #{expressId}
+    </select>
+
+    <select id="queryByExpressCode" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Select_List"/>
+        from t_logistics_express e
+        inner join t_logistics_address a
+        on a.id = e.address_id
+        where a.is_deleted=0 and e.is_deleted=0 and e.code = #{expressCode}
+    </select>
+
+</mapper>

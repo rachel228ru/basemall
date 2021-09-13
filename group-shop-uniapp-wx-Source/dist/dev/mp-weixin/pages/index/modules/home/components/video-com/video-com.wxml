@@ -1,0 +1,1 @@
+<view class="video--com data-v-429ba318" style="{{('padding:'+(radioTC===2?20:0)+'rpx')}}"><video style="{{('width:'+videowidth+'rpx;height:'+videoheight+'rpx')}}" src="{{radio===1?video:videoLink}}" poster="{{poster}}" class="data-v-429ba318"></video></view>

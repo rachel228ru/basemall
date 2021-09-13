@@ -1,0 +1,13 @@
+{
+  "uniqueIdentification": "GOODS_DEFUALT",
+  "version": "v1.2.3",
+  "buildAction": 1,
+  "url": "",
+  "importDirectUse": 0,
+  "mq": {
+    "exchange": "gruul.goods.direct",
+    "routeKey": "gruul.goods.default.create"
+  },
+  "kv": {
+  }
+}

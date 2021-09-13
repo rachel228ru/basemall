@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.logistics.mapper.LogisticsIncludePostageMapper">
+  <resultMap id="BaseResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsIncludePostageVo">
+    <id column="id"  property="id" />
+    <result column="logistics_id"  property="logisticsId" />
+    <result column="type"  property="type" />
+    <result column="region"  property="region" />
+    <result column="piece_num" jdbcType="INTEGER" property="pieceNum" />
+    <result column="amount_num"  property="amountNum" />
+  </resultMap>
+
+
+  <resultMap id="BeanMap" type="com.medusa.gruul.logistics.api.entity.LogisticsIncludePostage">
+    <id column="id"  property="id" />
+    <result column="logistics_id"  property="logisticsId" />
+    <result column="type"  property="type" />
+    <result column="region"  property="region" />
+    <result column="piece_num"  property="pieceNum" />
+    <result column="weight" property="weight"/>
+    <result column="amount_num"  property="amountNum" />
+  </resultMap>
+
+  <select id="selectByParams" resultMap="BeanMap" >
+   SELECT id, logistics_id, type, region, piece_num,weight,
+   amount_num  FROM t_logistics_include_postage
+    WHERE region like  CONCAT('%',#{region_json} ,'%') AND logistics_id =#{logistics_id} AND is_deleted = 0
+  </select>
+
+
+</mapper>

@@ -1,0 +1,34 @@
+server:
+  port: 10450
+  compression:
+    enabled: true
+spring:
+  application:
+    name: account-open
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ip
+        ip: ip
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  autoconfigure:
+    exclude: org.springframework.cloud.gateway.config.GatewayAutoConfiguration,org.springframework.cloud.gateway.config.GatewayClassPathWarningAutoConfiguration
+  profiles:
+    active: open
+# Logger Config
+logging:
+  level:
+    root: debug
+#过滤表
+gruul:
+  tenant:
+    use_shop: false
+snowflake:
+  workerId: 1
+  datacenterId: 1
+geo:
+  key:
+

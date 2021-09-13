@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.medusa</groupId>
+        <artifactId>gruul</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <artifactId>gruul-shops-open</artifactId>
+    <version>0.1</version>
+    <description>gruul 店铺模块</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>gruul-shops-open-api</module>
+        <module>gruul-shops-open-service</module>
+    </modules>
+
+</project>
+<!---->

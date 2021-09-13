@@ -1,0 +1,5 @@
+src/components/packages/vant
+src/components/medusa-core
+node_modules/*
+node_modules/vue-clipboard2/
+dist

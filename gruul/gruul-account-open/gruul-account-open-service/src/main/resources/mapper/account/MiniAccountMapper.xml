@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.account.mapper.MiniAccountMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.account.api.entity.MiniAccount">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="country" property="country"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="language" property="language"/>
+        <result column="nike_name" property="nikeName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <result column="first_login_time" property="firstLoginTime"/>
+        <result column="whether_authorization" property="whetherAuthorization"/>
+    </resultMap>
+
+    <resultMap id="UserListResultMap" type="com.medusa.gruul.account.model.dto.UserListDto">
+        <result column="member_number" property="memberNumber"/>
+        <result column="supply_bonus" property="supplyBonus"/>
+        <result column="rebate_bonus" property="rebateBonus"/>
+        <result column="user_id" property="userId"/>
+        <result column="nike_name" property="nikeName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="phone" property="phone"/>
+        <result column="member_register_time" property="memberRegisterTime"/>
+        <result column="last_deal_time" property="orderLastDealTime"/>
+        <result column="first_login_time" property="firstLoginTime"/>
+        <result column="consume_num" property="consumeNum"/>
+        <result column="consume_totle_money" property="consumeTotleMoney"/>
+        <result column="integral" property="integral"/>
+        <result column="community_type" property="communityType"/>
+        <result column="shop_user_id" property="shopUserId"/>
+    </resultMap>
+
+    <resultMap id="AreaAccountInfoDtoResultMap" type="com.medusa.gruul.account.api.model.AreaAccountInfoDto">
+        <result column="nike_name" property="nikeName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="last_deal_time" property="lastDealTime"/>
+        <result column="first_login_time" property="firstLoginTime"/>
+        <result column="consume_num" property="consumeNum"/>
+        <result column="consume_totle_money" property="consumeTotleMoney"/>
+        <result column="shop_user_id" property="shopUserId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        tenant_id,
+        create_time,
+        is_deleted,
+        update_time,
+        user_id,
+        country,
+        province,
+        city,
+        `language`,
+        nike_name,
+        avatar_url,
+        phone,
+        email,
+        gender,
+        first_login_time,
+        whether_authorization
+    </sql>
+
+    <select id="selectByUserList" resultMap="UserListResultMap">
+        select
+        DISTINCT
+        tma.id,
+        tma.user_id,
+        tma.avatar_url,
+        tma.phone,
+        tma.nike_name,
+        tma.first_login_time,
+        tmae.last_deal_time,
+        tmae.consume_num,
+        tmae.consume_totle_money,
+        tmae.community_type,
+        tmae.shop_user_id,
+        tmae.supply_bonus,
+        tmae.rebate_bonus
+        from t_mini_account AS tma
+        left join t_mini_account_extends AS tmae on tmae.user_id = tma.user_id
+        <where>
+            tmae.is_blacklist = 0
+            and tmae.shop_id = #{paramMap.shopId}
+            and tma.whether_authorization = 1
+            <if test="paramMap.tagId != null">
+                and tmae.shop_user_id in (SELECT user_id
+                FROM t_mini_account_tag_group
+                where tag_id = #{paramMap.tagId}
+                and is_deleted = 0)
+            </if>
+            <if test="paramMap.nikeName != null">
+                and tma.nike_name like #{paramMap.nikeName}
+            </if>
+            <if test="paramMap.orderSuccessStartTime != null">
+                and tmae.last_deal_time >= #{paramMap.orderSuccessStartTime}
+            </if>
+            <if test="paramMap.orderSuccessEndTime != null">
+                and  <![CDATA[ tmae.last_deal_time <= #{paramMap.orderSuccessEndTime}
+                ]]>
+            </if>
+        </where>
+        <if test="paramMap.sortType != null">
+            order by
+            <if test="paramMap.sortType == 1">
+                tmae.consume_totle_money desc,tma.id
+            </if>
+            <if test="paramMap.sortType == 2">
+                tmae.consume_totle_money asc
+            </if>
+
+        </if>
+        <if test="paramMap.sortType == null">
+            order by tmae.shop_user_id desc
+        </if>
+    </select>
+    <select id="selectByBlackListUser" resultType="com.medusa.gruul.account.model.dto.BlacklistUserDto">
+        select tma.user_id,
+        tma.avatar_url,
+        tma.phone,
+        tma.nike_name,
+        tma.first_login_time,
+        tmae.last_deal_time,
+        tmae.consume_num,
+        tmae.consume_totle_money,
+        tmae.shop_user_id,
+        (tmae.supply_bonus+tmae.rebate_bonus) supply_bonus
+        from t_mini_account as tma
+        left join t_mini_account_extends as tmae on tmae.user_id = tma.user_id
+        LEFT JOIN (SELECT user_id,
+        any_value(tenant_id) AS tenant_id,
+        any_value(restrict_type) AS restrict_type
+        FROM t_mini_account_restrict
+        GROUP BY user_id) AS mar on mar.user_id = tma.user_id
+        <where>
+            tmae.is_blacklist = 1
+            and tmae.shop_id = #{paramMap.shopId}
+            <if test="paramMap.permission != null">
+                AND tmae.shop_user_id IN (SELECT user_id
+                FROM t_mini_account_restrict
+                WHERE is_deleted = 0
+                and restrict_type
+                = #{paramMap.permission})
+            </if>
+            <if test="paramMap.fuzzy != null">
+                and
+                (
+                tma.nike_name like #{paramMap.fuzzy}
+                or
+                tma.phone like #{paramMap.fuzzy}
+                )
+            </if>
+        </where>
+        order by tmae.join_blacklist_time desc
+    </select>
+
+
+    <resultMap id="MiniAccountExtDtoResultMap" type="com.medusa.gruul.account.api.model.MiniAccountExtDto">
+        <result column="nike_name" property="nikeName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="shop_user_id" property="shopUserId"/>
+    </resultMap>
+
+
+    <select id="selectByShopUserIds" resultMap="MiniAccountExtDtoResultMap">
+        select tma.avatar_url,
+        tma.nike_name,
+        tmae.shop_user_id
+        from t_mini_account as tma
+        left join t_mini_account_extends as tmae on tmae.user_id = tma.user_id
+        where
+        tmae.shop_user_id
+        <foreach collection="shopUserIds" item="shopUserId" open="in(" separator="," close=")">
+            #{shopUserId}
+        </foreach>
+    </select>
+
+
+    <select id="getMemberInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mini_account t
+        where t.is_deleted = 0
+        <if test="tenantId != null and tenantId != ''">
+            AND t.tenant_id = #{tenantId}
+        </if>
+        <if test="userId != null and userId != ''">
+            AND t.user_id = #{userId}
+        </if>
+    </select>
+
+    <select id="getUserInfoByShopUserId" resultType="java.lang.String">
+        select user_id
+        from t_mini_account_extends t
+        where t.is_deleted = 0
+        <if test="tenantId != null and tenantId != ''">
+            AND t.tenant_id = #{tenantId}
+        </if>
+        <if test="shopUserId != null and shopUserId != ''">
+            AND t.shop_user_id = #{shopUserId}
+        </if>
+    </select>
+
+    <select id="getIntegralByShopUserId" resultType="java.math.BigDecimal">
+        select integral
+        from t_mini_account_extends t
+        where t.is_deleted = 0
+        <if test="tenantId != null and tenantId != ''">
+            AND t.tenant_id = #{tenantId}
+        </if>
+        <if test="shopUserId != null and shopUserId != ''">
+            AND t.shop_user_id = #{shopUserId}
+        </if>
+    </select>
+
+    <update id="updateBonus">
+        update t_mini_account_extends t
+        set t.supply_bonus = #{amount}
+        where t.is_deleted = 0
+          and t.shop_user_id = #{userId}
+          and t.tenant_id = #{tenantId}
+    </update>
+
+
+    <update id="updateRebateBonus">
+        update t_mini_account_extends t
+        set t.rebate_bonus = #{amount}
+        where t.is_deleted = 0
+          and t.shop_user_id = #{userId}
+          and t.tenant_id = #{tenantId}
+    </update>
+
+    <select id="selectByShopUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mini_account
+        where
+        user_id = (
+        select user_id from t_mini_account_extends where shop_user_id = #{shopUserId}
+        )
+    </select>
+</mapper>

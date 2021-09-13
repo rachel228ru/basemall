@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "评价中心",
+  "usingComponents": {
+    "goods": "/components/goods/goods",
+    "data-empty": "/components/data-empty/data-empty"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的订单",
+  "usingComponents": {
+    "order-list": "/subcontract/pages/order/order-list/order-list"
+  }
+}

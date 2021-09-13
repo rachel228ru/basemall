@@ -1,0 +1,50 @@
+package com.medusa.gruul.platform.model.vo.agent;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+/**
+ * @author whh
+ * @description
+ * @data: 2020/11/1
+ */
+@Data
+public class ChannelInfoVo {
+
+    @ApiModelProperty(value = "id")
+    private Long id;
+
+    @ApiModelProperty(value = "账户")
+    private String account;
+
+    @ApiModelProperty(value = "手机号")
+    private String phone;
+
+    @ApiModelProperty(value = "联系人")
+    private String linkName;
+
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createTime;
+
+    @ApiModelProperty(value = "代理到期时间")
+    private LocalDateTime nextDueTime;
+
+    @ApiModelProperty(value = "邀请码")
+    private String code;
+    @ApiModelProperty(value = "代理狀態 1:正常 2:冻结 3:停用")
+    private Integer status;
+    @ApiModelProperty(value = "累计销售总金额")
+    private BigDecimal totalSalePrice;
+
+    @ApiModelProperty(value = "佣金金额")
+    private BigDecimal commissionAmount;
+
+    @ApiModelProperty(value = "商户数量")
+    private Integer shopInfoCount;
+
+    @ApiModelProperty(value = "店铺数量")
+    private Integer appInfoCount;
+}

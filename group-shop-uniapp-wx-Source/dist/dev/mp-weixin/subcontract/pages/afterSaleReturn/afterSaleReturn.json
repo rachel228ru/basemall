@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "填写退货物流信息",
+  "usingComponents": {
+    "goods": "/components/goods/goods"
+  }
+}

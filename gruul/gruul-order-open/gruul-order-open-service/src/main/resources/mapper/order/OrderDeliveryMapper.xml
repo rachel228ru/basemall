@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.order.mapper.OrderDeliveryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.order.api.entity.OrderDelivery">
+        <id column="order_id" property="orderId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="delivery_type" property="deliveryType"/>
+        <result column="delivery_time" property="deliveryTime"/>
+        <result column="delivery_company" property="deliveryCompany"/>
+        <result column="delivery_sn" property="deliverySn"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_post_code" property="receiverPostCode"/>
+        <result column="receiver_province" property="receiverProvince"/>
+        <result column="receiver_city" property="receiverCity"/>
+        <result column="receiver_region" property="receiverRegion"/>
+        <result column="receiver_detail_address" property="receiverDetailAddress"/>
+        <result column="is_received" property="received"/>
+        <result column="receive_time" property="receiveTime"/>
+        <result column="package_name" property="packageName"/>
+        <result column="package_code" property="packageCode"/>
+        <result column="sorting_code" property="sortingCode"/>
+        <result column="delivery_template_id" property="deliveryTemplateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+         shop_id, order_id, delivery_type,
+         delivery_time, delivery_company, delivery_sn, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address,
+         is_received, receive_time, package_name, package_code, sorting_code, delivery_template_id
+    </sql>
+
+
+    <resultMap id="OrderDto" type="com.medusa.gruul.order.api.model.OrderDeliveryDto">
+        <id column="order_id" property="orderId"/>
+        <result column="delivery_company" property="deliveryCompany"/>
+        <result column="delivery_sn" property="deliverySn"/>
+        <result column="delivery_code" property="deliveryCode"/>
+    </resultMap>
+    <select id="selectOneByOrderId" resultMap="OrderDto">
+        SELECT
+        order_id,
+        delivery_company,
+        delivery_code,
+        delivery_sn
+        FROM t_order_delivery
+        WHERE
+        is_deleted = 0 AND order_id = #{orderId}
+    </select>
+    <select id="selectByOrderId" resultType="com.medusa.gruul.order.api.entity.OrderDelivery">
+        SELECT *
+        FROM t_order_delivery
+        WHERE
+        is_deleted = 0 AND order_id = #{orderId}
+    </select>
+
+
+    <update id="updateByParam" parameterType="com.medusa.gruul.order.api.model.OrderDeliveryDto">
+        UPDATE t_order_delivery
+        SET delivery_company = #{deliveryCompany},
+        delivery_code = #{deliveryCode},
+        delivery_sn = #{deliverySn},
+        delivery_time = #{deliveryTime},
+        update_time = #{updateTime},
+        package_name = #{packageName},
+        package_code = #{packageCode},
+        sorting_code = #{sortingCode}
+        WHERE
+            order_id = #{orderId}
+    </update>
+</mapper>

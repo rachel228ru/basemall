@@ -1,0 +1,238 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@mixin bottom-line($weight: 1px, $color: rgba(69, 64, 60, 0.21)) {
+  border-bottom: $weight solid $color;
+}
+
+// 页面主色
+$page-main-color: #fe4e63;
+// 字体颜色
+$page-text-color: #45403c;
+// 背景颜色
+$page-background-color: #f7f7f7;
+// 边框颜色
+$page-border-color: #ebeef5;
+// 默认边距
+$default-side: 10px;
+// 内边距
+$inner-side: 30px;
+// 默认字体大小
+$default-font-size: 14px;
+// 内容字体大小
+$content-font-size: 15px;
+// 手机屏幕宽度
+$screen-width: 340px;
+// 头像大小
+$avatar: 50px;
+
+/* 手机用户界面布局 */
+@include b(user) {
+  width: $screen-width;
+  height: 100%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.12);
+  align-self: flex-start;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  @include e(menu) {
+    background-color: $page-background-color;
+    padding: 0 $default-side;
+
+    @include m(fold) {
+      margin-bottom: 10px;
+    }
+  }
+
+  @include e(radius) {
+    width: $screen-width;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 2;
+
+    .center {
+      text-align: center;
+      font-size: $content-font-size;
+      color: #ffffff;
+    }
+  }
+}
+
+/* 设置遮罩层 */
+@include b(mask) {
+  position: absolute;
+  background-color: #ffffff;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  transition: left 100ms;
+
+  @include e(show) {
+    left: 0;
+  }
+
+  @include e(hidden) {
+    left: 100%;
+  }
+}
+
+/* 用户信息 */
+@include b(info) {
+  overflow: hidden;
+  padding: 15px $inner-side;
+  margin: 0 auto;
+  width: $screen-width;
+
+  @include e(avatar) {
+    float: left;
+    width: $avatar;
+    height: $avatar;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #e68f99;
+  }
+
+  @include e(name) {
+    float: left;
+    font-size: $content-font-size;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 500;
+    padding-left: 15px;
+    height: $avatar;
+    line-height: $avatar;
+  }
+
+  @include e(qrcode) {
+    float: right;
+    height: 60px;
+    text-align: center;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: $avatar;
+
+    .warp {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      height: $avatar;
+    }
+
+    .iconfont {
+      line-height: 28px;
+      font-size: 28px;
+    }
+    span {
+      display: block;
+      font-size: 13px;
+      line-height: 13px;
+    }
+  }
+}
+
+/* 我的用户数据 */
+@include b(data) {
+  color: #ffffff;
+
+  @include flex(space-around, center);
+  padding: 15px $inner-side;
+
+  @include e(item) {
+    text-align: center;
+  }
+
+  @include e(text) {
+    font-size: 13px;
+    padding-top: 5px;
+  }
+}
+
+/* 我的订单 */
+@include b(order) {
+  padding: $default-side;
+  background-color: $page-background-color;
+
+  @include e(all) {
+    @include flex(space-between, center);
+    padding: 15px $default-side;
+    background-color: #ffffff;
+    border-radius: 5px 5px 0 0;
+
+    @include m(me) {
+      font-weight: bold;
+      font-size: 14px;
+      color: #45403c;
+    }
+
+    @include m(check) {
+      color: rgba(69, 64, 60, 0.42);
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+
+  @include e(quick) {
+    @include flex(space-between, center);
+    padding: 15px $default-side;
+    background-color: #ffffff;
+    border-radius: 0 0 5px 5px;
+
+    @include m(item) {
+      text-align: center;
+    }
+
+    @include m(img) {
+      width: 28px;
+      height: 28px;
+    }
+    @include m(text) {
+      font-size: 13px;
+      color: rgba(69, 64, 60, 1);
+      padding-top: 5px;
+
+      &.shadow {
+        color: rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    @include m(number) {
+      color: #45403c;
+    }
+  }
+}
+
+/* 菜单 */
+@include b(menu) {
+  @include e(form) {
+    padding-left: 15px;
+    @include m(item) {
+      @include flex(flex-start);
+      &__label {
+        width: 100px;
+        text-align: left;
+      }
+    }
+  }
+}
+
+/* 底部 */
+@include b(version) {
+  text-align: center;
+  @include e(img) {
+    img {
+      width: 50px;
+    }
+  }
+
+  @include e(text) {
+    padding: 15px 0;
+    font-size: 13px;
+    color: #b2b2b2;
+  }
+}
+
+.splitFlag {
+  margin-bottom: 10px;
+}

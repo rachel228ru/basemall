@@ -1,0 +1,42 @@
+$--table-color: #e9f3fb;
+$--table-border: #ddecf0;
+.table-head-color {
+  background-color: $--table-color;
+}
+
+.table-border {
+  border: 1px solid;
+  border-color: $--table-border;
+}
+
+.table-border-left {
+  border-left: 1px solid;
+  border-color: $--table-border;
+}
+
+.table-border-right {
+  border-right: 1px solid;
+  border-color: $--table-border;
+}
+
+.table-border-top {
+  border-top: 1px solid;
+  border-color: $--table-border;
+}
+
+.table-border-bottom {
+  border-bottom: 1px solid;
+  border-color: $--table-border;
+}
+
+.table-border-x {
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-color: $--table-border;
+}
+
+.table-border-y {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: $--table-border;
+}

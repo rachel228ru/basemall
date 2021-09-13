@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "专区",
+  "usingComponents": {
+    "search-plugin": "/subcontract/pages/spellPage/components/search-plugin/search-plugin",
+    "top-modehead": "/subcontract/pages/spellPage/components/top-modehead/top-modehead",
+    "top-biggoods": "/subcontract/pages/spellPage/components/top-biggoods/top-biggoods",
+    "left-tabbar": "/subcontract/pages/spellPage/components/left-tabbar/left-tabbar",
+    "swiper-list": "/subcontract/pages/spellPage/components/swiper-list/swiper-list",
+    "left-biggoods": "/subcontract/pages/spellPage/components/left-biggoods/left-biggoods",
+    "classified-goods": "/subcontract/pages/spellPage/components/classified-goods/classified-goods"
+  }
+}

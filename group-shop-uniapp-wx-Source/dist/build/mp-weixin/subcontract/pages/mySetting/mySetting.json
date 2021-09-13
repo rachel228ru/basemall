@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "设置",
+  "usingComponents": {
+    "m-icon": "/components/m-icon/m-icon"
+  }
+}

@@ -1,0 +1,30 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(item) {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  line-height: 48px;
+  color: #303133;
+  cursor: pointer;
+  border-bottom: 1px solid #EBEEF5;
+  background-color: #ffffff;
+  padding-left: 15px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-bottom-color .3s;
+  outline: 0;
+
+  @include e(img) {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+  }
+
+  @include e(text) {
+    font-size: 14px;
+    color: #45403C;
+  }
+}

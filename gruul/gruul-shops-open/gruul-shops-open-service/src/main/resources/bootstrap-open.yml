@@ -1,0 +1,22 @@
+server:
+  port: 10211
+spring:
+  application:
+    name: shops-open
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ip
+        ip: ip
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  autoconfigure:
+    exclude: org.springframework.cloud.gateway.config.GatewayAutoConfiguration,org.springframework.cloud.gateway.config.GatewayClassPathWarningAutoConfiguration
+  profiles:
+    active: open
+
+gruul:
+  tenant:
+    use-shop: true

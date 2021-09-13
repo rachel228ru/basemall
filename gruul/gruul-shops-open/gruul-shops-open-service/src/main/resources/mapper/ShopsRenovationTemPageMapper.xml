@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.ShopsRenovationTemPageMapper">
+
+
+    <resultMap id="ShopsRenovationPageVoMap" type="com.medusa.gruul.shops.model.vo.ShopsRenovationPageVo">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="template_id" property="templateId"/>
+        <result column="page_name" property="pageName"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="type" property="type"/>
+        <result column="model_id" property="modelId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="operator_id" property="operatorId"/>
+        <result column="operator_name" property="operatorName"/>
+    </resultMap>
+
+
+    <!-- 获取商铺装修模板list -->
+    <select id="listTemplatePage" resultMap="ShopsRenovationPageVoMap">
+        select
+        *
+        from
+        `t_shops_renovation_page`
+        where
+        `template_id` = #{param.templateId}
+        and
+        `is_deleted` = '0'
+    </select>
+    <select id="selectByModelId" resultType="com.medusa.gruul.shops.api.entity.ShopsRenovationPage">
+        SELECT
+            *
+        from
+        `t_shops_renovation_page`
+        where
+        `model_id` = #{modelId}
+        and
+        `is_deleted` = '0'
+        ORDER BY id
+        DESC LIMIT 1
+
+
+    </select>
+    <select id="getFitmentInfoByTypeNotNull"
+            resultType="com.medusa.gruul.shops.model.vo.ShopsRenovationPageVo">
+
+        SELECT
+            srp.*
+        FROM
+            t_shops_renovation_page srp , t_shops_renovation_assembly sra
+        WHERE
+            srp.id = sra.page_id
+        AND
+            srp.template_id =  #{param.templateId}
+        AND
+            srp.is_deleted = 0 AND sra.is_deleted = 0
+        AND
+            srp.type IS NOT NULL
+    </select>
+
+
+</mapper>

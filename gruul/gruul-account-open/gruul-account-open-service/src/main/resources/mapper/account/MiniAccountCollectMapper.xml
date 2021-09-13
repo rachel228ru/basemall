@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.account.mapper.MiniAccountCollectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.account.api.entity.MiniAccountCollect">
+        <id column="collect_id" property="collectId"/>
+        <result column="user_id" property="userId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="status" property="status"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="original_price" property="originalPrice"/>
+        <result column="ramark" property="ramark"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+    </resultMap>
+
+
+    <resultMap id="BaseResultMapVo" type="com.medusa.gruul.account.model.vo.UserCollectVo">
+        <id column="collect_id" property="collectId"/>
+        <result column="user_id" property="userId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="status" property="status"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="original_price" property="originalPrice"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        collect_id,user_id,product_id,product_pic,product_name,status,product_price,original_price,create_time
+
+    </sql>
+
+    <select id="getUserCollectInfoById" resultMap="BaseResultMapVo" parameterType="java.lang.String">
+
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_mini_account_collect
+        WHERE
+        user_id = #{userId}
+        AND
+        is_deleted = 0
+    </select>
+
+
+    <select id="findAccountCollectByProductId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_mini_account_collect
+        WHERE
+        user_id = #{userId}
+        AND
+        product_id = #{productId}
+        AND
+        is_deleted = 0
+
+    </select>
+
+</mapper>

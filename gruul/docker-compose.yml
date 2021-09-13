@@ -1,0 +1,3 @@
+# 启动方法 VERSION=s1.0.6 (所需版本) BRANCH=test docker-compose up -d              down
+version: '2'
+services:

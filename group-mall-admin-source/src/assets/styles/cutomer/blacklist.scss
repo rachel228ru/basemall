@@ -1,0 +1,79 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(filter) {
+  margin: 0 0 20px 0;
+  @include e(right) {
+
+    @include m(select) {
+     margin-right: 10px;
+    }
+  }
+}
+
+@include b(info) {
+  margin: 10px;
+  display: flex;
+  text-align: left;
+
+  @include e(img) {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+  }
+  @include e(msg) {
+    padding-left: 10px;
+
+    @include m(name) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@include b(blacklist) {
+  position: relative;
+  margin-bottom: 80px;
+
+
+   @include e(footer) {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     position: fixed;
+     width: 980px;
+     background: #ffffff;
+     z-index: 1500;
+     padding: 10px;
+     bottom: 10px;
+
+     @include m(batchDel) {
+       margin-top: 20px;
+     }
+   }
+}
+
+.m__table--item {
+  text-align: center;
+}
+
+/deep/ .m__table--head.padding:after {
+  content: "-";
+  display: block;
+  line-height: 0;
+  color: transparent;
+}
+
+/deep/ .m__table--body:after {
+  content: "-";
+  display: block;
+  line-height: 0;
+  color: transparent;
+}
+
+/deep/ .m__table--head th {
+  padding: 8px 10px;
+  text-align: left;
+  color: #515a6e;
+  font-weight: 200;
+}

@@ -1,0 +1,126 @@
+/*
+ * @description: 抽离开源版本
+ * @Author: chuyinlong
+ * @Date: 2021-08-12 15:36:21
+ * @LastEditors: chuyinlong
+ * @LastEditTime: 2021-08-30 14:28:31
+ * 123
+ */
+/** 待付款 */
+var isPendingPayment = function (status) {
+  return status === "WAIT_FOR_PAY";
+};
+
+/** 待发货状态 */
+var isWaitDelivery = function (status) {
+  return status === "WAIT_FOR_SEND";
+};
+
+/** 待提货状态 */
+var isWaitTake = function (status) {
+  return status === "WAIT_FOR_PICKUP";
+};
+
+/** 待评价状态 */
+var isWaitComment = function (status) {
+  return status === "WAIT_FOR_COMMENT";
+};
+
+/** 已关闭状态 */
+var isClose = function (status) {
+  var closeStatus = [
+    "BUYER_PAY_TIMEOUT_CLOSE",
+    "BUYER_CANCEL_CLOSE",
+    "SELLER_CANCEL_CLOSE",
+    "EXCHANGE_SUCCESS_CLOSE",
+  ];
+  return closeStatus.indexOf(status) !== -1;
+};
+
+/** 支付类型 */
+var getPayTypeName = function (key) {
+  return {
+    UNPAID: "未支付",
+    WECHAT: "微信支付",
+  }[key];
+};
+
+/** 订单状态 */
+var getOrderStatusName = function (key) {
+  return {
+    WAIT_FOR_PAY: "待买家付款",
+    WAIT_FOR_SEND: "买家已付款",
+    WAIT_FOR_PICKUP: "待提货",
+    WAIT_FOR_COMMENT: "交易成功",
+    COMPLETE: "交易成功",
+    REFUNDED: "交易关闭",
+    PART_REFUNDED: "部分退款",
+    BUYER_PAY_TIMEOUT_CLOSE: "交易关闭",
+    BUYER_CANCEL_CLOSE: "交易关闭",
+    SELLER_CANCEL_CLOSE: "交易关闭",
+    EXCHANGE_SUCCESS_CLOSE: "交易关闭",
+  }[key];
+};
+
+/** 订单状态 */
+var getOrderStatusTips = function (key) {
+  return {
+    WAIT_FOR_PAY: "待买家付款",
+    WAIT_FOR_SEND: "买家已付款",
+    WAIT_FOR_PICKUP: "待提货",
+    WAIT_FOR_COMMENT: "交易成功",
+    COMPLETE: "交易成功",
+    REFUNDED: "交易关闭",
+    PART_REFUNDED: "部分退款",
+    BUYER_PAY_TIMEOUT_CLOSE: "因支付超时交易关闭",
+    BUYER_CANCEL_CLOSE: "因买家取消订单交易关闭",
+    SELLER_CANCEL_CLOSE: "因卖家取消订单交易关闭",
+    EXCHANGE_SUCCESS_CLOSE: "因换货成功交易关闭",
+  }[key];
+};
+
+/** 是否为排除不显示的状态 */
+var isExcludeStatus = function (key) {
+  return ["WAIT_FOR_COMMENT"].indexOf(key) !== -1;
+};
+
+var excludeActive = function (activeArr, active) {
+  return activeArr.indexOf(+active) !== -1;
+};
+
+/** 是否订单所有商品正在售后 */
+var isafs = function (itemVoList) {
+  var noafsList = itemVoList.filter(function (item) {
+    return !item.afs || item.afs.type === "CLOSE"
+  })
+  return noafsList.length > 0
+}
+
+// /** 配送类型 */
+var getDeliveryTypeName = function (key) {
+  return {
+    LOGISTICS: "物流配送",
+  }[key];
+}
+
+var getOrderTypeName = function (key) {
+  return {
+    EXCHANGE: "换货单",
+  }[key];
+}
+
+module.exports = {
+  getOrderTypeName: getOrderTypeName,
+  isPendingPayment: isPendingPayment,
+  getOrderStatusName: getOrderStatusName,
+  isWaitDelivery: isWaitDelivery,
+  isWaitTake: isWaitTake,
+  isClose: isClose,
+  getDeliveryTypeName: getDeliveryTypeName,
+  isWaitComment: isWaitComment,
+  getPayTypeName: getPayTypeName,
+  isExcludeStatus: isExcludeStatus,
+  excludeActive: excludeActive,
+  getOrderStatusTips: getOrderStatusTips,
+  isafs: isafs,
+}

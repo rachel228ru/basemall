@@ -1,0 +1,65 @@
+@charset "UTF-8";
+page.data-v-1305548c {
+  min-height: 100%;
+  background: #f1f2f6;
+}
+view.data-v-1305548c {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*按钮*/
+button.data-v-1305548c {
+  line-height: inherit;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  opacity: 1;
+  background-color: inherit;
+}
+button.data-v-1305548c::after {
+    border: 0;
+}
+.m__button.data-v-1305548c {
+  min-width: 140rpx;
+  padding: 6rpx 0;
+  text-align: center;
+  border-radius: 30rpx;
+  border: 2rpx solid #989898;
+  outline: none;
+  background: #fff;
+  margin-left: 20rpx;
+}
+.m__button.primary.data-v-1305548c {
+    background: #fe4e63;
+    border-color: #fe4e63;
+    color: #fff;
+}
+.m__button.primary[disabled].data-v-1305548c {
+      border-color: #fda7b2;
+      background: #fda7b2;
+      color: #fff3f6;
+}
+.text__pink.data-v-1305548c {
+  color: #fe4e63;
+}
+.text__green.data-v-1305548c {
+  color: #08bb07;
+}
+.text__primary.data-v-1305548c {
+  color: #000000;
+}
+/* BEM support Func
+ -------------------------- */
+/* BEM
+ -------------------------- */
+.tag.data-v-1305548c {
+  background: #fe4e63;
+  color: #fff;
+  display: inline-block;
+  padding: 2rpx 4rpx;
+  margin-right: 10rpx;
+}
+

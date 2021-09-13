@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "select-norms": "/components/select-norms/selectNorms"
+  }
+}

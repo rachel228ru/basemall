@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.payment.mapper.PaymentWechatMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.payment.api.entity.PaymentWechat">
+        <id column="id" property="id" />
+        <result column="trade_type" property="tradeType" />
+        <result column="payment_id" property="paymentId" />
+        <result column="out_trade_no" property="outTradeNo" />
+        <result column="subject" property="subject" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="open_id" property="openId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, trade_type, payment_id, out_trade_no, subject, tenant_id, open_id
+    </sql>
+
+</mapper>

@@ -1,0 +1,28 @@
+/*对齐方式(text-align  text-)*/
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-justify {
+    text-align: justify;
+    text-align-last: justify;
+}
+/* vertical-align */
+.v-t{
+    vertical-align:top;
+}
+.v-b{
+    vertical-align:bottom;
+}
+.v-m{
+    vertical-align:middle;
+}

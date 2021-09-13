@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.medusa.gruul.sms.dao.mapper.TSmsTemplateEntityMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.sms.dao.entity.TSmsTemplateEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+          <result column="user_id" property="userId" jdbcType="BIGINT"/>
+          <result column="sms_provider_id" property="smsProviderId" jdbcType="BIGINT"/>
+          <result column="sms_template_content" property="smsTemplateContent" jdbcType="VARCHAR"/>
+          <result column="sms_template_code" property="smsTemplateCode" jdbcType="VARCHAR"/>
+          <result column="sms_template_is_pass" property="smsTemplateIsPass" jdbcType="TINYINT"/>
+          <result column="sms_remark" property="smsRemark" jdbcType="VARCHAR"/>
+          <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+          <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+          <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+          <result column="template_type" property="templateType" jdbcType="INTEGER"/>
+          <result column="sms_template_type" property="smsTemplateType" jdbcType="INTEGER"/>
+          <result column="sms_template_name" property="smsTemplateName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+         id, user_id,  sms_provider_id,  sms_template_content,  sms_template_code,  sms_template_is_pass,  sms_remark,  is_deleted,  create_time,  update_time,  template_type,  sms_template_type,  sms_template_name, sms_template_name 
+    </sql>
+
+    <!-- 根据id实现条件查询-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_template
+        where id =  #{id}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_sms_template  where id =  #{id}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.medusa.gruul.sms.dao.entity.TSmsTemplateEntity">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_sms_template ( id,
+	      user_id,
+          sms_provider_id,
+          sms_template_content,
+          sms_template_code,
+          sms_template_is_pass,
+          sms_remark,
+          is_deleted,
+          create_time,
+          update_time,
+          template_type,
+          sms_template_type,
+          sms_template_name,
+        )
+        values ( #{id},
+         #{userId,jdbcType=BIGINT},
+         #{smsProviderId,jdbcType=BIGINT},
+         #{smsTemplateContent,jdbcType=VARCHAR},
+         #{smsTemplateCode,jdbcType=VARCHAR},
+         #{smsTemplateIsPass,jdbcType=TINYINT},
+         #{smsRemark,jdbcType=VARCHAR},
+         #{isDeleted,jdbcType=TINYINT},
+         #{createTime,jdbcType=TIMESTAMP},
+         #{updateTime,jdbcType=TIMESTAMP},
+         #{templateType,jdbcType=INTEGER},
+         #{smsTemplateType,jdbcType=INTEGER},
+         #{smsTemplateName,jdbcType=VARCHAR},
+         )
+
+    </insert>
+
+
+    <insert id="insertSelective" parameterType="com.medusa.gruul.sms.dao.entity.TSmsTemplateEntity">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into  t_sms_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="smsProviderId != null">
+                sms_provider_id,
+            </if>
+            <if test="smsTemplateContent != null">
+                sms_template_content,
+            </if>
+            <if test="smsTemplateCode != null">
+                sms_template_code,
+            </if>
+            <if test="smsTemplateIsPass != null">
+                sms_template_is_pass,
+            </if>
+            <if test="smsRemark != null">
+                sms_remark,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="templateType != null">
+                template_type,
+            </if>
+            <if test="smsTemplateType != null">
+                sms_template_type,
+            </if>
+            <if test="smsTemplateName != null">
+                sms_template_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            #{id},
+            </if>
+                 <if test="userId != null">
+                     #{userId,jdbcType=BIGINT},
+                 </if>
+                 <if test="smsProviderId != null">
+                     #{smsProviderId,jdbcType=BIGINT},
+                 </if>
+                 <if test="smsTemplateContent != null">
+                     #{smsTemplateContent,jdbcType=VARCHAR},
+                 </if>
+                 <if test="smsTemplateCode != null">
+                     #{smsTemplateCode,jdbcType=VARCHAR},
+                 </if>
+                 <if test="smsTemplateIsPass != null">
+                     #{smsTemplateIsPass,jdbcType=TINYINT},
+                 </if>
+                 <if test="smsRemark != null">
+                     #{smsRemark,jdbcType=VARCHAR},
+                 </if>
+                 <if test="isDeleted != null">
+                     #{isDeleted,jdbcType=TINYINT},
+                 </if>
+                 <if test="createTime != null">
+                     #{createTime,jdbcType=TIMESTAMP},
+                 </if>
+                 <if test="updateTime != null">
+                     #{updateTime,jdbcType=TIMESTAMP},
+                 </if>
+                 <if test="templateType != null">
+                     #{templateType,jdbcType=INTEGER},
+                 </if>
+                 <if test="smsTemplateType != null">
+                     #{smsTemplateType,jdbcType=INTEGER},
+                 </if>
+                 <if test="smsTemplateName != null">
+                     #{smsTemplateName,jdbcType=VARCHAR},
+                 </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.medusa.gruul.sms.dao.entity.TSmsTemplateEntity">
+        update t_sms_template
+        <set>
+            <if test="id != null">
+            id =  #{id},
+            </if>
+               <if test="userId != null">
+                   user_id = #{userId,jdbcType=BIGINT},
+               </if>
+               <if test="smsProviderId != null">
+                   sms_provider_id = #{smsProviderId,jdbcType=BIGINT},
+               </if>
+               <if test="smsTemplateContent != null">
+                   sms_template_content = #{smsTemplateContent,jdbcType=VARCHAR},
+               </if>
+               <if test="smsTemplateCode != null">
+                   sms_template_code = #{smsTemplateCode,jdbcType=VARCHAR},
+               </if>
+               <if test="smsTemplateIsPass != null">
+                   sms_template_is_pass = #{smsTemplateIsPass,jdbcType=TINYINT},
+               </if>
+               <if test="smsRemark != null">
+                   sms_remark = #{smsRemark,jdbcType=VARCHAR},
+               </if>
+               <if test="isDeleted != null">
+                   is_deleted = #{isDeleted,jdbcType=TINYINT},
+               </if>
+               <if test="createTime != null">
+                   create_time = #{createTime,jdbcType=TIMESTAMP},
+               </if>
+               <if test="updateTime != null">
+                   update_time = #{updateTime,jdbcType=TIMESTAMP},
+               </if>
+               <if test="templateType != null">
+                   template_type = #{templateType,jdbcType=INTEGER},
+               </if>
+               <if test="smsTemplateType != null">
+                   sms_template_type = #{smsTemplateType,jdbcType=INTEGER},
+               </if>
+               <if test="smsTemplateName != null">
+                   sms_template_name = #{smsTemplateName,jdbcType=VARCHAR},
+               </if>
+        </set>
+        where id =  #{id}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.medusa.gruul.sms.dao.entity.TSmsTemplateEntity">
+        update t_sms_template
+        set 
+        user_id = #{userId,jdbcType=BIGINT},
+
+        sms_provider_id = #{smsProviderId,jdbcType=BIGINT},
+
+        sms_template_content = #{smsTemplateContent,jdbcType=VARCHAR},
+
+        sms_template_code = #{smsTemplateCode,jdbcType=VARCHAR},
+
+        sms_template_is_pass = #{smsTemplateIsPass,jdbcType=TINYINT},
+
+        sms_remark = #{smsRemark,jdbcType=VARCHAR},
+
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+
+        template_type = #{templateType,jdbcType=INTEGER},
+
+        sms_template_type = #{smsTemplateType,jdbcType=INTEGER},
+
+        sms_template_name = #{smsTemplateName,jdbcType=VARCHAR},
+        where  id =  #{id}
+    </update>
+
+
+    <select id="searchByEntityCount" resultType="java.lang.Integer" parameterType="com.medusa.gruul.sms.dao.entity.TSmsTemplateEntity">
+        select count(*)
+        from  t_sms_template
+        <where>
+            <if test="id != null">
+                  id = #{id,jdbcType=BIGINT}
+            </if>
+               <if test="userId != null">
+                   AND user_id = #{userId,jdbcType=BIGINT}
+               </if>
+               <if test="smsProviderId != null">
+                   AND sms_provider_id = #{smsProviderId,jdbcType=BIGINT}
+               </if>
+               <if test="smsTemplateContent != null">
+                   AND sms_template_content = #{smsTemplateContent,jdbcType=VARCHAR}
+               </if>
+               <if test="smsTemplateCode != null">
+                   AND sms_template_code = #{smsTemplateCode,jdbcType=VARCHAR}
+               </if>
+               <if test="smsTemplateIsPass != null">
+                   AND sms_template_is_pass = #{smsTemplateIsPass,jdbcType=TINYINT}
+               </if>
+               <if test="smsRemark != null">
+                   AND sms_remark = #{smsRemark,jdbcType=VARCHAR}
+               </if>
+               <if test="isDeleted != null">
+                   AND is_deleted = #{isDeleted,jdbcType=TINYINT}
+               </if>
+               <if test="createTime != null">
+                   AND create_time = #{createTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="updateTime != null">
+                   AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="templateType != null">
+                   AND template_type = #{templateType,jdbcType=INTEGER}
+               </if>
+               <if test="smsTemplateType != null">
+                   AND sms_template_type = #{smsTemplateType,jdbcType=INTEGER}
+               </if>
+               <if test="smsTemplateName != null">
+                   AND sms_template_name = #{smsTemplateName,jdbcType=VARCHAR}
+               </if>
+        </where>
+    </select>
+
+
+    <select id="searchByEntity" resultMap="BaseResultMap" parameterType="com.medusa.gruul.sms.dao.entity.TSmsTemplateEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from  t_sms_template
+        <where>
+            <if test="id != null">
+            id = #{id,jdbcType=BIGINT}
+            </if>
+               <if test="userId != null">
+                   AND    user_id = #{userId,jdbcType=BIGINT}
+               </if>
+               <if test="smsProviderId != null">
+                   AND    sms_provider_id = #{smsProviderId,jdbcType=BIGINT}
+               </if>
+               <if test="smsTemplateContent != null">
+                   AND    sms_template_content = #{smsTemplateContent,jdbcType=VARCHAR}
+               </if>
+               <if test="smsTemplateCode != null">
+                   AND    sms_template_code = #{smsTemplateCode,jdbcType=VARCHAR}
+               </if>
+               <if test="smsTemplateIsPass != null">
+                   AND    sms_template_is_pass = #{smsTemplateIsPass,jdbcType=TINYINT}
+               </if>
+               <if test="smsRemark != null">
+                   AND    sms_remark = #{smsRemark,jdbcType=VARCHAR}
+               </if>
+               <if test="isDeleted != null">
+                   AND    is_deleted = #{isDeleted,jdbcType=TINYINT}
+               </if>
+               <if test="createTime != null">
+                   AND    create_time = #{createTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="updateTime != null">
+                   AND    update_time = #{updateTime,jdbcType=TIMESTAMP}
+               </if>
+               <if test="templateType != null">
+                   AND    template_type = #{templateType,jdbcType=INTEGER}
+               </if>
+               <if test="smsTemplateType != null">
+                   AND    sms_template_type = #{smsTemplateType,jdbcType=INTEGER}
+               </if>
+               <if test="smsTemplateName != null">
+                   AND    sms_template_name = #{smsTemplateName,jdbcType=VARCHAR}
+               </if>
+        </where>
+    </select>
+
+
+</mapper>

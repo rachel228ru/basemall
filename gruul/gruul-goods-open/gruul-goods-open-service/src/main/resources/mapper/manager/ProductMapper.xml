@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.ProductVo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="provider_id" property="providerId"/>
+        <result column="provider_name" property="providerName"/>
+        <result column="distribution_mode" property="distributionMode"/>
+        <result column="freight_template_id" property="freightTemplateId"/>
+        <result column="attribute_id" property="attributeId"/>
+        <result column="attribute_name" property="attributeName"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="album_pics" property="albumPics"/>
+        <result column="wide_pic" property="widePic"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="status" property="status"/>
+        <result column="place" property="place"/>
+        <result column="csv_url" property="csvUrl"/>
+        <result column="sort" property="sort"/>
+        <result column="sale" property="sale"/>
+        <result column="unit" property="unit"/>
+        <result column="weight" property="weight"/>
+        <result column="service_ids" property="serviceIds"/>
+        <result column="detail" property="detail"/>
+        <result column="is_open_specs" property="openSpecs"/>
+        <result column="attribute" property="attribute"/>
+        <result column="sale_describe" property="saleDescribe"/>
+        <result column="score" property="score"/>
+        <collection property="skuStocks" ofType="com.medusa.gruul.goods.api.model.vo.manager.SkuStockVo" column="id"
+                    select="querySkuStock"></collection>
+        <collection property="productAttributes" ofType="com.medusa.gruul.goods.api.model.vo.manager.ProductAttributeVo"
+                    column="id" select="queryProductAttribute"></collection>
+        <collection property="productShowCategorys"
+                    ofType="com.medusa.gruul.goods.api.model.vo.manager.ProductShowCategoryVo"
+                    column="id" select="queryProductShowCategory"></collection>
+    </resultMap>
+
+    <!-- 移动专区查询映射结果 -->
+    <resultMap id="SaleModeResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.ProductVo">
+        <id column="id" property="id"/>
+        <result column="sorting_category_name" property="sortingCategoryName"/>
+        <collection property="productShowCategorys"
+                    ofType="com.medusa.gruul.goods.api.model.vo.manager.ProductShowCategoryVo"
+                    column="id" select="queryProductShowCategory"></collection>
+    </resultMap>
+
+    <resultMap id="SkuStockResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.SkuStockVo">
+        <id column="s_id" property="id"/>
+        <result column="s_version" property="version"/>
+        <result column="s_product_id" property="productId"/>
+        <result column="s_sku_code" property="skuCode"/>
+        <result column="s_specs" property="specs"/>
+        <result column="s_weight" property="weight"/>
+        <result column="s_pic" property="pic"/>
+        <result column="s_price" property="price"/>
+        <result column="s_original_price" property="originalPrice"/>
+        <result column="s_stock" property="stock"/>
+        <result column="s_low_stock" property="lowStock"/>
+        <result column="s_sale" property="sale"/>
+        <result column="s_per_limit" property="perLimit"/>
+    </resultMap>
+
+    <resultMap id="ProductAttributeResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.ProductAttributeVo">
+        <id column="a_id" property="id"/>
+        <result column="a_product_id" property="productId"/>
+        <result column="a_name" property="name"/>
+        <result column="a_value" property="value"/>
+    </resultMap>
+
+    <resultMap id="ProductShowCategoryResultMap"
+               type="com.medusa.gruul.goods.api.model.vo.manager.ProductShowCategoryVo">
+        <id column="ps_id" property="id"/>
+        <result column="ps_name" property="name"/>
+        <result column="ps_show_category_id" property="showCategoryId"/>
+        <result column="ps_parent_id" property="parentId"/>
+        <collection property="productShowCategorySeconds"
+                    ofType="com.medusa.gruul.goods.api.model.vo.manager.ProductShowCategorySecondVo" column="ps_id"
+                    select="queryProductShowCategorySecond"></collection>
+    </resultMap>
+
+    <resultMap id="ProductShowCategorySecondResultMap"
+               type="com.medusa.gruul.goods.api.model.vo.manager.ProductShowCategorySecondVo">
+        <id column="pss_id" property="id"/>
+        <result column="pss_name" property="name"/>
+        <result column="pss_show_category_id" property="showCategoryId"/>
+        <result column="pss_parent_id" property="parentId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Product_List">
+        p.id, p.create_time,  p.provider_id, r.name as provider_name, p.limit_type, p.sale_mode,
+        p.distribution_mode, p.freight_template_id, p.name, p.pic, p.album_pics, p.video_url,
+        p.product_sn, p.status, p.sort, p.sale, p.unit, p.weight, p.is_open_specs, p.score, p.service_ids, p.detail, p.attribute,p.attribute_id,
+        p.attribute_name,p.is_deleted
+    </sql>
+
+    <!-- 专区变更查询结果列 -->
+    <sql id="Sale_Mode_Product_List">
+        p.id, p.create_time
+    </sql>
+
+    <sql id="Base_Supplier_Product_List">
+        p.id, p.create_time, p.provider_id, r.name as provider_name, p.sale_mode,
+        p.name, p.pic, p.album_pics, p.video_url,
+        p.product_sn, p.status, p.sale, p.unit, p.weight
+    </sql>
+
+    <sql id="Base_Product_Detail">
+        p.id, p.create_time, p.provider_id, r.name as provider_name, p.limit_type, p.sale_mode,
+        p.distribution_mode, p.freight_template_id,  p.name, p.pic, p.album_pics, p.wide_pic,
+        p.video_url, p.sale_describe, p.product_sn, p.status, p.sort, p.sale, p.unit, p.weight, p.is_open_specs, p.score, p.service_ids, p.detail, p.attribute,  p.attribute_id,
+        p.attribute_name, p.place, p.csv_url
+    </sql>
+
+    <sql id="Base_Sku_List">
+        s.id AS s_id, s.version AS s_version, s.product_id AS s_product_id, s.sku_code AS s_sku_code, s.specs AS s_specs, s.weight as s_weight, s.pic AS s_pic,
+        s.price AS s_price, s.original_price AS s_original_price, s.stock AS s_stock, s.low_stock AS s_low_stock, s.sale AS s_sale, s.per_limit AS s_per_limit
+    </sql>
+
+    <sql id="Base_Member_List">
+        m.id AS m_id, m.product_id AS m_product_id, m.sku_id AS m_sku_id, m.member_level_id AS m_member_level_id, m.member_price AS m_member_price,
+        m.member_level_name AS m_member_level_name
+    </sql>
+
+    <sql id="Base_Rebate_List">
+        r.id AS r_id, r.product_id AS r_product_id, r.sku_id AS r_sku_id, r.rebate_price AS r_rebate_price
+    </sql>
+
+    <sql id="Base_Attribute_List">
+        a.id AS a_id, a.product_id AS a_product_id, a.name AS a_name, a.value AS a_value
+    </sql>
+
+    <sql id="Base_ProductShowCategory_List">
+        ps.id AS ps_id, ps.parent_id AS ps_parent_id, ps.show_category_id as ps_show_category_id, tsc.name AS ps_name
+    </sql>
+
+    <sql id="Base_ProductShowCategorySecond_List">
+        pss.id AS pss_id, pss.parent_id AS pss_parent_id, pss.show_category_id as pss_show_category_id, tsc.name AS pss_name
+    </sql>
+
+    <select id="queryProductList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.ProductParam">
+        SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_product p
+        LEFT JOIN t_supplier r ON p.provider_id = r.id and r.is_deleted = 0
+        <where>
+            p.is_deleted = 0
+            AND p.sale_mode = #{productParam.saleMode}
+            <if test="productParam.showCategoryId != null">
+                AND EXISTS (
+                SELECT
+                psc.id
+                FROM
+                t_product_show_category psc
+                WHERE
+                psc.product_id = p.id and psc.is_deleted = 0
+                AND
+                (psc.show_category_id = #{productParam.showCategoryId})
+                )
+            </if>
+            <if test="productParam.productSn != null and productParam.productSn != ''">
+                AND p.product_sn LIKE CONCAT('%',#{productParam.productSn},'%')
+            </if>
+            <if test="productParam.name != null and productParam.name != ''">
+                AND p.name LIKE CONCAT('%',#{productParam.name},'%')
+            </if>
+            <if test="productParam.providerName != null and productParam.providerName != ''">
+                AND r.name LIKE CONCAT('%',#{productParam.providerName},'%')
+            </if>
+            <if test="productParam.providerId != null ">
+                AND r.id = #{productParam.providerId}
+            </if>
+            <if test="productParam.status != null ">
+                AND p.status = #{productParam.status}
+            </if>
+            <choose>
+                <when test="productParam.place == 1">
+                    AND p.place = #{productParam.place}
+                </when>
+                <otherwise>
+                    AND p.place = 0
+                </otherwise>
+            </choose>
+            <if test="productParam.createBeginTime != null and productParam.createBeginTime != ''">
+                AND DATE_FORMAT(p.create_time,'%Y-%m-%d') <![CDATA[>=]]> #{productParam.createBeginTime}
+            </if>
+            <if test="productParam.createEndTime!=null and productParam.createEndTime != ''">
+                AND DATE_FORMAT(p.create_time,'%Y-%m-%d') <![CDATA[<=]]> #{productParam.createEndTime}
+            </if>
+        </where>
+        ORDER BY
+        p.create_time
+        DESC
+    </select>
+
+    <select id="querySaleModeChangeProduct" resultMap="SaleModeResultMap"
+            parameterType="java.lang.Long">
+        SELECT
+        <include refid="Sale_Mode_Product_List"/>
+        FROM
+        t_product p
+        <where>
+            p.is_deleted = 0
+            and p.id = #{id}
+        </where>
+    </select>
+
+    <select id="querySupplierProductList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.ProductParam">
+        SELECT
+        <include refid="Base_Supplier_Product_List"/>
+        FROM
+        t_product p
+        LEFT JOIN t_supplier r ON p.provider_id = r.id and r.is_deleted = 0
+        <where>
+            p.is_deleted = 0
+            AND r.id = #{productParam.providerId}
+        </where>
+        ORDER BY
+        p.create_time
+        DESC
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        SELECT
+        p.id, p.create_time, p.name, p.pic, p.product_sn, p.distribution_mode, p.sale_mode, p.status
+        FROM
+        t_product p
+        <where>
+            p.is_deleted = 0
+        </where>
+    </select>
+
+    <select id="queryAllCount" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        t_product p
+    </select>
+
+
+
+    <select id="getProductById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Product_Detail"/>
+        FROM
+        t_product p
+        LEFT JOIN t_supplier r ON p.provider_id = r.id and r.is_deleted = 0
+        <where>
+            p.is_deleted = 0
+            and p.id = #{id}
+        </where>
+    </select>
+
+    <select id="querySkuStock" resultMap="SkuStockResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Sku_List"/>
+        FROM
+        t_sku_stock s
+        WHERE
+        s.is_deleted = 0
+        AND
+        s.product_id = #{id}
+    </select>
+
+
+    <select id="queryProductAttribute" resultMap="ProductAttributeResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Attribute_List"/>
+        FROM
+        t_product_attribute a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.product_id = #{id}
+    </select>
+
+    <select id="queryProductShowCategory" resultMap="ProductShowCategoryResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_ProductShowCategory_List"/>
+        FROM
+        t_product_show_category ps inner join t_show_category tsc on ps.show_category_id = tsc.id
+        WHERE
+        ps.is_deleted = 0 and tsc.is_deleted = 0
+        AND
+        ps.parent_id = 0
+        AND
+        ps.product_id = #{id}
+    </select>
+
+    <select id="queryProductShowCategorySecond" resultMap="ProductShowCategorySecondResultMap"
+            parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_ProductShowCategorySecond_List"/>
+        FROM
+        t_product_show_category pss inner join t_show_category tsc on pss.show_category_id = tsc.id
+        WHERE
+        pss.is_deleted = 0 and tsc.is_deleted = 0
+        AND
+        pss.parent_id = #{ps_id}
+    </select>
+
+    <select id="queryDefaultProduct" resultMap="BaseResultMap">
+        SELECT
+        p.*
+        FROM
+        t_product p
+        where p.is_deleted = 0
+    </select>
+</mapper>

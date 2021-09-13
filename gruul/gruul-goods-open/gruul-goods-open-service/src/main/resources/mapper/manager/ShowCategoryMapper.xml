@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.ShowCategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.ShowCategoryVo">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="level" property="level"/>
+        <result column="sort" property="sort"/>
+        <result column="product_number" property="productNumber"/>
+        <result column="show_category_id" property="showCategoryId"/>
+        <result column="sort" property="sort"/>
+        <collection property="showCategoryVos" ofType="com.medusa.gruul.goods.api.model.vo.manager.ShowCategorySecondVo"
+                    column="id" select="queryShowCategorySecond"></collection>
+    </resultMap>
+
+    <resultMap id="SecondResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.ShowCategorySecondVo">
+        <id column="second_id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="second_name" property="name"/>
+        <result column="product_number" property="productNumber"/>
+        <result column="show_category_id" property="showCategoryId"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        t.id, t.name, t.parent_id, t.id as show_category_id, t.sort
+    </sql>
+
+    <sql id="Second_Column_List">
+      c.id as second_id, c.name as second_name, c.parent_id as parent_id, coalesce(count(s.id), 0) as product_number, c.id as show_category_id, c.sort
+    </sql>
+
+    <select id="queryShowCategoryList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.ShowCategoryParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_show_category t
+        where
+        t.sale_mode = #{showCategoryParam.saleMode}
+        and t.parent_id = 0
+        and t.is_deleted = 0
+        order by t.sort
+    </select>
+
+    <select id="queryAllShowCategoryList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.ShowCategoryParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_show_category t
+        where t.sale_mode = #{showCategoryParam.saleMode}
+        and t.parent_id = 0
+        and t.is_deleted = 0
+        order by t.sort
+    </select>
+
+    <select id="getShowCategoryById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_show_category t
+        where t.id = #{id}
+        and t.is_deleted = 0
+    </select>
+
+    <select id="queryShowCategorySecond" resultMap="SecondResultMap">
+        select
+        <include refid="Second_Column_List"/>
+        from t_show_category c
+        left join t_product_show_category p on c.id = p.show_category_id and p.is_deleted = 0
+        left join t_product s on p.product_id = s.id and s.is_deleted = 0
+        where c.parent_id = #{id}
+        and c.is_deleted = 0
+        group by c.id,c.name
+        order by c.sort
+    </select>
+
+    <select id="queryDefaultShowCategory" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        t_show_category t
+        WHERE
+        t.parent_id = 0
+        and t.is_deleted = 0
+        limit 1
+    </select>
+
+</mapper>

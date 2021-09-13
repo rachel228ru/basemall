@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA;8BAC8B",
+    "sources": [
+        "function.scss",
+        "config.scss"
+    ],
+    "names": [],
+    "file": "function.css"
+}

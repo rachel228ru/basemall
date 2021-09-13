@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.PlatformShopMessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.PlatformShopMessage">
+        <id column="id" property="id"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="use_type" property="useType"/>
+        <result column="version" property="version"/>
+        <result column="message_type" property="messageType"/>
+        <result column="mini_open" property="miniOpen"/>
+        <result column="mini_msg" property="miniMsg"/>
+        <result column="code_open" property="codeOpen"/>
+        <result column="code_msg" property="codeMsg"/>
+        <result column="mp_open" property="mpOpen"/>
+        <result column="mp_msg" property="mpMsg"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="mark" property="mark"/>
+        <result column="mini_template_id" property="miniTemplateId"/>
+        <result column="code_template_id" property="codeTemplateId"/>
+        <result column="mp_template_id" property="mpTemplateId"/>
+        <result column="title" property="title"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        is_deleted,title,
+        update_time,
+        create_time,
+        id, use_type, version, message_type, mini_open, mini_msg, code_open, code_msg, mp_open, mp_msg, tenant_id, mark,
+        mini_template_id, code_template_id, mp_template_id
+    </sql>
+    <select id="getLastMiniMsg" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_platform_shop_message
+        where
+        use_type = 1
+        and
+        version = (
+        select version from t_platform_shop_message
+        where id = (
+        select max(id) from t_platform_shop_message
+        )
+        )
+    </select>
+
+</mapper>

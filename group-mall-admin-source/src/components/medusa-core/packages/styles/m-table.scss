@@ -1,0 +1,253 @@
+@import "../styles/variable";
+
+.m__table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  font-size: 12px;
+  // background: #fff;
+
+  .hide {
+    display: none;
+  }
+
+  &--container {
+    background: #eef1f6;
+    padding: 11px 8px;
+
+    &.single {
+      background: none;
+
+      .m__table--head {
+        th {
+          &:first-child {
+            border-radius: 10px 0 0px 0px;
+          }
+
+          &:last-child {
+            border-radius: 0 10px 0px 0px;
+          }
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .close {
+    background: #f5f5f5 !important;
+  }
+
+  .hover--class {
+    $bc: #bebebe !important;
+
+    &:hover {
+      .body--header {
+        border-color: $bc;
+        position: relative;
+      }
+
+      .body--content {
+        td {
+          border-color: $bc;
+
+          &:first-child {
+            border-color: $bc;
+          }
+
+          &:last-child {
+            border-color: $bc;
+          }
+        }
+      }
+    }
+  }
+
+  .ordinary--class {
+    $bc: #bcdfff;
+
+    &:hover {
+      .body--header {
+        border-color: $bc;
+      }
+
+      .body--content {
+        td {
+          border-color: $bc;
+
+          &:last-child {
+            border-color: $bc;
+          }
+        }
+      }
+    }
+  }
+
+  .need--border {
+    $bc: #bcdfff;
+
+    .body--content {
+      td {
+        border-right: 1px solid $bc;
+
+        &:last-child {
+          border-color: $bc;
+        }
+      }
+    }
+  }
+
+  &--empty {
+
+    .empty__td {
+      // width: 100%;
+      width: 960px;
+      height: 80px;
+      background-color: white;
+      margin-left: -15px;
+      font-size: 14px;
+      color: #B3B3B3;
+    }
+  }
+
+  &--head {
+    // margin-bottom: 14px;
+
+    th {
+      $b-c: #d8eaf9;
+      background: #fff;
+      padding: 10px 10px;
+      text-align: center;
+      color: #515a6e;
+      font-weight: 200;
+      border-top: 1px solid $b-c;
+      border-bottom: 1px solid $b-c;
+      height: 50px;
+      vertical-align: middle;
+      font-size: 14px;
+      font-weight: normal;
+      color: rgba(88, 104, 132, 1);
+
+      &:first-child {
+        border-left: 1px solid $b-c;
+      }
+
+      &:last-child {
+        border-right: 1px solid $b-c;
+      }
+    }
+
+    &:after {
+      content: "-";
+      display: block;
+      line-height: 14px;
+      color: transparent;
+    }
+
+    &.padding {
+      &:after {
+        content: "-";
+        display: block;
+        // line-height: 0px;
+        color: transparent;
+      }
+    }
+  }
+
+  $b-c: #d8eaf9;
+
+  &--body {
+    .body--header {
+      @include flex(flex-start);
+
+      padding: 0 10px;
+      border: 1px solid $b-c;
+      font-size: 13px;
+      border-radius: 10px 10px 0px 0px;
+      height: 55px;
+      vertical-align: middle;
+      background: #fff;
+    }
+
+    &.default {
+      .body--content {
+        // border-radius: 10px 10px 0px 0px;
+
+        .m__table--item {
+          &:first-child {
+            border-radius: 0px 0 0px 0px;
+          }
+
+          &:last-child {
+            border-radius: 0px 0px 0px 0px;
+          }
+        }
+      }
+
+      .m__table--item {
+        border-top: 1px solid #d8eaf9;
+        vertical-align: middle;
+      }
+    }
+
+    .body--content {
+      td {
+        .item__content {
+          // @include flex(flex-start);
+          @include flex(center);
+        }
+
+        .selection__checkbox {
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+
+          &.selection {
+            @include flex(flex-start);
+          }
+        }
+
+        padding: 8px 10px;
+        border-top: 0px;
+        border-bottom: 1px solid $b-c;
+
+        border-right: 0px;
+        font-size: 12px;
+        color: #50596d;
+        background: #fff;
+        vertical-align: middle;
+
+        &:first-child {
+          border-left: 1px solid $b-c;
+        }
+
+        &:last-child {
+          border-right: 1px solid $b-c;
+        }
+      }
+
+      &.is--multiple {
+        td {
+          &:first-child {
+            border-right: 1px solid $b-c !important;
+          }
+        }
+      }
+    }
+
+    &:after {
+      content: "-";
+      display: block;
+      line-height: 14px;
+      color: transparent;
+      width: 100%;
+    }
+  }
+
+  .el-checkbox {
+    margin-right: 10px !important;
+    float: left;
+  }
+}

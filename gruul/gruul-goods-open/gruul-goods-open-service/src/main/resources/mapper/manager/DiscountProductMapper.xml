@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.DiscountProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.DiscountProductVo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="wide_pic" property="widePic"/>
+        <result column="album_pics" property="albumPics"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="min_price" property="minPrice"/>
+        <result column="max_price" property="maxPrice"/>
+        <result column="sale_mode" property="saleMode"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Product_List">
+        t.id, t.name, t.pic, t.wide_pic, t.album_pics, t.product_sn, t.limit_type, t.sale_mode, t.domino_state, min(u.price) as min_price, case when t.limit_type = 0 then min(u.price) else max(u.price) end as max_price
+    </sql>
+
+
+
+    <select id="queryRemoveProductList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.goods.api.model.param.manager.DiscountProductParam">
+        SELECT * from
+        (SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_sku_stock u
+        inner join t_product t on u.product_id = t.id and t.is_deleted = 0 and t.status = 1
+        where u.is_deleted = 0 group by u.product_id) p
+        <where>
+            <if test="discountProductParam.productIds != null and discountProductParam.productIds.size() > 0 ">
+                AND p.id in
+                <foreach collection="discountProductParam.productIds" item="id" index="index" open="(" close=")" separator=",">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="discountProductParam.showCategoryId != null">
+                AND EXISTS (
+                SELECT
+                psc.id
+                FROM
+                t_product_show_category psc
+                WHERE
+                psc.product_id = p.id
+                AND
+                (psc.show_category_id = #{discountProductParam.showCategoryId})
+                AND psc.is_deleted = 0
+                )
+            </if>
+            <if test="discountProductParam.name != null and discountProductParam.name != ''">
+                AND ( p.name LIKE CONCAT('%',#{discountProductParam.name},'%') or p.product_sn LIKE
+                CONCAT('%',#{discountProductParam.name},'%'))
+            </if>
+            <if test="discountProductParam.saleMode != null">
+                AND p.sale_mode = #{discountProductParam.saleMode}
+            </if>
+            <if test="discountProductParam.minPrice != null ">
+                AND p.min_price <![CDATA[>=]]> #{discountProductParam.minPrice}
+            </if>
+            <if test="discountProductParam.maxPrice!=null ">
+                AND p.max_price <![CDATA[<=]]> #{discountProductParam.maxPrice}
+            </if>
+        </where>
+        ORDER BY
+        p.id
+        DESC
+    </select>
+
+    <select id="querySaveProductList" resultMap="BaseResultMap"
+            parameterType="java.util.List">
+        SELECT * from
+        (SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_sku_stock u
+        inner join t_product t on u.product_id = t.id
+        where t.is_deleted = 0 and t.status = 1 and u.is_deleted = 0 group by u.product_id) p
+        <where>
+            p.id in
+            <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+        ORDER BY
+        p.id
+        DESC
+    </select>
+
+    <select id="queryDiscountProductTypeList" resultMap="BaseResultMap"
+            parameterType="java.util.List">
+        SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_sku_stock u
+        inner join t_product t on u.product_id = t.id and t.is_deleted = 0 and t.status = 1
+        and t.id in
+        <foreach collection="productIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        where u.is_deleted = 0
+        group by u.product_id
+        ORDER BY t.id desc
+    </select>
+
+
+</mapper>

@@ -1,0 +1,145 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include m(menu) {
+  padding: 15px 8px;
+  border-bottom: 1px solid #d7d7d7;
+  z-index: 3;
+  position: relative;
+
+  @include e(item) {
+    &.active {
+      background: #fbfbfb;
+    }
+
+    &.hover {
+      background: #fbfbfb;
+
+      .item--modal,
+      .item--mask {
+        display: block;
+      }
+    }
+
+    @include m(title) {
+      color: #409eff;
+
+      a {
+        color: #409eff;
+      }
+    }
+  }
+
+  @include m(setting) {
+    @include flex;
+    $s: 20px;
+    width: $s;
+    height: $s;
+    background: #fff;
+    top: 0;
+    margin: -10px auto 0;
+    position: relative;
+    z-index: 9;
+    cursor: pointer;
+    font-size: 18px;
+
+    .el-icon-s-tools {
+      // color: #2e8cf0;
+    }
+
+    .el-icon-success {
+      color: #67c23a;
+    }
+  }
+
+  .item--mask {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: #fbfbfb;
+    z-index: 100;
+  }
+
+  .item--modal {
+    display: none;
+    width: 100px;
+    height: auto;
+    background: #fbfbfb;
+    position: absolute;
+    top: -1px;
+    right: -98px;
+    z-index: 11;
+    border: 1px solid #d7d7d7;
+    // border-left: 0px;
+
+    .modal--item {
+      padding: 10px 5px;
+    }
+  }
+
+  .item--title {
+    @include flex(space-between);
+
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #252525;
+
+    a {
+      font-size: 16px;
+      color: #000;
+      width: 100%;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: #545454;
+    font-size: 14px;
+
+    &:visited {
+      color: #545454;
+    }
+
+    &:hover {
+      color: rgba($color: #409eff, $alpha: 0.9);
+    }
+
+    &:active {
+      color: rgba($color: #409eff, $alpha: 0.7);
+    }
+
+    &.active {
+      color: #2e8cf0 !important;
+    }
+  }
+
+  .iconfont {
+    color: #2e8cf0;
+  }
+
+  .item__sub {
+    margin-top: 10px;
+
+    &--menu {
+      @include flex(flex-start);
+      flex-wrap: wrap;
+
+      .sub--item {
+        width: 80px;
+        padding: 10px 0px;
+        cursor: pointer;
+        color: #545454;
+
+        // &.active {
+        //   color: rgba($color: #409eff, $alpha: 1);
+        // }
+      }
+    }
+  }
+}

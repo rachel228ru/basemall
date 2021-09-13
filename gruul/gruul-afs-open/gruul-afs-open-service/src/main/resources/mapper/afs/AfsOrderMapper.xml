@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.afs.mapper.AfsOrderMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.afs.api.entity.AfsOrder">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="no" property="no"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="close_type" property="closeType"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="template_id" property="templateId"/>
+        <result column="return_template_id" property="returnTemplateId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="refund_amount" property="refundAmount"/>
+        <result column="deadline" property="deadline"/>
+        <result column="description" property="description"/>
+        <result column="images" property="images"/>
+        <result column="close_time" property="closeTime"/>
+        <result column="refusal_time" property="refusalTime"/>
+        <result column="success_time" property="successTime"/>
+        <result column="refusal_reason" property="refusalReason"/>
+        <result column="reason" property="reason"/>
+        <result column="receipt_bill_id" property="receiptBillId"/>
+        <result column="note" property="note"/>
+        <result column="delivery_sn" property="deliverySn"/>
+        <result column="delivery_code" property="deliveryCode"/>
+        <result column="delivery_company" property="deliveryCompany"/>
+        <result column="is_logistics" property="isLogistics"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,create_time,update_time,deleted,id, shop_id, no, type, status, close_type, user_id, user_name,
+        user_avatar_url, product_sku_id, template_id, return_template_id,
+        order_id, refund_amount,
+        deadline, description,
+        images, close_time, refusal_time, success_time, refusal_reason, receipt_bill_id, note, delivery_sn,
+        delivery_code, delivery_company, is_logistics
+    </sql>
+    <select id="selectOriginalOrderListByOrderId" resultType="java.lang.Long">
+        SELECT
+            aoi.order_id
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND ao.order_id = #{orderId}
+    </select>
+    <select id="selectOriginalOrderByOrderId" resultType="java.lang.Long">
+        SELECT
+            aoi.order_id
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND ao.order_id = #{orderId}
+        LIMIT 1
+    </select>
+    <select id="selectProgressByOriginalOrderIdsAndIdNotIn" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+            ao.*
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.id
+        WHERE
+            ao.id != #{id}
+            AND ao.type in(1, 4)
+            AND ao.status &lt; 99
+            AND aoi.order_id IN(#{originalOrderIds})
+    </select>
+    <select id="searchManageAfsOrderVoPage" resultType="com.medusa.gruul.afs.model.ManageAfsOrderVo">
+        SELECT DISTINCT
+        ao.id AS id,
+        ao.no AS no,
+        ao.type AS TYPE,
+        ao.user_id AS user_id,
+        ao.user_name AS user_name,
+        ao.user_avatar_url AS user_avatar_url,
+        ao.refund_amount AS refund_amount,
+        ao.create_time AS create_time,
+        ao.status AS status,
+        ao.note AS note,
+        ai.order_id AS order_id,
+        ai.product_pic AS product_pic,
+        ai.product_name AS product_name,
+        ai.specs AS specs,
+        ai.product_price AS product_price,
+        ai.product_quantity AS product_quantity,
+        od.delivery_type AS delivery_type,
+        od.receiver_name AS receiver_name,
+        od.receiver_phone AS receiver_phone,
+        od.receiver_province AS receiver_province,
+        od.receiver_city AS receiver_city,
+        od.receiver_region AS receiver_region,
+        od.receiver_detail_address AS receiver_detail_address,
+        o.status AS order_status
+        FROM
+        t_afs_order AS ao
+        LEFT JOIN t_afs_order_item AS ai ON ao.id = ai.afs_id
+        LEFT JOIN t_order_delivery AS od ON ai.order_id = od.order_id
+        LEFT JOIN t_order AS o ON ai.order_id = o.id
+        WHERE
+        ao.is_deleted = 0
+        <if test="dto.goodsName!=null and dto.goodsName!=''">
+            AND ai.product_name LIKE concat('%', #{dto.goodsName}, '%')
+        </if>
+        <if test="dto.userName!=null and dto.userName!=''">
+            AND ao.user_name LIKE concat('%', #{dto.userName}, '%')
+        </if>
+        <if test="dto.receiverName!=null and dto.receiverName!=''">
+            AND od.receiver_name LIKE concat('%', #{dto.receiverName}, '%')
+        </if>
+        <if test="dto.orderId!=null and dto.orderId!=''">
+            AND ao.no LIKE concat('%', #{dto.orderId}, '%')
+        </if>
+        <if test="dto.pointName!=null and dto.pointName!=''">
+            AND od.point_name LIKE concat('%', #{dto.pointName}, '%')
+        </if>
+        <if test="dto.lineId!=null and dto.lineId!=''">
+            AND od.line_id = #{dto.lineId}
+        </if>
+        <if test="dto.deliverType!=null and dto.deliverType!=''">
+            AND od.delivery_type = #{dto.deliverType}
+        </if>
+        <if test="dto.startTime!=null and dto.startTime!='' and dto.endTime!=null and dto.endTime!=''">
+            AND ao.create_time BETWEEN #{dto.startTime} AND #{dto.endTime}
+        </if>
+        <if test="statusList!=null and statusList.size>0">
+            AND ao.status IN
+            <foreach collection="statusList" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+        <if test="dto.area !=null and dto.area != ''">
+            AND ai.order_area = #{dto.area}
+        </if>
+        ORDER BY ao.create_time DESC
+    </select>
+    <select id="selectProgressByOrderIdAndProductSkuId" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+            ao.*
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND aoi.order_id = #{orderId}
+            AND aoi.product_sku_id = #{productSkuId}
+            AND ao.status &lt; 99
+            ORDER BY ao.create_time DESC
+        LIMIT 1
+    </select>
+    <select id="getOrderApplyNumber" resultType="java.lang.Integer">
+        SELECT
+        COUNT(DISTINCT ao.id)
+        FROM
+        t_afs_order AS ao
+        LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+        ao.is_deleted = 0
+        AND aoi.order_id in
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+        AND ao.type in
+        <foreach collection="types" item="type" open="(" separator="," close=")">
+            #{type}
+        </foreach>
+    </select>
+    <select id="selectByOrderId" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+            *
+        FROM
+            t_afs_order
+        WHERE
+            order_id = #{orderId}
+        LIMIT 1
+    </select>
+
+    <select id="selectAfsOrderByReceiptBillId" resultType="com.medusa.gruul.afs.api.model.AfsSimpleVo">
+        SELECT
+            ao.id,
+            ao.no,
+            ao.type,
+            ao.status,
+            ao.close_type,
+            aoi.order_id
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.receipt_bill_id = #{receiptBillId}
+    </select>
+    <select id="selectProgressByOrderIdAndIdNotIn" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+            ao.*
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND aoi.order_id = #{orderId}
+            AND ao.id not in (#{afsId})
+            AND ao.status &lt; 99
+            ORDER BY ao.create_time DESC
+    </select>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="ApiAfsOrderVoMap" type="com.medusa.gruul.afs.model.ApiAfsOrderVo">
+        <id column="id" property="id"/>
+        <result column="no" property="no"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="close_type" property="closeType"/>
+        <result column="deadline" property="deadline"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="specs" property="specs"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="apply_order_id" property="applyOrderId"/>
+        <result column="pay_amount" property="payAmount"/>
+    </resultMap>
+
+    <select id="searchOrder" resultMap="ApiAfsOrderVoMap">
+        SELECT
+            ao.id,
+            ao.no,
+            ao.type,
+            ao.status,
+            ao.close_type,
+            ao.deadline,
+            aoi.product_price,
+            aoi.product_name,
+            aoi.product_pic,
+            aoi.product_quantity,
+            aoi.product_sku_id,
+            aoi.specs,
+            aoi.order_id AS apply_order_id,
+            o.pay_amount AS pay_amount
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+            LEFT JOIN t_order AS o ON aoi.order_id = o.id
+        WHERE
+            ao.is_deleted = 0
+            AND ao.type in(3, 4, 5)
+            AND ao.user_id = #{userId}
+        ORDER BY
+            ao.create_time DESC
+    </select>
+    <select id="selectByOriginalOrderId" resultType="com.medusa.gruul.afs.api.entity.AfsOrder">
+        SELECT
+            ao.*
+        FROM
+            t_afs_order AS ao
+            LEFT JOIN t_afs_order_item AS aoi ON ao.id = aoi.afs_id
+        WHERE
+            ao.is_deleted = 0
+            AND aoi.order_id = #{orderId}
+            ORDER BY ao.id DESC
+        LIMIT 1
+    </select>
+</mapper>

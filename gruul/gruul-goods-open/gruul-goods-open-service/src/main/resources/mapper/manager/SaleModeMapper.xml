@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.manager.SaleModeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.manager.SaleModeVo">
+        <id column="id" property="id"/>
+        <result column="mode_name" property="modeName"/>
+        <result column="mode_type" property="modeType"/>
+        <result column="sort" property="sort"/>
+        <result column="product_number" property="productNumber"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        t.id, t.mode_name, t.mode_type, t.sort, coalesce(count(s.id), 0) as product_number
+    </sql>
+
+    <select id="querySaleModeList" parameterType="com.medusa.gruul.goods.api.model.param.manager.SaleModeParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sale_mode t
+        left join t_product s on t.id = s.sale_mode and s.is_deleted = 0 and s.place = 0
+        where
+        t.is_deleted = 0
+        <if test="saleModeParam.modeName != null and saleModeParam.modeName != ''">
+            AND t.mode_name LIKE CONCAT('%',#{saleModeParam.modeName},'%')
+        </if>
+        group by t.id,t.mode_name,t.mode_type,t.sort
+        order by t.sort
+    </select>
+
+    <select id="queryAllSaleModeList" resultMap="BaseResultMap">
+        select
+        t.id, t.mode_name, t.mode_type, t.sort
+        from t_sale_mode t
+        where
+        t.is_deleted = 0
+        order by t.sort
+    </select>
+
+    <select id="queryMaxSort" resultType="java.lang.Integer">
+        select
+        max(t.sort)
+        from t_sale_mode t
+        where
+        t.is_deleted = 0
+    </select>
+
+    <select id="queryDefaultSaleMode" resultMap="BaseResultMap">
+        select
+        t.id, t.mode_name, t.mode_type, t.sort
+        from t_sale_mode t
+        where
+        t.is_deleted = 0
+        order by t.sort
+    </select>
+
+</mapper>

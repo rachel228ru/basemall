@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "goods-item": "/components/goods/goods"
+  }
+}

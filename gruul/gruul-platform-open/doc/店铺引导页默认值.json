@@ -1,0 +1,13 @@
+{
+  "uniqueIdentification": "SHOP_GUIDE_PAGE_DEFUALT",
+  "version": "v1.2.3",
+  "buildAction": 1,
+  "importDirectUse": 0,
+  "url": "/",
+  "mq": {
+    "exchange": "gruul.shops.exchange",
+    "routeKey": "gruul.shops.guide.page.init"
+  },
+  "kv": {
+  }
+}

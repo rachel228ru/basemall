@@ -1,0 +1,580 @@
+{
+  "uniqueIdentification": "accountCentreDefault",
+  "version": "s1.0.0",
+  "buildAction": 1,
+  "importDirectUse":1,
+  "url": "/",
+  "mq": {
+    "exchange": "gruul.shops.exchange",
+    "routeKey": "gruul.shops.center.queue.init"
+  },
+  "kv": {
+    "tenantId": "100002",
+    "headStyle": 1,
+    "customStyle": {
+      "backgroundImage": "https://static.easyicon.net/preview/123/1235276.gif",
+      "cardColor": "#89bf04",
+      "textColor": "#E7C898"
+    },
+    "getCartText": "领卡文案",
+    "hideCartInlet": false,
+    "orderInfo": {
+      "waitIcon": {
+        "url": "https://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/daifukuan.png",
+        "name": "待付款",
+        "path": "pages/evaluationCenter/evaluationCenter"
+      },
+      "deliveryIcon": {
+        "url": "https://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/daitihuo.png",
+        "name": "配送中",
+        "path": "pages/evaluationCenter/evaluationCenter"
+      },
+      "waitPickingIcon": {
+        "url": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/daitihuo.png",
+        "name": "待提货",
+        "path": "pages/evaluationCenter/evaluationCenter"
+      },
+      "afterSaleIcon": {
+        "url": "https://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/shouhou.png",
+        "name": "售后",
+        "path": "pages/evaluationCenter/evaluationCenter"
+      },
+      "evaluateIcon": {
+        "url": "https://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/shouhou.png",
+        "name": "评价中心",
+        "path": "pages/evaluationCenter/evaluationCenter"
+      }
+    },
+    "menuStyle": 1,
+    "codeStyle": 1,
+    "menuVos": [
+      {
+        "menuName": "积分商城",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/jifen.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/jifen.png",
+        "styleType": 1,
+        "sortIndex": 0,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": true,
+        "allowUse": 1,
+        "linkSelectItem": {"id":1,"type":4,"name":"积分商城","url":"/pages/integralShop/integralShop","append":"group"},
+        "subMenu": []
+      },
+      {
+        "menuName": "分销中心",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/fenxiao.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/fenxiao.png",
+        "styleType": 1,
+        "sortIndex": 1,
+        "pId": "0",
+        "hideMenu": false,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 2,
+          "type": 4,
+          "name": "分销中心",
+          "url": "/pages/index/index",
+          "append": "mall"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "团长中心",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/tuanzhanggongzuotai.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/tuanzhanggongzuotai.png",
+        "styleType": 1,
+        "sortIndex": 2,
+        "pId": "0",
+        "hideMenu": false,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 10,
+          "type": 0,
+          "name": "团长中心",
+          "url": "/pages/commanderCenter/commanderCenter"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "团长信息",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/tuanzhangxinxi.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/tuanzhangxinxi.png",
+        "styleType": 1,
+        "sortIndex": 3,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 11,
+          "type": 0,
+          "name": "团长信息",
+          "url": "/pages/commanderInfo/commanderInfo"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "提货点后台",
+        "menuIconUrl": "https://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/daitihuo.png",
+        "defaultIcon": "https://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/daitihuo.png",
+        "styleType": 1,
+        "sortIndex": 4,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": true,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 12,
+          "type": 0,
+          "name": "提货点后台",
+          "url": "/pages/pointBackground/pointBackground"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "资源入驻",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/ziyuanruzhu.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/ziyuanruzhu.png",
+        "styleType": 1,
+        "sortIndex": 5,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 5,
+          "type": 0,
+          "name": "资源入驻",
+          "url": "/pages/resourceApply/resourceApply"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "申请合伙人",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/shenqingchengshihehuoren.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/shenqingchengshihehuoren.png",
+        "styleType": 1,
+        "sortIndex": 6,
+        "pId": "0",
+        "hideMenu": false,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 6,
+          "type": 0,
+          "name": "申请合伙人",
+          "url": ""
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "领券中心",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/lingquanzhongxin.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/lingquanzhongxin.png",
+        "styleType": 1,
+        "sortIndex": 7,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 3,
+          "type": 4,
+          "name": "领券中心",
+          "url": "/pages/coupon/couponCenter/couponCenter"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "我的优惠券",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/wodeyouhuiquan.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/wodeyouhuiquan.png",
+        "styleType": 1,
+        "sortIndex": 8,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 4,
+          "type": 4,
+          "name": "我的优惠券",
+          "url": "/pages/coupon/coupon"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "购物车",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/gouwuche.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/gouwuche.png",
+        "styleType": 1,
+        "sortIndex": 9,
+        "pId": "0",
+        "hideMenu": false,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 4,
+          "type": 0,
+          "name": "购物车",
+          "url": "/pages/index/index",
+          "append": "shopCar"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "客服",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/wodekefu.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/wodekefu.png",
+        "styleType": 1,
+        "sortIndex": 10,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 8,
+          "type": 0,
+          "name": "客服",
+          "url": ""
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "地址管理",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/dizhiguanli.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/dizhiguanli.png",
+        "styleType": 1,
+        "sortIndex": 11,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 7,
+          "type": 0,
+          "name": "地址管理",
+          "url": "/pages/address/address"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "设置",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/shezhi.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/shezhi.png",
+        "styleType": 1,
+        "sortIndex": 12,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 9,
+          "type": 0,
+          "name": "设置",
+          "url": "/pages/mySetting/mySetting"
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "提货二维码",
+        "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+        "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+        "styleType": 1,
+        "sortIndex": 13,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 7,
+          "type": 4,
+          "name": "提货二维码",
+          "url": ""
+        },
+        "subMenu": [
+        ]
+      },
+      {
+        "menuName": "社群拼团",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/%E7%A4%BE%E5%8C%BA.png",
+        "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+        "styleType": 2,
+        "sortIndex": 0,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 7,
+          "type": 4,
+          "name": "社群拼团",
+          "url": ""
+        },
+        "subMenu": [
+          {
+            "menuName": "团长中心",
+            "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+            "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+            "styleType": 2,
+            "sortIndex": 0,
+            "hideMenu": false,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 10,
+              "type": 0,
+              "name": "团长中心",
+              "url": "/pages/commanderCenter/commanderCenter"
+            },
+            "subMenu": [
+            ]
+          },
+          {
+            "menuName": "团长信息",
+            "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+            "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+            "styleType": 2,
+            "sortIndex": 1,
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 11,
+              "type": 0,
+              "name": "团长信息",
+              "url": "/pages/commanderInfo/commanderInfo"
+            },
+            "subMenu": [
+            ]
+          },
+          {
+            "menuName": "提货点后台",
+            "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+            "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+            "styleType": 2,
+            "sortIndex": 2,
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 12,
+              "type": 0,
+              "name": "提货点管理",
+              "url": "/pages/pointBackground/pointBackground"
+            },
+            "subMenu": [
+            ]
+          }
+        ]
+      },
+      {
+        "menuName": "营销活动",
+        "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/%E5%95%86%E5%BA%97.png",
+        "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/%E5%95%86%E5%BA%97.png",
+        "styleType": 2,
+        "sortIndex": 1,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 9,
+          "type": 0,
+          "name": "营销活动",
+          "url": ""
+        },
+        "subMenu": [
+          {
+            "menuName": "分销中心",
+            "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+            "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+            "styleType": 2,
+            "sortIndex": 0,
+            "pId": "0",
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 2,
+              "type": 4,
+              "name": "分销中心",
+              "url": "/pages/index/index",
+              "append": "mall"
+            },
+            "subMenu": [
+            ]
+          },
+          {
+            "menuName": "积分商城",
+            "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+            "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+            "styleType": 2,
+            "sortIndex": 1,
+            "pId": "0",
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 1,
+              "type": 4,
+              "name": "积分商城",
+              "url": "/pages/integralShop/integralShop",
+              "append": "group"
+            },
+            "subMenu": []
+          },
+          {
+            "menuName": "我的优惠券",
+            "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+            "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+            "styleType": 2,
+            "sortIndex": 2,
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 4,
+              "type": 4,
+              "name": "我的优惠券",
+              "url": "/pages/coupon/coupon"
+            },
+            "subMenu": [
+            ]
+          }
+        ]
+      },
+      {
+        "menuName": "我的工具",
+        "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+        "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+        "styleType": 2,
+        "sortIndex": 2,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 4,
+          "type": 0,
+          "name": "我的工具",
+          "url": "",
+          "append": ""
+        },
+        "subMenu": [
+          {
+            "menuName": "购物车",
+            "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/%E8%B4%AD%E7%89%A9%E8%BD%A6.png",
+            "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/%E8%B4%AD%E7%89%A9%E8%BD%A6.png",
+            "styleType": 2,
+            "sortIndex": 0,
+            "pId": "0",
+            "hideMenu": false,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 4,
+              "type": 0,
+              "name": "购物车",
+              "url": "/pages/index/index",
+              "append": "shopCar"
+            },
+            "subMenu": [
+            ]
+          },
+          {
+            "menuName": "客服",
+            "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/%E5%AE%A2%E6%9C%8D.png",
+            "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/%E5%AE%A2%E6%9C%8D.png",
+            "styleType": 2,
+            "sortIndex": 1,
+            "pId": "0",
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 8,
+              "type": 0,
+              "name": "客服",
+              "url": ""
+            },
+            "subMenu": [
+            ]
+          },
+          {
+            "menuName": "城市合伙人",
+            "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/chengshihehuoren.png",
+            "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/chengshihehuoren.png",
+            "styleType": 2,
+            "sortIndex": 2,
+            "pId": "0",
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 8,
+              "type": 0,
+              "name": "客服",
+              "url": ""
+            },
+            "subMenu": [
+            ]
+          },
+          {
+            "menuName": "资源入驻",
+            "menuIconUrl": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/wodeshezhi.png",
+            "defaultIcon": "http://medusa-small-file.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E6%A0%87/wodeshezhi.png",
+            "styleType": 2,
+            "sortIndex": 3,
+            "pId": "0",
+            "hideMenu": true,
+            "splitFlag": false,
+            "allowUse": 1,
+            "linkSelectItem": {
+              "id": 5,
+              "type": 0,
+              "name": "资源入驻",
+              "url": "/pages/resourceApply/resourceApply"
+            },
+            "subMenu": [
+            ]
+          }
+        ]
+      },
+      {
+        "menuName": "设置",
+        "menuIconUrl": "https://static.easyicon.net/preview/123/1235276.gif",
+        "defaultIcon": "https://static.easyicon.net/preview/123/1235276.gif",
+        "styleType": 2,
+        "sortIndex": 3,
+        "pId": "0",
+        "hideMenu": true,
+        "splitFlag": false,
+        "allowUse": 1,
+        "linkSelectItem": {
+          "id": 9,
+          "type": 0,
+          "name": "设置",
+          "url": "/pages/mySetting/mySetting"
+        },
+        "subMenu": [
+        ]
+      }
+    ]
+  }
+}

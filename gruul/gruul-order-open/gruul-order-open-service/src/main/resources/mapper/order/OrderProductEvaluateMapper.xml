@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.order.mapper.OrderProductEvaluateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.order.api.entity.OrderProductEvaluate">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="rate" property="rate"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="specs" property="specs"/>
+        <result column="comment" property="comment"/>
+        <result column="picture" property="picture"/>
+        <result column="choice" property="choice"/>
+        <result column="reply" property="reply"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+        id, shop_id, order_id, rate, product_id,product_pic, product_name,product_price,product_quantity, product_sku_id, specs, comment, picture, choice, reply
+    </sql>
+    <select id="selectByOrderId" resultType="com.medusa.gruul.order.api.entity.OrderProductEvaluate">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order_product_evaluate
+        where is_deleted=0 and order_id = #{orderId}
+    </select>
+
+
+    <!-- 返回给物流模块的数据 -->
+    <resultMap id="ProductEvaluateVoMap" type="com.medusa.gruul.order.model.ProductEvaluateVo">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar_url" property="userAvatarUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="rate" property="rate"/>
+        <result column="specs" property="specs"/>
+        <result column="comment" property="comment"/>
+        <result column="picture" property="picture"/>
+        <result column="reply" property="reply"/>
+        <result column="reply_time" property="replyTime"/>
+    </resultMap>
+    <select id="selectProductEvaluatePage" resultMap="ProductEvaluateVoMap">
+        SELECT
+        pe.id,
+        oe.user_id,
+        oe.user_name,
+        oe.user_avatar_url,
+        pe.create_time,
+        pe.rate,
+        pe.specs,
+        pe.comment,
+        pe.picture,
+        pe.reply,
+        pe.update_time AS reply_time
+        FROM
+        t_order_product_evaluate AS pe
+        LEFT JOIN t_order_evaluate AS oe ON pe.order_id = oe.order_id
+        WHERE
+        pe.product_id = #{productId}
+        <if test="type!=null and type == 1">
+            AND pe.picture != ''
+        </if>
+        <if test="type!=null and type == 2">
+            AND pe.comment != ''
+        </if>
+        AND (pe.choice = 1
+        <if test="userId!=null and userId != ''">
+            OR oe.user_id = #{userId}
+        </if>
+        )
+        ORDER BY oe.create_time DESC
+    </select>
+    <select id="selectProductRateByList" resultType="com.medusa.gruul.order.api.model.ProductRateVo">
+        SELECT
+        ROUND(AVG( rate ),1) as rate,
+        product_id
+        FROM
+        `t_order_product_evaluate`
+        WHERE
+        product_id IN
+        <foreach collection="productIds" item="productId" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+        GROUP BY
+        product_id
+    </select>
+    <select id="countTotal" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        t_order_product_evaluate AS pe
+        LEFT JOIN t_order_evaluate AS oe ON oe.order_id = pe.order_id
+        WHERE
+        pe.product_id = #{productId}
+        AND (
+        pe.choice = 1
+        <if test="userId!=null and userId != ''">
+            OR oe.user_id = #{userId}
+        </if>
+        )
+    </select>
+    <select id="countPraiseNum" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            t_order_product_evaluate AS pe
+            LEFT JOIN t_order_evaluate AS oe ON oe.order_id = pe.order_id
+        WHERE
+            pe.product_id = #{productId}
+            AND pe.rate > 3
+            AND (oe.user_id = #{userId} OR pe.choice = 1)
+    </select>
+    <select id="countHasContent" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            t_order_product_evaluate AS pe
+            LEFT JOIN t_order_evaluate AS oe ON oe.order_id = pe.order_id
+        WHERE
+            pe.product_id = #{productId}
+            AND pe.comment != ''
+            AND (oe.user_id = #{userId} OR pe.choice = 1)
+    </select>
+    <select id="countHasPicture" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            t_order_product_evaluate AS pe
+            LEFT JOIN t_order_evaluate AS oe ON oe.order_id = pe.order_id
+        WHERE
+            pe.product_id = #{productId}
+            AND pe.picture != ''
+            AND (oe.user_id = #{userId} OR pe.choice = 1)
+    </select>
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.account.mapper.MiniAccountExtendsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.account.api.entity.MiniAccountExtends">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="user_id" property="userId"/>
+        <result column="last_deal_time" property="lastDealTime"/>
+        <result column="is_blacklist" property="isBlacklist"/>
+        <result column="consume_num" property="consumeNum"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="join_blacklist_time" property="joinBlacklistTime"/>
+        <result column="community_type" property="communityType"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="shop_user_id" property="shopUserId"/>
+        <result column="current_status" property="currentStatus"/>
+        <result column="last_choose_lcation" property="lastChooseLcation"/>
+        <result column="supply_bonus" property="supplyBonus"/>
+        <result column="rebate_bonus" property="rebateBonus"/>
+        <result column="freeze_bonus" property="freezeBonus"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,community_type,shop_id,shop_user_id,current_status,
+        is_deleted,
+        update_time,
+        tenant_id,last_choose_lcation,
+        id, user_id, last_deal_time, is_blacklist, consume_num,  last_login_time,join_blacklist_time,
+        supply_bonus,rebate_bonus,freeze_bonus
+    </sql>
+
+    <select id="selectByCurrentStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mini_account_extends
+        where
+        is_deleted = 0
+        AND user_id = #{userId}
+        AND current_status = #{currentStatus}
+    </select>
+
+</mapper>

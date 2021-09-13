@@ -1,0 +1,440 @@
+page {
+    background-color: #f6f6f6;
+    padding-bottom: calc(90rpx + constant(safe-area-inset-bottom));
+    padding-bottom: calc(90rpx + env(safe-area-inset-bottom));
+  }
+  
+  .delivery {
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    background-color: white;
+    font-size: 30rpx;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .arrow {
+    display: flex;
+    align-items: center;
+    margin-left: 10rpx;
+  }
+  
+  .address {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    padding-top: 20rpx;
+    background-color: white;
+    border-radius: 15rpx;
+  }
+  
+  .address > image {
+    height: 10rpx;
+    width: 100%;
+  }
+  
+  .address__top {
+    font-size: 30rpx;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+  
+    .address__top--sign {
+      width: 120rpx;
+      height: 40rpx;
+      background-color: #ffecee;
+      border-radius: 25rpx;
+      color: #fe7888;
+      margin-right: 20rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      border: 1px solid #fe7888;
+      padding: 0px 5px;
+    }
+  }
+  
+  .address__sec {
+    margin-top: 20rpx;
+    font-size: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+  }
+  
+  .address__user {
+    margin-top: 20rpx;
+    font-size: 28rpx;
+    color: #7e7e7e;
+    margin-bottom: 20rpx;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .address__lead {
+    padding-top: 20rpx;
+    font-size: 28rpx;
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx 20px 0;
+    margin-bottom: 10px;
+  
+    &--left {
+      display: flex;
+    }
+  
+    &--right {
+      color: #b2b2b2;
+    }
+  }
+  
+  .card {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    background-color: white;
+    border-radius: 15rpx;
+    font-size: 26rpx;
+  }
+  
+  .card__top {
+    margin-left: 20rpx;
+    padding: 20rpx;
+    font-weight: bold;
+    border-bottom: 1rpx solid #f8f8f8;
+  }
+  
+  .card__good {
+    padding: 20rpx;
+    display: flex;
+  }
+  
+  .card__good > image {
+    margin-left: 20rpx;
+    width: 200rpx;
+    height: 200rpx;
+  }
+  
+  .goods--name {
+    font-size: 28rpx;
+  }
+  
+  .card__good--detail {
+    margin-left: 20rpx;
+    width: 70%;
+  
+    .card__good--detail--sec {
+      color: #acacac;
+      font-size: 22rpx;
+      margin-top: 10rpx;
+      display: flex;
+      justify-content: space-between;
+  
+      .price {
+        font-size: 36rpx;
+        margin-right: 30rpx;
+        color: #0d0d0d;
+      }
+    }
+  }
+  
+  .line--middle {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .priceCard {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    background-color: white;
+    border-radius: 15rpx;
+    font-size: 26rpx;
+    padding-bottom: 20rpx;
+  }
+  
+  .priceCard__price {
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    padding-top: 20rpx;
+    margin-bottom: 35rpx;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .item--label {
+    font-size: 14px;
+  }
+  
+  .priceCard__coupon {
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: space-between;
+  
+    .priceCard__coupon--coupNum {
+      @include flex(flex-end);
+      color: #fe475f;
+  
+      .arrow {
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+  
+  .priceCard__code {
+    margin-left: 40rpx;
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 40rpx;
+  
+    .priceCard__code--price {
+      color: #fe475f;
+    }
+  }
+  
+  .priceCard__freight {
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .priceCard__all {
+    @include flex(flex-end, center);
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    margin-top: 20rpx;
+    font-size: 14px;
+  
+    .priceCard__all--price {
+      color: #fe475f;
+      font-size: 16px;
+    }
+  }
+  
+  .vip {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    background-color: white;
+    border-radius: 15rpx;
+    font-size: 26rpx;
+    padding-bottom: 20rpx;
+  }
+  
+  .vip__top {
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    padding-top: 20rpx;
+    display: flex;
+    align-items: center;
+  
+    .vip__top--sign {
+      width: 100rpx;
+      height: 40rpx;
+      background-color: #39352a;
+      color: white;
+      border-radius: 50rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .vip__top--num {
+      color: #fe475f;
+    }
+  }
+  
+  .ifMember {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .vip__bottom {
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    margin-top: 20rpx;
+    padding-top: 20rpx;
+    border-top: 1rpx solid #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+  
+    .vip__bottom--num {
+      color: #fe475f;
+    }
+  }
+  
+  .form {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    background-color: white;
+    border-radius: 15rpx;
+    padding-left: 40rpx;
+    font-size: 26rpx;
+    padding-top: 40rpx;
+    padding-bottom: 20px;
+  
+    &.custom {
+      padding-left: 10rpx;
+    }
+  
+    .form-textare {
+      font-size: 30rpx;
+      height: 120rpx;
+      margin-top: 10px;
+      font-size: 14px;
+      color: rgb(133, 133, 133);
+  
+      &.view {
+        position: relative;
+        top: -2px;
+      }
+  
+      .van-cell {
+        padding: 15px 0;
+      }
+    }
+  }
+  
+  .payWay {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    background-color: white;
+    border-radius: 15rpx;
+    font-size: 26rpx;
+  
+    &__title {
+      @include flex(flex-start);
+    }
+  }
+  
+  .payWay__balance {
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    height: 60rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1rpx solid #f4f4f4;
+  }
+  
+  .notice {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    background-color: white;
+    border-radius: 15rpx;
+    font-size: 26rpx;
+    padding-left: 40rpx;
+    height: 80rpx;
+    display: flex;
+    align-items: center;
+  }
+  
+  .integral {
+    margin-top: 50rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    font-size: 26rpx;
+    height: 80rpx;
+    margin-bottom: 100rpx;
+    display: flex;
+    align-items: center;
+  }
+  
+  .integral__sign {
+    width: 80rpx;
+    height: 40rpx;
+    font-size: 24rpx;
+    border: 1rpx solid #fe4e63;
+    color: #fe4e63;
+    background-color: white;
+    border-radius: 25rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .submit {
+    @include flex(space-between);
+  
+    flex-direction: row;
+    align-items: center;
+    height: 90rpx;
+    position: fixed;
+    bottom: 0;
+    width: 750rpx;
+    border-top: 1rpx solid #e9e9e9;
+    background-color: white;
+    padding-left: 10px;
+  
+    z-index: 99;
+  
+    &__left {
+      display: flex;
+      margin-right: 40rpx;
+      align-items: center;
+      font-size: 32rpx;
+  
+      &--all {
+        @include flex(flex-start);
+        color: #fa5555;
+      }
+    }
+  }
+  
+  .submit button {
+    height: 90rpx;
+    font-size: 32rpx;
+    line-height: 48rpx;
+    padding: 6rpx 30rpx;
+    background-color: #fe4e63;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .notice__cell {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 15px;
+  }
+  
+  .address__empty {
+    @include flex(space-between);
+  
+    color: rgb(88, 88, 88);
+    padding: 0 20rpx 10rpx;
+  
+    &.border {
+      border-bottom: 1px solid #f6f6f6;
+    }
+  }
+  
+  .submit__mask {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+  }
+  

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "m-icon": "/components/m-icon/m-icon",
+    "auth": "/components/auth/auth"
+  }
+}

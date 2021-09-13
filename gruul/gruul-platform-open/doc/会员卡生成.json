@@ -1,0 +1,13 @@
+{
+  "uniqueIdentification": "MEMBER_CART",
+  "version": "v1.2.3",
+  "buildAction": 1,
+  "importDirectUse": 0,
+  "url": "/",
+  "mq": {
+    "exchange": "gruul.member.exchange",
+    "routeKey": "gruul.member.init"
+  },
+  "kv": {
+  }
+}

@@ -1,0 +1,65 @@
+@import "./var";
+
+page {
+  min-height: 100%;
+  background: #f1f2f6;
+  
+}
+
+view {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*按钮*/
+button {
+  line-height: inherit;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  font-size: inherit;
+  opacity: 1;
+  background-color: inherit;
+
+  &::after {
+    border: 0px;
+  }
+}
+
+.m__button {
+  min-width: 70px;
+  padding: 3px 0;
+  text-align: center;
+  border-radius: 15px;
+  border: 1px solid #989898;
+  outline: none;
+  background: #fff;
+  margin-left: 10px;
+
+  &.primary {
+    background: $main-light-color;
+    border-color: $main-light-color;
+    color: #fff;
+
+    &[disabled] {
+      $d-c: #fda7b2;
+      border-color: $d-c;
+      background: $d-c;
+      color: #fff3f6;
+    }
+  }
+}
+
+.text {
+  &__pink {
+    color: #fe4e63;
+  }
+  &__green {
+    color: #08bb07;
+  }
+  &__primary {
+    color: #000000;
+  }
+}

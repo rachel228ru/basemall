@@ -1,0 +1,121 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(order) {
+  @include e(header) {
+    background-color: rgb(246, 246, 246);
+    height: 95px;
+    box-sizing: border-box;
+    padding: 26px 20px 10px 20px;
+    display: flex;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    @include m(switch) {
+      width: 65px;
+      text-align: right;
+      box-sizing: border-box;
+      padding-top: 10px;
+    }
+
+    @include m(tipline) {
+      flex: 1;
+
+      p {
+        line-height: 26px;
+        font-size: 14px;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      p:nth-of-type(2) {
+        color: red;
+      }
+    }
+  }
+}
+
+@include b(rectisetting) {
+  @include e(item) {
+    display: flex;
+    margin-bottom: 30px;
+    font-size: 14px;
+
+    @include m(label) {
+      display: inline-block;
+      width: 160px;
+      line-height: 32px;
+      height: 32px;
+
+      b {
+        color: red;
+        display: inline-block;
+        width: 16px;
+        text-align: center;
+        height: 32px;
+        line-height: 32px;
+        padding-right: 3px;
+        box-sizing: border-box;
+        vertical-align: middle;
+      }
+    }
+
+    @include m(times) {
+      line-height: 32px;
+      height: 32px;
+    }
+
+    @include m(expect) {
+      display: inline-block;
+      width: 100px;
+      margin: 0px 10px;
+    }
+
+    @include m(settime) {
+      margin-left: 20px;
+    }
+
+    @include m(tip) {
+      display: inline-block;
+      margin-left: 41px;
+      color: #999;
+    }
+  }
+
+  @include e(savebtn) {
+    margin: 30px 0 20px 16px;
+  }
+
+  @include e(diatf) {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  @include e(diatc) {
+    position: relative;
+    box-sizing: border-box;
+    padding-left: 20px;
+
+    @include m(reicon) {
+      position: absolute;
+      display: inline-block;
+      color: red;
+      top: 43px;
+      left: 4px;
+    }
+
+    @include m(item) {
+      margin: 20px 0;
+    }
+
+    @include m(tpick) {
+      width: 120px;
+      display: inline-block;
+    }
+
+    @include m(edit) {
+      margin-left: 30px;
+    }
+  }
+}

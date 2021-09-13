@@ -1,0 +1,23 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+@include b(distribut) {
+  @include e(head) {
+    @include m(search) {
+      width: 246px;
+      float: right;
+    }
+  }
+}
+
+
+@include b(linetabel) {
+  margin-top: 17px;
+
+  /deep/ thead tr th {
+    background-color: #f6f8fa;
+  }
+
+
+}

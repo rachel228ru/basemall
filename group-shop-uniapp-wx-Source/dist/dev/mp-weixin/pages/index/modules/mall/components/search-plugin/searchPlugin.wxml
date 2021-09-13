@@ -1,0 +1,1 @@
+<view class="page data-v-12ac206e"><view class="page__box  van-search data-v-12ac206e"><view data-event-opts="{{[['tap',[['toPop',['$event']]]]]}}" class="page__header   data-v-12ac206e" bindtap="__e"><van-icon class="page__header__icon data-v-12ac206e" vue-id="42d86e58-1" name="search" data-com-type="wx" bind:__l="__l"></van-icon>请输入关键字搜索</view></view></view>

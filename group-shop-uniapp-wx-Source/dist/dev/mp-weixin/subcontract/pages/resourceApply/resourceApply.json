@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "资源入驻",
+  "usingComponents": {
+    "m-icon": "/components/m-icon/m-icon"
+  }
+}

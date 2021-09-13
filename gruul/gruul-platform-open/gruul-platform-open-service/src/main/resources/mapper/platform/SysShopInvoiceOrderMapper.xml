@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.SysShopInvoiceOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.SysShopInvoiceOrder">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="type" property="type"/>
+        <result column="invoice_rise_type" property="invoiceRiseType"/>
+        <result column="invoice_rise_name" property="invoiceRiseName"/>
+        <result column="invoice_taxpayer_num" property="invoiceTaxpayerNum"/>
+        <result column="amount" property="amount"/>
+        <result column="email" property="email"/>
+        <result column="status" property="status"/>
+        <result column="order_id" property="orderId"/>
+        <result column="account_id" property="accountId"/>
+        <result column="order_type" property="orderType"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="number_no" property="numberNo"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        is_deleted,audit_time,
+        update_time,order_type,
+        id, type, invoice_rise_type, invoice_rise_name, invoice_taxpayer_num, amount, email, status, order_id,
+        account_id,number_no
+    </sql>
+
+    <select id="selectMaxId" resultType="Integer">
+        select max(id) from t_sys_shop_invoice_order;
+    </select>
+
+</mapper>

@@ -1,0 +1,136 @@
+@import "../variable";
+@import "../mixins/mixins";
+@import "../mixins/utils.scss";
+
+
+@include b(default__table) {
+  margin-top: 17px;
+
+  /deep/ thead tr th {
+    background-color: #f6f8fa;
+  }
+}
+
+@include b(directpage) {
+  @include e(header) {
+    @include m(timepicker) {
+      width: 245px;
+    }
+
+    @include m(type) {
+      width: 90px;
+      margin-left: 15px;
+    }
+  }
+}
+
+@include b(orderpage) {
+  position: relative;
+
+  @include e(header) {
+    position: relative;
+
+    @include m(type) {
+      width: 120px;
+    }
+
+    @include m(name) {
+      width: 230px;
+      margin-left: 15px;
+    }
+
+    @include m(export) {
+      float: right;
+    }
+  }
+
+  @include e(order) {
+    display: flex;
+
+    @include m(img) {
+      width: 65px;
+      height: 65px;
+      vertical-align: middle;
+    }
+
+    @include m(name) {
+      flex: 1;
+      vertical-align: middle;
+      line-height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      padding-left: 5px;
+    }
+  }
+
+  @include e(export) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+
+@include b(letthempage) {
+  position: relative;
+
+  @include e(header) {
+    position: relative;
+
+    @include m(type) {
+      width: 130px;
+      margin-left: 15px;
+    }
+
+    @include m(name) {
+      width: 230px;
+    }
+
+    @include m(export) {
+      float: right;
+    }
+  }
+
+  @include e(order) {
+    display: flex;
+
+    @include m(img) {
+      width: 65px;
+      height: 65px;
+      vertical-align: middle;
+    }
+
+    @include m(name) {
+      flex: 1;
+      vertical-align: middle;
+      line-height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      padding-left: 5px;
+    }
+  }
+
+  @include e(export) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+
+@include b(histinvoice) {
+  @include e(header) {
+    @include m(tip) {
+      color: #666;
+    }
+
+    @include m(datapicker) {
+      width: 170px;
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,0 +1,381 @@
+// 商超分类页 
+
+@import "../mixins/mixins";
+
+.decoration__page {
+  // position: fixed;
+  width: calc(100vw - 70px);
+  padding-bottom: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  left: 0px;
+  display: flex;
+  justify-content: space-around;
+}
+.setting {
+  width: 100%;
+  overflow: initial;
+}
+.user {
+  height: calc(100vh - 70px);
+}
+.editor__preview_new {
+  width: 340px;
+  height: calc(100vh - 80px) !important;
+  border: 1px solid #080b0f !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+.editor__form_wrap {
+  width: 435px;
+  height: calc(100vh - 80px) !important;
+  padding-bottom: 0 !important;
+  border: 1px solid #dcdfe6;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  .editor__form_wrap_main {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+  }
+  .editor__form_header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #dcdfe6;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .pd20 {
+    padding: 20px;
+    padding-bottom: 0;
+  }
+}
+
+
+
+.spellPage--preview {
+  width: 100%;
+
+  .show__content-info {
+    height: calc(100% - 40px);
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
+
+  .header__box {
+    height: 40px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+    line-height: 40px;
+    padding: 0 10px;
+
+    span {
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+    }
+
+    .back {
+      float: left;
+      cursor: pointer;
+    }
+
+    .tis {
+      float: right;
+      width: 30px;
+      text-align: right;
+
+      i {
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        background-color: #000;
+        margin-right: 2px;
+      }
+    }
+  }
+
+  .search__box {
+    height: 60px;
+    box-sizing: border-box;
+    padding: 12px 20px;
+
+    .search-icon {
+      height: 35px;
+      background-color: rgba(242, 242, 242, 1);
+      border-radius: 6px;
+
+      i {
+        float: right;
+        margin-top: 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .show__con-box {
+    height: calc(100% - 60px);
+    box-sizing: border-box;
+  }
+
+  .dividing__line {
+    width: 100%;
+    height: 5px;
+    background-color: rgba(242, 242, 242, 1);
+  }
+
+  .con__box {
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .left__tabbar-box {
+    width: 80px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .left-con__box {
+    display: flex;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-sizing: border-box;
+  }
+
+  .left__biggoods-box {
+    flex: 1;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+.spellPage--setting {
+  background-color: #fff;
+
+  .class__box {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 220px;
+    overflow-y: scroll;
+    border-radius: 4px;
+
+    .select__box {
+      padding: 10px 12px;
+      box-sizing: border-box;
+
+      .tips {
+        font-size: 14px;
+        color: #999;
+        float: right;
+        margin-top: 7px;
+      }
+    }
+  }
+
+  .content__box {
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-top: 15px;
+    padding: 15px 0px;
+  }
+
+  .color__select {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 3px 15px;
+    display: inline-block;
+    height: 32px;
+    width: 150px;
+    overflow: hidden;
+
+    .el-color-picker--small .el-color-picker__trigger {
+      width: 24px;
+      height: 24px;
+      padding: 2px;
+    }
+  }
+
+  .color__tips {
+    display: inline-block;
+    height: 28px;
+    line-height: 25px;
+    vertical-align: text-bottom;
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+  .poster__box {
+    margin-top: 15px;
+
+    .tips {
+      font-size: 14px;
+      color: #999;
+      height: 32px;
+      padding-top: 10px;
+    }
+  }
+
+  .slider__box {
+    .el-slider__runway.show-input {
+      margin-right: 120px;
+    }
+    
+    .el-slider__input {
+      width: 100px;
+    }
+  }
+
+  .list__item {
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+    .click__btn {
+      float: right;
+      color: #FF0000;
+      height: 35px;
+      line-height: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .navigation__tips {
+    .tips {
+      font-size: 14px;
+      color: #999;
+      height: 32px;
+      padding-top: 10px;
+    }
+  }
+
+  .navigation__box {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 10px;
+
+    .add__navigation {
+      span {
+        display: inline-block;
+        padding: 10px 6px;
+        border-radius: 4px;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #ddd;
+        color: #333;
+      }
+    }
+  }
+
+  .one__class-box {
+    margin-top: 15px;
+    height: 56px;
+    overflow: hidden;
+    padding-top: 10px;
+  }
+
+  .pd20 {
+    padding: 0px;
+  }
+  
+}
+
+
+@include b(homeSwiperForm-item) {
+  position: relative;
+  display: flex;
+  border: 1px solid #e4e4e4;
+  padding: 10px;
+  margin-bottom: 10px;
+  @include e(right) {
+    flex: 1;
+    padding-left: 10px;
+  }
+  @include e(uploader) {
+    width: 80px;
+    height: 80px;
+    display: block;
+    .el-upload {
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .el-upload:hover {
+      border-color: #409eff;
+    }
+  }
+
+  @include e(img) {
+    width: 80px;
+    height: 80px;
+    display: block;
+  }
+
+  @include e(plus) {
+    font-size: 28px;
+    color: #8c939d;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+  }
+
+  .remove__swiper--item {
+    display: none;
+  }
+
+  &:hover {
+    .remove__swiper--item {
+      display: block;
+      position: absolute;
+      font-size: 20px;
+      right: -8px;
+      top: -8px;
+      width: 20px;
+      height: 20px;
+      z-index: 20;
+      color: #e4e4e4;
+      background-color: #fff;
+      cursor: pointer;
+    }
+  }
+}
+
+@include b(homeSwiperForm-add) {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #e4e4e4;
+  margin-bottom: 10px;
+  .el-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  span {
+    color: #3088f0;
+    cursor: pointer;
+  }
+  p {
+    font-size: 12px;
+    color: #a7a7a7;
+  }
+}
+
+@include b(homeSwiperForm-form) {
+  border: 1px solid #e4e4e4;
+  padding: 10px;
+}
+

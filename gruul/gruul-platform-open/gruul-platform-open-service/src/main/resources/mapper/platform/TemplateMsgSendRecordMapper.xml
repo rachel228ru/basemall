@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.TemplateMsgSendRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.TemplateMsgSendRecord">
+        <id column="id" property="id"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="use_type" property="useType"/>
+        <result column="message_type" property="messageType"/>
+        <result column="send_json" property="sendJson"/>
+        <result column="send_status" property="sendStatus"/>
+        <result column="failure_reason" property="failureReason"/>
+        <result column="use_teamplate_id" property="useTeamplateId"/>
+        <result column="mini_id" property="miniId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        is_deleted,
+        update_time,
+        create_time,
+        tenant_id,
+        id, use_type, message_type, send_json, send_status, failure_reason, use_teamplate_id, mini_id
+    </sql>
+
+</mapper>

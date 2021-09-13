@@ -1,0 +1,398 @@
+
+// 商超分类页顶部模式商品大图
+
+@import "../mixins/mixins";
+
+.top__biggoods-page {
+  .spellpre__goods--box {
+    padding: 0px;
+  }
+
+  @include b(spellpre) {
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+    position: relative;
+  
+    @include e(header) {
+      color: #333;
+      height: 50px;
+      line-height: 50px;
+      box-sizing: border-box;
+      background-color: #fff;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+  
+      @include m(title) {
+        font-size: 18px;
+        font-weight: 700;
+      }
+  
+      @include m(more) {
+        font-size: 14px;
+        font-weight: 400;
+        float: right;
+      }
+    }
+  
+    @include e(headtemp) {
+      height: 50px;
+      line-height: 50px;
+      width: 100%;
+    }
+  
+    @include e(goods) {
+      box-sizing: border-box;
+  
+  
+      .spellpre__goods--box {
+        position: relative;
+        background-color: #fff;
+        overflow: hidden;
+      }
+  
+      @include m(boxCP) {
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+      }
+  
+      @include m(boxSW) {
+        border: 1px solid #f5f5f5;
+      }
+  
+      @include m(angle) {
+        border-radius: 7px;
+      }
+  
+      @include m(corners) {
+        border-radius: 0;
+      }
+  
+      @include m(nameF) {
+        font-weight: 400;
+      }
+  
+      @include m(nameB) {
+        font-weight: 600;
+      }
+  
+      @include m(cart1) {
+        float: right;
+        height: 28px;
+        width: 28px;
+        background-color: rgba(252, 98, 63, 1);
+        box-sizing: border-box;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+      }
+  
+      @include m(cart) {
+        float: right;
+        height: 25px;
+        width: 25px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+  
+        img {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+        }
+      }
+  
+      @include m(cart1) {
+        margin-top: 6px;
+        background-color: #fff;
+
+        img {
+          display: inline-block;
+          width: 23px;
+          height: 23px;
+        }
+      }
+  
+      @include m(cart2) {
+        border: 1px solid rgba(252, 98, 63, 1);
+        margin-top: 6px;
+        position: relative;
+
+        img {
+          position: absolute;
+          left: 4px;
+          top: 3px;
+        }
+      }
+  
+      @include m(cart3) {
+        border: 1px solid rgba(252, 98, 63, 1);
+        width: auto;
+        padding: 0 5px;
+        color: rgba(252, 98, 63, 1);
+        font-size: 12px;
+        border-radius: 12px;
+        height: 22px;
+        line-height: 22px;
+      }
+  
+      @include m(cart4) {
+        border: 1px solid rgba(252, 98, 63, 1);
+        background-color: rgba(252, 98, 63, 1);
+        width: auto;
+        padding: 0 5px;
+        color: #fff;
+        font-size: 12px;
+        border-radius: 12px;
+        height: 22px;
+        line-height: 22px;
+      }
+  
+      @include m(coner) {
+        position: absolute;
+  
+        img, span {
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+        }
+      }
+  
+      @include m(coner1) {
+        left: -2px;
+        top: 10px;
+        width: 52px;
+        height: 24px;
+      }
+  
+      @include m(coner2) {
+        left: 10px;
+        top: 0px;
+        width: 48px;
+        height: 26px;
+        
+        span {
+          color: white;
+          font-size: 12px;
+          text-align: center;
+          line-height: 24px;
+        }
+      }
+  
+      @include m(coner3) {
+        left: 0;
+        top: 0;
+        width: 48px;
+        height: 40px;
+      }
+  
+      @include m(delivery) {
+        color: #A3A3A3;
+        font-size: 12px;
+        font-weight: 400;
+        padding-top: 4px;
+      }
+  
+      @include m(footer) {
+        .timebox {
+          display: inline-block;
+          height: 20px;
+        }
+  
+        .tip {
+          display: inline-block;
+          height: 20px;
+          line-height: 20px;
+          color: #8B8B8B;
+          font-size: 13px;
+          margin-right: 4px;
+          margin-top: 1px;
+        }
+      }
+  
+      .time_flex {
+        width: 110px;
+        height: 20px;
+        display: inline-block;
+        color: #2F2F2F;
+        font-size: 9px;
+  
+        span {
+          display: inline-block;
+          width: 12px;
+          height: 14px;
+          line-height: 14px;
+          text-align: center;
+          color: #fff;
+          background-color: #2F2F2F;
+          border-radius: 3px;
+          margin: 0px 1px;
+        }
+      }
+  
+      .time-info {
+        float: right;
+        height: 20px;
+        line-height: 20px;
+        color: #A3A3A3;
+        font-size: 11px;
+        margin-left: 8px;
+        margin-top: 1px;
+      }
+    
+      .user__icon {
+        float: right;
+        height: 20px;
+        width: 60px;
+        position: relative;
+        margin-top: 1px;
+  
+        span {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 1);
+          background-color: #D1D1D1;
+          top: 0;
+          position: absolute;
+  
+          img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+          }
+        }
+  
+        .icon_1 {
+          right: 0;
+          z-index: 1;
+        }
+        .icon_2 {
+          right: 10px;
+          z-index: 2;
+        }
+        .icon_3 {
+          right: 20px;
+          z-index: 3;
+        }
+      }
+    }
+  
+    @include e(goodsB) {
+      box-sizing: border-box;
+  
+      @include m(box) {
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+      }
+  
+      @include m(icon) {
+        width: 100%;
+        height: 175px;
+  
+        .ipic {
+          display: inline-block;
+          width: 100%;
+          height: 175px;
+          background-color: rgba(233, 247, 253, 1);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+  
+          img {
+            display: inline-block;
+            width: 44px;
+            height: 46px;
+          }
+        }
+      }
+  
+      .detail__box {
+        box-sizing: border-box;
+        padding: 0 8px;
+      }
+  
+      @include m(name) {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 15px;
+        line-height: 32px;
+        height: 32px;
+        color: #0E0E0E;
+      }
+  
+      @include m(buy) {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        box-sizing: border-box;
+      }
+  
+      @include m(prinum) {
+        display: inline-block;
+        font-size: 19px;
+        font-weight: 500;
+        color: #EC342C;
+        height: 40px;
+        line-height: 40px;
+      }
+  
+      @include m(guaid) {
+        font-size: 12px;
+        color: #AAAAAA;
+        display: inline-block;
+        margin-left: 5px;
+        height: 40px;
+        line-height: 40px;
+      }
+  
+      @include m(info) {
+        box-sizing: border-box;
+        height: 35px;
+        position: relative;
+      }
+    }
+  }
+}
+
+.top__biggoods-page.page__goods-addPadding {
+  padding: 0px 12px;
+  height: calc(100% - 55px);
+  overflow-y: scroll;
+}
+
+.top__biggoods-page.left__Lgoods-style {
+  .spellpre__goodsL--icon, .ipic {
+    width: 90px;
+    height: 90px;
+  }
+
+  .spellpre__goodsL--content {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .spellpre__goodsL--info {
+    width: calc(100% - 100px);
+  }
+
+  .spellpre__goods--delivery {
+    display: none;
+  }
+
+  .spellpre__goodsL--name {
+    padding: 4px 0;
+    max-height: 22px;
+    white-space: nowrap;
+  }
+}

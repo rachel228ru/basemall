@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.order.mapper.OrderSettingMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.order.api.entity.OrderSetting">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="flash_order_overtime" property="flashOrderOvertime"/>
+        <result column="normal_order_overtime" property="normalOrderOvertime"/>
+        <result column="confirm_overtime" property="confirmOvertime"/>
+        <result column="finish_overtime" property="finishOvertime"/>
+        <result column="comment_overtime" property="commentOvertime"/>
+        <result column="open_evaluate" property="openEvaluate"/>
+        <result column="afs_apply_number" property="afsApplyNumber"/>
+        <result column="merchant_confirm_overtime" property="merchantConfirmOvertime"/>
+        <result column="user_return_overtime" property="userReturnOvertime"/>
+        <result column="kd_app_id" property="kdAppId"/>
+        <result column="kd_app_key" property="kdAppKey"/>
+        <result column="payment_model" property="paymentModel"/>
+        <result column="custom_from" property="customFrom"/>
+        <result column="order_notify" property="orderNotify"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tenant_id,
+        create_time,
+        update_time,
+        is_deleted,
+        id, flash_order_overtime, normal_order_overtime, confirm_overtime, finish_overtime, comment_overtime,
+        open_evaluate, afs_apply_number, merchant_confirm_overtime, user_return_overtime,
+        kd_app_id, kd_app_key, payment_model, custom_from,order_notify
+    </sql>
+
+</mapper>

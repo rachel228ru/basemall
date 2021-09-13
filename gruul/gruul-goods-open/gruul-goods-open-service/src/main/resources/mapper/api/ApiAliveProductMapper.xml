@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.goods.mapper.api.ApiAliveProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiAliveProductVo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="wide_pic" property="widePic"/>
+        <result column="album_pics" property="albumPics"/>
+        <result column="distribution_mode" property="distributionMode"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="min_price" property="minPrice"/>
+        <result column="max_price" property="maxPrice"/>
+        <result column="inventory" property="inventory"/>
+    </resultMap>
+
+    <resultMap id="BaseListResultMap" type="com.medusa.gruul.goods.api.model.vo.api.ApiAliveProductVo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="wide_pic" property="widePic"/>
+        <result column="album_pics" property="albumPics"/>
+        <result column="distribution_mode" property="distributionMode"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="limit_type" property="limitType"/>
+        <result column="min_price" property="minPrice"/>
+        <result column="max_price" property="maxPrice"/>
+        <result column="inventory" property="inventory"/>
+        <result column="sale" property="sale"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Product_List">
+        t.id, t.create_time, t.name, t.pic, t.wide_pic, t.album_pics, t.distribution_mode,
+        t.product_sn, t.limit_type, t.sale_mode, min(u.price) as min_price, max(u.original_price) as max_price,
+        sum(u.stock) as inventory
+    </sql>
+
+    <sql id="Api_Product_List">
+        t.id, t.create_time, t.name, t.pic, t.wide_pic, t.album_pics, t.distribution_mode,
+        t.product_sn, t.limit_type, t.sale_mode, min(u.price) as min_price, max(u.original_price) as max_price,
+        sum(u.stock) as inventory, sum(u.sale) as sale
+    </sql>
+
+    <select id="querySaveProductList" resultMap="BaseResultMap">
+        SELECT * from
+        (SELECT
+        <include refid="Base_Product_List"/>
+        FROM
+        t_sku_stock u
+        inner join t_product t on u.product_id = t.id
+        where t.is_deleted = 0 and t.status = 1 and u.is_deleted = 0 group by u.product_id) p
+        <where>
+            p.id in
+            <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+        <if test="saleMode!=null">
+            AND p.sale_mode = #{saleMode}
+        </if>
+        ORDER BY
+        p.id
+        DESC
+    </select>
+
+
+
+    <select id="querySuperMarketProductList"
+            parameterType="com.medusa.gruul.goods.api.model.param.api.ApiProductParam"
+            resultMap="BaseListResultMap">
+        SELECT p.*  from
+        (SELECT
+        <include refid="Api_Product_List"/>
+        FROM
+        t_sku_stock u
+        inner join t_product t on u.product_id = t.id
+        where t.is_deleted = 0 and t.status = 1 and u.is_deleted = 0 group by u.product_id) p
+        where 1=1
+        <if test="apiProductParam.saleMode != null and apiProductParam.saleMode != ''">
+            and p.sale_mode = #{apiProductParam.saleMode}
+        </if>
+        <if test="apiProductParam.name != null and apiProductParam.name != ''">
+            AND p.name LIKE CONCAT('%',#{apiProductParam.name},'%')
+        </if>
+        <if test="apiProductParam.showCategoryId != null">
+            AND EXISTS (
+            SELECT
+            psc.id
+            FROM
+            t_product_show_category psc
+            WHERE
+            psc.product_id = p.id and psc.is_deleted = 0
+            AND
+            (psc.show_category_id = #{apiProductParam.showCategoryId})
+            )
+        </if>
+        ORDER BY
+        <choose>
+            <when test="apiProductParam.type == 1">
+                p.sale desc, p.min_price desc
+            </when>
+            <when test="apiProductParam.type == 2">
+                p.sale ${apiProductParam.sort}
+            </when>
+            <when test="apiProductParam.type == 3">
+                p.create_time ${apiProductParam.sort}
+            </when>
+            <when test="apiProductParam.type == 4">
+                p.min_price ${apiProductParam.sort}
+            </when>
+            <otherwise>
+                p.create_time desc
+            </otherwise>
+        </choose>
+    </select>
+
+
+
+    <select id="queryShowCategoryProductList"
+            parameterType="java.lang.Integer"
+            resultMap="BaseListResultMap">
+        SELECT p.*  from
+        (SELECT
+        <include refid="Api_Product_List"/>
+        FROM
+        t_sku_stock u
+        inner join t_product t on u.product_id = t.id
+        inner join t_product_show_category c on t.id = c.product_id
+        where c.show_category_id = #{secondShowCategoryId}
+        and t.is_deleted = 0
+        and c.is_deleted = 0
+        and t.status = 1
+        and u.is_deleted = 0
+        group by u.product_id) p
+        ORDER BY
+        p.create_time desc
+    </select>
+
+    <select id="queryShowCategoryProductListBySaleMode"
+            resultMap="BaseListResultMap">
+        SELECT p.*  from
+        (SELECT
+        <include refid="Api_Product_List"/>
+        FROM
+        t_sku_stock u
+        inner join t_product t on u.product_id = t.id
+        inner join t_product_show_category c on t.id = c.product_id
+        where c.show_category_id = #{secondShowCategoryId}
+        and t.sale_mode = #{saleMode}
+        and t.is_deleted = 0
+        and c.is_deleted = 0
+        and t.status = 1
+        and u.is_deleted = 0
+        group by u.product_id) p
+        ORDER BY
+        p.create_time desc
+    </select>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.AccountInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.AccountInfo">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="forbid_status" property="forbidStatus"/>
+        <result column="bind_mini_id" property="bindMiniId"/>
+        <result column="subject_id" property="subjectId"/>
+        <result column="password" property="password"/>
+        <result column="passwd" property="passwd"/>
+        <result column="salt" property="salt"/>
+        <result column="city" property="city"/>
+        <result column="language" property="language"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="access_token" property="accessToken"/>
+        <result column="refresh_token" property="refreshToken"/>
+        <result column="nike_name" property="nikeName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <result column="open_id" property="openId"/>
+        <result column="union_id" property="unionId"/>
+        <result column="province" property="province"/>
+        <result column="country" property="country"/>
+        <result column="privilege" property="privilege"/>
+        <result column="ref_expires_time" property="refExpiresTime"/>
+        <result column="access_expires_time" property="accessExpiresTime"/>
+        <result column="account_type" property="accountType"/>
+        <result column="region" property="region"/>
+        <result column="address" property="address"/>
+        <result column="last_login_shop_id" property="lastLoginShopId"/>
+        <result column="bind_mini_shop_id" property="bindMiniShopId"/>
+        <result column="balance" property="balance"/>
+        <result column="agent_id" property="agentId"/>
+        <result column="comment_text" property="commentText"/>
+        <result column="me_agent_id" property="meAgentId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        is_deleted,
+        update_time,bind_mini_id,subject_id,forbid_status,
+        account_type,region,address,last_login_shop_id,
+        id, password, passwd, salt, city, 'language', last_login_time, access_token, refresh_token, nike_name,
+        avatar_url, phone, email, gender, open_id, union_id, province, country, privilege,
+        ref_expires_time,bind_mini_shop_id,
+        access_expires_time,comment_text,agent_id,balance,me_agent_id
+    </sql>
+
+</mapper>

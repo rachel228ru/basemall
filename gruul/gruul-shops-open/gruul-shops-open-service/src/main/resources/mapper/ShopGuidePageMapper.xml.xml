@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.shops.mapper.ShopGuidePageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.shops.api.entity.ShopGuidePage">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="url" property="url"/>
+        <result column="path" property="path"/>
+        <result column="is_default" property="deleted"/>
+    </resultMap>
+
+    <!--通用ShopGuidePageVo 查询映射结果-->
+
+    <resultMap id="ShopGuidePageDtoResultMap" type="com.medusa.gruul.shops.model.dto.ShopGuidePageDto">
+        <result column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="url" property="url"/>
+        <result column="link" property="link"/>
+        <result column="app_id" property="appId"/>
+        <result column="path" property="path"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+       create_time,is_deleted,update_time,url,path,app_id,is_default
+    </sql>
+
+    <!--通用ShopGuidePageVo 查询结果列-->
+    <sql id="ShopGuidePageDto_Column_List">
+        id,`type`,tenant_id,shop_id,url,path,app_id,link
+    </sql>
+
+    <update id="updateShopGuidePage">
+        UPDATE
+          t_shop_guide_page
+        SET
+          url = #{shopGuidePageDto.url},
+          path = #{shopGuidePageDto.path},
+          is_default = 1
+
+    </update>
+
+
+    <select id="selectGuidePage" resultType="com.medusa.gruul.shops.model.dto.ShopGuidePageDto"
+            resultMap="ShopGuidePageDtoResultMap">
+        SELECT
+        <include refid="ShopGuidePageDto_Column_List"/>
+        FROM
+        t_shop_guide_page
+        WHERE is_deleted = 0
+        LIMIT 5
+
+    </select>
+
+    <select id="selectGuidePageDefault" resultType="com.medusa.gruul.shops.model.dto.ShopGuidePageDto"
+            resultMap="ShopGuidePageDtoResultMap">
+
+        SELECT
+        `type`,tenant_id,shop_id,url,path,app_id,link
+        FROM
+        t_shop_guide_page
+        WHERE
+        shop_id = '100001100001'
+        AND
+        tenant_id = '100001'
+        and is_deleted = 0
+        LIMIT 5
+
+    </select>
+
+</mapper>

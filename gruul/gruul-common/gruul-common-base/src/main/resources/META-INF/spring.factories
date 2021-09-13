@@ -1,0 +1,16 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.medusa.gruul.common.log.aspect.WebLogAspect,\
+    com.medusa.gruul.common.data.mybatis.MybatisPlusConfig,\
+    com.medusa.gruul.common.data.handler.IMetaObjectHandler,\
+    com.medusa.gruul.common.data.tenant.TenantContextHolderFilter,\
+    com.medusa.gruul.common.data.tenant.FeignTenantConfiguration,\
+    com.medusa.gruul.common.data.annotation.EscapeShopAspect,\
+    com.medusa.gruul.common.data.annotation.EscapeTenantAspect,\
+    com.medusa.gruul.common.core.config.JacksonConfig,\
+    com.medusa.gruul.common.core.config.ValidatorConfig,\
+    com.medusa.gruul.common.core.exception.RestExceptionHandler,\
+    com.medusa.gruul.common.core.config.MessageSourceConfig,\
+    com.medusa.gruul.common.core.config.RestTemplateConfig,\
+    com.medusa.gruul.common.core.util.SpringContextHolder,\
+    com.medusa.gruul.common.redis.constant.RedisConfig,\
+    org.springframework.cloud.openfeign.GruulHystrixFeignTargeterConfiguration

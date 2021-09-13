@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.platform.mapper.TenementMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.platform.api.entity.TenementMenu">
+        <id column="id" property="id"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="icon" property="icon"/>
+        <result column="code" property="code"/>
+        <result column="description" property="description"/>
+        <result column="mini_id" property="miniId"/>
+        <result column="permission_status" property="permissionStatus"/>
+        <result column="hide_status" property="hideStatus"/>
+        <result column="base_menu_id" property="baseMenuId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        is_deleted,
+        create_time,
+        update_time,
+        tenant_id,
+        id, icon, code, description, mini_id, permission_status, hide_status, base_menu_id
+    </sql>
+
+</mapper>

@@ -1,0 +1,71 @@
+@import "../mixins/utils.scss";
+
+@include b(shop) {
+  height: 100%;
+
+  @include e(header) {
+
+    @include m(user) {
+      margin-bottom: 15px;
+    }
+
+    @include m(banner) {
+      .banner {
+        height: 180px;
+      }
+    }
+  }
+
+  @include e(list) {
+    background: #ffffff;
+    padding: 10px;
+    margin-top: 10px;
+
+    @include m(form) {
+      margin-bottom: 60px;
+
+      .el-button {
+        margin-right: 45px;
+      }
+    }
+
+    @include m(empty) {
+      min-height: 450px;
+      @include flex();
+      flex-direction: column;
+    }
+
+    @include m(create) {
+      margin-left: 15px;
+    }
+
+
+    .myShop {
+      padding: 20px 40px;
+    }
+  }
+}
+
+@include b(info) {
+  @include flex(flex-start);
+  margin: 10px;
+  text-align: left;
+  vertical-align: center;
+
+  @include e(img) {
+    width: 80px;
+    height: 80px;
+    flex: 0 0 80px;
+    border-radius: 40px;
+  }
+  @include e(msg) {
+    @include flex(center, flex-start);
+    flex-direction: column;
+    margin-left: 10px;
+    height: 80px;
+
+    @include m(tags) {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "下单详情",
+  "usingComponents": {
+    "formid": "/components/formId/formId",
+    "custom-form": "/modules/pages/submit/custom-form/custom-form"
+  }
+}

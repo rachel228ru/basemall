@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medusa.gruul.logistics.mapper.LogisticsExpressMapper">
+    <resultMap id="BaseResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsExpressVo">
+        <id column="id"  property="id"/>
+        <result column="name"  property="name"/>
+        <result column="code"  property="code"/>
+        <result column="phone"  property="phone"/>
+        <result column="address_id"  property="addressId"/>
+        <result column="customer_name"  property="customerName"/>
+        <result column="customer_password"  property="customerPassword"/>
+        <result column="link_name"  property="linkName"/>
+        <result column="link_tel"  property="linkTel"/>
+        <result column="status"  property="status"/>
+        <collection property="logisticsAddressVos" ofType="com.medusa.gruul.logistics.model.vo.LogisticsAddressVo" column="address_id"
+                    select="queryLogisticsAddress"></collection>
+    </resultMap>
+
+    <resultMap id="LogisticsAddressResultMap" type="com.medusa.gruul.logistics.model.vo.LogisticsAddressVo">
+        <result column="a_id" property="id"/>
+        <result column="a_province" property="province"/>
+        <result column="a_city" property="city"/>
+        <result column="a_country" property="country"/>
+        <result column="a_address" property="address"/>
+        <result column="a_name" property="name"/>
+        <result column="a_phone" property="phone"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, `name`, code, phone, address_id, customer_name, customer_password, link_name, link_tel, status
+    </sql>
+
+    <sql id="Base_Address_List">
+        a.id as a_id, a.province AS a_province, a.city AS a_city, a.country AS a_country, a.address AS a_address, a.name as a_name, a.phone AS a_phone
+    </sql>
+
+    <select id="queryLogisticsExpressList" resultMap="BaseResultMap"
+            parameterType="com.medusa.gruul.logistics.model.param.LogisticsExpressParam">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_express
+        where is_deleted=0
+    </select>
+
+    <select id="queryLogisticsExpressInfo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_logistics_express
+        where is_deleted=0
+        and id = #{id}
+    </select>
+
+    <select id="queryLogisticsAddress" resultMap="LogisticsAddressResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Address_List"/>
+        FROM
+        t_logistics_address a
+        WHERE
+        a.is_deleted = 0
+        AND
+        a.id = #{address_id}
+    </select>
+
+</mapper>
